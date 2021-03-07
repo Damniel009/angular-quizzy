@@ -1,9 +1,7 @@
 <div class="p-field p-shadow-13 mx-auto">
-    <div *ngIf="canBeEdited" class="edit-question">
-        edit
-    </div>
+  <div *ngIf="!canBeEdited" class="edit-question">
+    <app-checkbox-question></app-checkbox-question>
+  </div>
 
-    <div *ngIf="!canBeEdited" class="final-question">
-        standby
-    </div>
+  <div *ngIf="canBeEdited" class="final-question">standby</div>
 </div>
