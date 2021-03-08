@@ -1,6 +1,6 @@
 <div class="p-field p-shadow-13 mx-auto">
   <div *ngIf="!canBeEdited" class="edit-question">
-    <app-checkbox-question></app-checkbox-question>
+    <app-checkbox-question (savedQuestion)="addQuestionToForm($event)"></app-checkbox-question>
   </div>
 
   <div *ngIf="canBeEdited" class="final-question">standby</div>

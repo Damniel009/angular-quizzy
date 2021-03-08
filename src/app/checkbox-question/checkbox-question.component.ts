@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-checkbox-question',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckboxQuestionComponent implements OnInit {
   question: any;
-  options = [{ label: 'Option1', duplicate: false }];
+  options = [{ label: 'Option1', duplicate: false, answer: false }];
+
+  @Output() savedQuestion = new EventEmitter<Object>();
 
   ngOnInit() {}
 
@@ -16,6 +18,7 @@ export class CheckboxQuestionComponent implements OnInit {
       Object.assign({
         label: `Option${this.options.length + 1}`,
         duplicate: false,
+        answer: false
       })
     );
   }
@@ -24,20 +27,30 @@ export class CheckboxQuestionComponent implements OnInit {
     this.options.splice(index, 1);
   }
 
-  checkDuplicate() {
-    // console.log(this.options);
-    let uniq = this.options.filter(
-      (v, i, a) => a.findIndex((t) => t.label === v.label) != i
-    );
+  // checkDuplicate() {
+  //   let uniq = this.options.filter(
+  //     (v, i, a) => a.findIndex((t) => t.label === v.label) != i
+  //   );
 
-    // if(uniq[0] && (this.options[this.options.length - 1] === uniq[0])){
-    //   this.options[this.options.length - 1].duplicate = true;
-    // }
+  //   console.log(this.options);
+    
+  //   if(uniq[0] && (this.options[this.options.length - 1] === uniq[0])){
+  //     this.options[this.options.length - 1].duplicate = true;
+  //   }
 
-    // let uniq = this.options.filter((option, index, all) => {
-    //   all.findIndex((optionFromAll) => {
-    //     optionFromAll.label === option.label;
-    //   }) === index;
-    // });
+  //   let uniq = this.options.filter((option, index, all) => {
+  //     all.findIndex((optionFromAll) => {
+  //       optionFromAll.label === option.label;
+  //     }) === index;
+  //   });
+  // }
+
+  updateAnswers(question){
+    this.options[question].answer = true
+  }
+
+  saveQuestion(){
+    let final = this.options
+    this.savedQuestion.emit(final);
   }
 }

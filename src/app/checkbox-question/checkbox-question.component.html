@@ -21,7 +21,7 @@
         title="Remove Column"
         (click)="removeCheckbox(i)"
       ></button>
-      <p-checkbox [disabled]="true" inputId="i"></p-checkbox>
+      <p-checkbox (onChange)="updateAnswers(i)" inputId="i"></p-checkbox>
       <label class="checkbox-option" for="i"
         ><input
           class="checkbox-option-label-input"
@@ -54,7 +54,7 @@
       pButton
       pRipple
       class="float-right p-button-outlined"
-      (click)="checkDuplicate()"
+      (click)="saveQuestion()"
       type="button"
       label="Save question"
     ></button>

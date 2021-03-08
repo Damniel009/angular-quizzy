@@ -16,6 +16,8 @@ export class QuizQuestionComponent implements OnInit {
 
   public canBeEdited: Boolean;
 
+  questions = [];
+
   // @HostListener('document:click', ['$event'])
   // clickout(event) {
   //   if (this.eRef.nativeElement.contains(event.target)) {
@@ -31,4 +33,10 @@ export class QuizQuestionComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  addQuestionToForm(newQuestion){
+    this.questions.push(newQuestion);
+    console.log(this.questions);
+  }
+  
 }
