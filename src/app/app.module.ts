@@ -14,7 +14,9 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
-
+import { PanelModule } from 'primeng/panel';
+import {MenuModule} from 'primeng/menu';
+import {MenuItem} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     InputTextModule,
     CheckboxModule,
     RadioButtonModule,
+    PanelModule,
+    MenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],

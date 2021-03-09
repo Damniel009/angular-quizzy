@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   ElementRef,
-  HostListener,
+  Output,
+  EventEmitter,
   Input,
 } from '@angular/core';
 
@@ -13,30 +14,40 @@ import {
 })
 export class QuizQuestionComponent implements OnInit {
   @Input() item: string;
+  @Input() index: number;
+  @Output() savedQuestion = new EventEmitter<Object>();
+  @Output() removedQuestion = new EventEmitter<Object>();
 
-  public canBeEdited: Boolean;
+  question: any;
+  notSaved: boolean = true;
+  canBeEdited: boolean = false;
 
-  questions = [];
+  finalQuestions;
 
-  // @HostListener('document:click', ['$event'])
-  // clickout(event) {
-  //   if (this.eRef.nativeElement.contains(event.target)) {
-  //     this.canBeEdited = true;
-  //   } else {
-  //     this.canBeEdited = false;
-  //   }
-  // }
+  constructor() {}
 
-  constructor(private eRef: ElementRef) {
-    this.canBeEdited = false;
+  ngOnInit(): void {}
+
+  addQuestionToForm(newQuestion) {
+    this.finalQuestions = newQuestion;
   }
 
-  ngOnInit(): void {
+  saveQuestion() {
+    this.notSaved = false;
+    this.canBeEdited = true;
+
+    let final = Object.assign({
+      question: this.item,
+      options: this.finalQuestions,
+    });
+    this.savedQuestion.emit(final);
   }
 
-  addQuestionToForm(newQuestion){
-    this.questions.push(newQuestion);
-    console.log(this.questions);
+  removeQuestion(toBeRemoved){
+    console.log(toBeRemoved);
+    
+    this.removedQuestion.emit(toBeRemoved);
   }
-  
+
+  editQuestion() {}
 }

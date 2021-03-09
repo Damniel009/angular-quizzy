@@ -1,7 +1,50 @@
 <div class="p-field p-shadow-13 mx-auto">
-  <div *ngIf="!canBeEdited" class="edit-question">
-    <app-checkbox-question (savedQuestion)="addQuestionToForm($event)"></app-checkbox-question>
-  </div>
+  <p-panel header="{{ item === '' ? 'Question' : item }}" [toggleable]="true">
+    <ng-template pTemplate="icons">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-trash"
+        class="p-button-rounded p-button-danger p-button-text"
+        (click)="removeQuestion(index)"
+      ></button>
+    </ng-template>
+    <div class="edit-question">
+      <span class="p-float-label">
+        <input
+          class="checkbox-question"
+          type="text"
+          id="question"
+          pInputText
+          [(ngModel)]="item"
+        />
+        <label for="question">Question</label>
+      </span>
 
-  <div *ngIf="canBeEdited" class="final-question">standby</div>
+      <app-checkbox-question
+        (savedQuestion)="addQuestionToForm($event)"
+      ></app-checkbox-question>
+
+      <button
+        *ngIf="notSaved"
+        pButton
+        pRipple
+        class="mt-2 p-button-outlined"
+        (click)="saveQuestion()"
+        type="button"
+        label="Save question"
+      ></button>
+
+      <button
+        *ngIf="canBeEdited"
+        pButton
+        pRipple
+        class="mt-2 p-button-outlined"
+        type="button"
+        label="Edit question"
+      ></button>
+    </div>
+  </p-panel>
+
+  <!-- <div *ngIf="canBeEdited" class="final-question">standby</div> -->
 </div>

@@ -6,7 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./checkbox-question.component.css'],
 })
 export class CheckboxQuestionComponent implements OnInit {
-  question: any;
+  
   options = [{ label: 'Option1', duplicate: false, answer: false }];
 
   @Output() savedQuestion = new EventEmitter<Object>();
@@ -14,13 +14,15 @@ export class CheckboxQuestionComponent implements OnInit {
   ngOnInit() {}
 
   addCheckbox() {
-    this.options.push(
-      Object.assign({
-        label: `Option${this.options.length + 1}`,
-        duplicate: false,
-        answer: false
-      })
-    );
+    let newQuestion = Object.assign({
+      label: `Option${this.options.length + 1}`,
+      duplicate: false,
+      answer: false,
+    });
+    this.options.push(newQuestion);
+
+    let emitOptions = this.options;
+    this.savedQuestion.emit(emitOptions);
   }
 
   removeCheckbox(index) {
@@ -33,7 +35,7 @@ export class CheckboxQuestionComponent implements OnInit {
   //   );
 
   //   console.log(this.options);
-    
+
   //   if(uniq[0] && (this.options[this.options.length - 1] === uniq[0])){
   //     this.options[this.options.length - 1].duplicate = true;
   //   }
@@ -45,12 +47,13 @@ export class CheckboxQuestionComponent implements OnInit {
   //   });
   // }
 
-  updateAnswers(question){
-    this.options[question].answer = true
+  updateAnswers(question) {
+    this.options[question].answer = true;
   }
 
-  saveQuestion(){
-    let final = this.options
+  saveQuestion() {
+    
+    let final = this.options;
     this.savedQuestion.emit(final);
   }
 }

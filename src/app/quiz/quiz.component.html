@@ -1,30 +1,25 @@
 <div>
-    <div class="p-mt-2">
-        <div class="p-col" *ngFor="let col of columns; let i = index">
-          <app-quiz-question
-            [item]="i"
-          ></app-quiz-question>
-        </div>
-      </div>
-      
-      <button
-        *ngIf="columns.length > 1"
-        pButton
-        pRipple
-        type="button"
-        icon="pi pi-minus"
-        title="Remove Column"
-        (click)="removeColumn()"
-      ></button>
-    
-      <button
-        class="ml-2"
-        pButton
-        pRipple
-        type="button"
-        icon="pi pi-plus"
-        title="Add Column"
-        (click)="addColumn()"
-        [disabled]="columns.length === 20"
-      ></button>
+  <div class="p-mt-2">
+    <div class="p-col" *ngFor="let col of columns; let i=index">
+      <app-quiz-question
+        (savedQuestion)="addQuestionToForm($event)"
+        (removedQuestion)="removeQuestionFromForm($event)"
+        [item]="col"
+        [index]="i"
+      ></app-quiz-question>
+    </div>
+  </div>
+
+
+
+  <button
+    class="ml-2"
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-plus"
+    title="Add Column"
+    (click)="addColumn()"
+    [disabled]="columns.length === 20"
+  ></button>
 </div>

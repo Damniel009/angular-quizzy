@@ -6,17 +6,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quiz.component.css'],
 })
 export class QuizComponent implements OnInit {
-  columns: number[];
+  columns: string[];
+  questions = [];
 
   ngOnInit() {
-    this.columns = [0];
+    this.columns = ['asd'];
+  }
+
+  addQuestionToForm(newQuestion) {
+    this.questions.push(newQuestion);
+    console.log(this.questions);
+  }
+
+  removeQuestionFromForm(question){
+    console.log(this.columns[question]);
+    
+    this.columns.splice(question, 1);
+    console.log(this.columns);
   }
 
   addColumn() {
-    this.columns.push(this.columns.length);
+    this.columns.push('');
+    // this.columns.forEach(element => {console.log(this.columns.indexOf(element))})
+      
+    
   }
 
-  removeColumn() {
-    this.columns.splice(-1, 1);
-  }
+  // removeColumn() {
+  //   this.columns.splice(-1, 1);
+  // }
 }
