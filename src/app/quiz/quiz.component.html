@@ -1,16 +1,53 @@
 <div>
   <div class="p-mt-2">
-    <div class="p-col" *ngFor="let col of columns; let i=index">
-      <app-quiz-question
+    <div class="p-col" *ngFor="let col of columns; let i = index">
+      <ng-template #checkboxTemplate>
+        <div class="p-field p-shadow-13 mx-auto">
+          <p-panel
+            header="{{
+              !finalQuestions[i]?.question
+                ? 'Question'
+                : finalQuestions[i]?.question
+            }}" 
+            [toggleable]="true"
+            [collapsed]="col.collapsed"
+          >
+            <ng-template *ngIf="columns.length > 1" pTemplate="icons">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text"
+              ></button>
+            </ng-template>
+
+            <div class="edit-question">
+              <app-checkbox-question
+                (savedQuestion)="addQuestionToForm($event)"
+              ></app-checkbox-question>
+            </div>
+          </p-panel>
+        </div>
+      </ng-template>
+
+      <ng-template #radioTemplate> </ng-template>
+
+      <ng-container
+        *ngIf="col.type === 'checkbox'; then checkboxTemplate"
+      ></ng-container>
+
+      <ng-container
+        *ngIf="col.type === 'radio'; then radioTemplate"
+      ></ng-container>
+
+      <!-- <app-quiz-question
         (savedQuestion)="addQuestionToForm($event)"
         (removedQuestion)="removeQuestionFromForm($event)"
-        [item]="col"
+        [col]="col"
         [index]="i"
-      ></app-quiz-question>
+      ></app-quiz-question> -->
     </div>
   </div>
-
-
 
   <button
     class="ml-2"

@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { quizDto } from '../quiz/quizDto';
 
 @Component({
   selector: 'app-checkbox-question',
@@ -6,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./checkbox-question.component.css'],
 })
 export class CheckboxQuestionComponent implements OnInit {
-  
+  question: string;
   options = [{ label: 'Option1', duplicate: false, answer: false }];
 
   @Output() savedQuestion = new EventEmitter<Object>();
@@ -20,9 +21,6 @@ export class CheckboxQuestionComponent implements OnInit {
       answer: false,
     });
     this.options.push(newQuestion);
-
-    let emitOptions = this.options;
-    this.savedQuestion.emit(emitOptions);
   }
 
   removeCheckbox(index) {
@@ -52,8 +50,11 @@ export class CheckboxQuestionComponent implements OnInit {
   }
 
   saveQuestion() {
-    
-    let final = this.options;
+    let final = Object.assign(new quizDto(), {
+      question: this.question,
+      answers: this.options,
+    });    
+
     this.savedQuestion.emit(final);
   }
 }

@@ -1,4 +1,14 @@
 <div class="checkbox-container">
+  <span class="p-float-label">
+    <input
+      class="checkbox-question"
+      type="text"
+      id="question"
+      pInputText
+      [(ngModel)]="question"
+    />
+    <label for="question">Question</label>
+  </span>
   <div class="p-col" *ngFor="let option of this.options; let i = index">
     <span class="p-field-checkbox">
       <button
@@ -37,6 +47,15 @@
       title="Add Column"
       (click)="addCheckbox()"
       [disabled]="this.options.length === 10"
+    ></button>
+
+    <button
+      pButton
+      pRipple
+      class="float-right p-button-outlined"
+      (click)="saveQuestion()"
+      type="button"
+      label="Save question"
     ></button>
   </div>
 </div>
