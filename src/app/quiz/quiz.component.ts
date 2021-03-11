@@ -24,6 +24,13 @@ export class QuizComponent implements OnInit {
       command: () => {
         this.addRadiobutton();
       }
+    },
+    {
+      label: 'Textarea',
+      icon: 'pi pi-fw pi-check-square',
+      command: () => {
+        this.addTextarea();
+      }
     }
   ];
 
@@ -43,6 +50,15 @@ export class QuizComponent implements OnInit {
       question: '',
       answers: [{ label: 'Option1', duplicate: false, answer: false }],
       type: 'radio',
+      collapsed: false,
+    });
+  }
+
+  addTextarea(){
+    this.finalQuestions.push({
+      question: '',
+      answers: [{ label: 'Option1', duplicate: false, answer: false }],
+      type: 'text',
       collapsed: false,
     });
   }

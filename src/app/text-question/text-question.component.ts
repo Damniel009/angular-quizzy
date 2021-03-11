@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { questionDto } from '../quiz/questionDto';
 
 @Component({
   selector: 'app-text-question',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./text-question.component.css']
 })
 export class TextQuestionComponent implements OnInit {
-
+  // @Input() item: questionDto;
   constructor() { }
 
   ngOnInit(): void {

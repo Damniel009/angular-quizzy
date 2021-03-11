@@ -58,12 +58,37 @@
         </div>
       </ng-template>
 
+      <ng-template #textAreaTemplate>
+        <div class="p-field p-shadow-13 mx-auto">
+          <p-panel
+            header="{{ !question.question ? 'Question' : question.question }}"
+            [toggleable]="true"
+            [collapsed]="question.collapsed"
+          >
+            <ng-template *ngIf="finalQuestions.length > 0" pTemplate="icons">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text"
+                (click)="removeQuestion(question)"
+              ></button>
+            </ng-template>
+            <app-text-question> </app-text-question>
+          </p-panel>
+        </div>
+      </ng-template>
+
       <ng-container
         *ngIf="question.type === 'checkbox'; then checkboxTemplate"
       ></ng-container>
 
       <ng-container
         *ngIf="question.type === 'radio'; then radioTemplate"
+      ></ng-container>
+
+      <ng-container
+        *ngIf="question.type === 'text'; then textAreaTemplate"
       ></ng-container>
     </div>
   </div>
