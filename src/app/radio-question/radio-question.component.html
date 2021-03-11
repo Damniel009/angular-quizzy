@@ -1,1 +1,68 @@
-<p>radio-question works!</p>
+<div class="checkbox-container">
+  <span class="p-float-label">
+    <input
+      class="checkbox-question"
+      type="text"
+      id="question"
+      pInputText
+      [(ngModel)]="item.question"
+    />
+    <label for="question">Question</label>
+  </span>
+  <div class="p-col" *ngFor="let option of item.answers; let i = index">
+    <span class="p-field-checkbox">
+      <button
+        *ngIf="this.item.answers.length > 1"
+        pButton
+        type="button"
+        icon="pi pi-trash"
+        class="p-button-rounded p-button-danger p-button-text"
+        title="Remove Column"
+        (click)="removeRadio(i)"
+      ></button>
+
+      <p-radioButton
+        name="groupname"
+        value="{{ item.answers[i].label }}"
+        [(ngModel)]="radios"
+        inputId="{{ i }}"
+        (onClick)="updateAnswers(i)"
+      ></p-radioButton>
+      <label class="checkbox-option" for="{{ i }}"
+        ><input
+          class="checkbox-option-label-input"
+          type="text"
+          pInputText
+          [(ngModel)]="item.answers[i].label"
+      /></label>
+
+      <i
+        *ngIf="item.answers[i].duplicate"
+        class="pi pi-exclamation-circle"
+        style="color: red"
+      ></i>
+    </span>
+  </div>
+
+  <div class="action-buttons">
+    <button
+      class="ml-2 p-button-rounded p-button-secondary p-button-outlined"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-plus"
+      title="Add Column"
+      (click)="addRadio()"
+      [disabled]="this.item.answers.length === 10"
+    ></button>
+
+    <button
+      pButton
+      pRipple
+      class="float-right p-button-outlined"
+      (click)="saveQuestion()"
+      type="button"
+      label="Save question"
+    ></button>
+  </div>
+</div>

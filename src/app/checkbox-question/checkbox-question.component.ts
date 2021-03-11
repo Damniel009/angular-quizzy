@@ -8,7 +8,7 @@ import { questionDto } from '../quiz/questionDto';
 })
 export class CheckboxQuestionComponent implements OnInit {
   @Input() item: questionDto;
-  
+
   question: string;
   options = [{ label: 'Option1', duplicate: false, answer: false }];
 
@@ -18,7 +18,7 @@ export class CheckboxQuestionComponent implements OnInit {
 
   addCheckbox() {
     let newQuestion = Object.assign({
-      label: `Option${this.options.length + 1}`,
+      label: `Option${this.item.answers.length + 1}`,
       duplicate: false,
       answer: false,
     });
@@ -56,11 +56,8 @@ export class CheckboxQuestionComponent implements OnInit {
       question: this.item.question,
       answers: this.item.answers,
       type: 'checkbox',
-      collapsed: true
-    });    
-    console.log(final);
-    
-
+      collapsed: true,
+    });
     this.savedQuestion.emit(final);
   }
 }

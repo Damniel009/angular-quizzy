@@ -1,14 +1,13 @@
 <div>
   <div class="p-mt-2">
-    <div class="p-question" *ngFor="let question of finalQuestions; let i = index">
+    <div
+      class="p-question"
+      *ngFor="let question of finalQuestions; let i = index"
+    >
       <ng-template #checkboxTemplate>
         <div class="p-field p-shadow-13 mx-auto">
           <p-panel
-            header="{{
-              !question.question
-                ? 'Question'
-                : question.question
-            }}" 
+            header="{{ !question.question ? 'Question' : question.question }}"
             [toggleable]="true"
             [collapsed]="question.collapsed"
           >
@@ -32,7 +31,32 @@
         </div>
       </ng-template>
 
-      <ng-template #radioTemplate> hello </ng-template>
+      <ng-template #radioTemplate>
+        <div class="p-field p-shadow-13 mx-auto">
+          <p-panel
+            header="{{ !question.question ? 'Question' : question.question }}"
+            [toggleable]="true"
+            [collapsed]="question.collapsed"
+          >
+            <ng-template *ngIf="finalQuestions.length > 0" pTemplate="icons">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text"
+                (click)="removeQuestion(question)"
+              ></button>
+            </ng-template>
+
+            <div class="edit-question">
+              <app-radio-question
+                [item]="question"
+                (savedQuestion)="addQuestionToForm($event, i)"
+              ></app-radio-question>
+            </div>
+          </p-panel>
+        </div>
+      </ng-template>
 
       <ng-container
         *ngIf="question.type === 'checkbox'; then checkboxTemplate"
@@ -54,5 +78,10 @@
     (click)="menu.toggle($event)"
     [disabled]="finalQuestions.length === 20"
   ></button>
-  <p-slideMenu #menu [model]="items" [popup]="true" [viewportHeight]="190"></p-slideMenu>
+  <p-slideMenu
+    #menu
+    [model]="items"
+    [popup]="true"
+    [viewportHeight]="190"
+  ></p-slideMenu>
 </div>
