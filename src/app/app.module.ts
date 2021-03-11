@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //components
-import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { AppComponent } from './app.component';
 import { CheckboxQuestionComponent } from './checkbox-question/checkbox-question.component';
@@ -23,7 +22,6 @@ import { RadioQuestionComponent } from './radio-question/radio-question.componen
 @NgModule({
   declarations: [
     AppComponent,
-    QuizQuestionComponent,
     QuizComponent,
     CheckboxQuestionComponent,
     RadioQuestionComponent,
