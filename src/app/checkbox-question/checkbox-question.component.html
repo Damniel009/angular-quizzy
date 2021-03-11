@@ -20,8 +20,8 @@
         title="Remove Column"
         (click)="removeCheckbox(i)"
       ></button>
-      <p-checkbox (onChange)="updateAnswers(i)" inputId="i"></p-checkbox>
-      <label class="checkbox-option" for="i"
+      <p-checkbox (onChange)="updateAnswers(i)" inputId="{{ i }}"></p-checkbox>
+      <label class="checkbox-option" for="{{ i }}"
         ><input
           class="checkbox-option-label-input"
           type="text"
