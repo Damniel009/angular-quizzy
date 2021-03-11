@@ -17,7 +17,8 @@ import { PanelModule } from 'primeng/panel';
 import { MenuModule } from 'primeng/menu';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { RadioQuestionComponent } from './radio-question/radio-question.component';
-
+import { MenubarComponent } from './menubar/menubar.component';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,11 @@ import { RadioQuestionComponent } from './radio-question/radio-question.componen
     QuizComponent,
     CheckboxQuestionComponent,
     RadioQuestionComponent,
+    MenubarComponent,
   ],
   imports: [
     FormsModule,
+    MenubarModule,
     BrowserModule,
     BrowserAnimationsModule,
     ButtonModule,
