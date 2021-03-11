@@ -1,4 +1,5 @@
+import { questionDto } from './questionDto';
+
 export class quizDto {
-  question: string;
-  answers: Object[];
+  questions: questionDto[];  
 }

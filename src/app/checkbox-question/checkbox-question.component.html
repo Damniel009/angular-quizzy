@@ -5,14 +5,14 @@
       type="text"
       id="question"
       pInputText
-      [(ngModel)]="question"
+      [(ngModel)]="item.question"
     />
     <label for="question">Question</label>
   </span>
-  <div class="p-col" *ngFor="let option of this.options; let i = index">
+  <div class="p-col" *ngFor="let option of item.answers; let i = index">
     <span class="p-field-checkbox">
       <button
-        *ngIf="this.options.length > 1"
+        *ngIf="this.item.answers.length > 1"
         pButton
         type="button"
         icon="pi pi-trash"
@@ -26,11 +26,11 @@
           class="checkbox-option-label-input"
           type="text"
           pInputText
-          [(ngModel)]="options[i].label"
+          [(ngModel)]="item.answers[i].label"
       /></label>
 
       <i
-        *ngIf="options[i].duplicate"
+        *ngIf="item.answers[i].duplicate"
         class="pi pi-exclamation-circle"
         style="color: red"
       ></i>
@@ -46,7 +46,7 @@
       icon="pi pi-plus"
       title="Add Column"
       (click)="addCheckbox()"
-      [disabled]="this.options.length === 10"
+      [disabled]="this.item.answers.length === 10"
     ></button>
 
     <button

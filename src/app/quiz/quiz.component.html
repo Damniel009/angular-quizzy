@@ -1,29 +1,31 @@
 <div>
   <div class="p-mt-2">
-    <div class="p-col" *ngFor="let col of columns; let i = index">
+    <div class="p-question" *ngFor="let question of finalQuestions; let i = index">
       <ng-template #checkboxTemplate>
         <div class="p-field p-shadow-13 mx-auto">
           <p-panel
             header="{{
-              !finalQuestions[i]?.question
+              !question.question
                 ? 'Question'
-                : finalQuestions[i]?.question
+                : question.question
             }}" 
             [toggleable]="true"
-            [collapsed]="col.collapsed"
+            [collapsed]="question.collapsed"
           >
-            <ng-template *ngIf="columns.length > 1" pTemplate="icons">
+            <ng-template *ngIf="finalQuestions.length > 0" pTemplate="icons">
               <button
                 pButton
                 type="button"
                 icon="pi pi-trash"
                 class="p-button-rounded p-button-danger p-button-text"
+                (click)="removeQuestion(question)"
               ></button>
             </ng-template>
 
             <div class="edit-question">
               <app-checkbox-question
-                (savedQuestion)="addQuestionToForm($event)"
+                [item]="question"
+                (savedQuestion)="addQuestionToForm($event, i)"
               ></app-checkbox-question>
             </div>
           </p-panel>
@@ -33,19 +35,12 @@
       <ng-template #radioTemplate> </ng-template>
 
       <ng-container
-        *ngIf="col.type === 'checkbox'; then checkboxTemplate"
+        *ngIf="question.type === 'checkbox'; then checkboxTemplate"
       ></ng-container>
 
       <ng-container
-        *ngIf="col.type === 'radio'; then radioTemplate"
+        *ngIf="question.type === 'radio'; then radioTemplate"
       ></ng-container>
-
-      <!-- <app-quiz-question
-        (savedQuestion)="addQuestionToForm($event)"
-        (removedQuestion)="removeQuestionFromForm($event)"
-        [col]="col"
-        [index]="i"
-      ></app-quiz-question> -->
     </div>
   </div>
 
@@ -57,6 +52,6 @@
     icon="pi pi-plus"
     title="Add Column"
     (click)="addColumn()"
-    [disabled]="columns.length === 20"
+    [disabled]="finalQuestions.length === 20"
   ></button>
 </div>

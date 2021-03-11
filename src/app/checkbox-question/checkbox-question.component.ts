@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { quizDto } from '../quiz/quizDto';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { questionDto } from '../quiz/questionDto';
 
 @Component({
   selector: 'app-checkbox-question',
@@ -7,6 +7,8 @@ import { quizDto } from '../quiz/quizDto';
   styleUrls: ['./checkbox-question.component.css'],
 })
 export class CheckboxQuestionComponent implements OnInit {
+  @Input() item: questionDto;
+  
   question: string;
   options = [{ label: 'Option1', duplicate: false, answer: false }];
 
@@ -20,11 +22,11 @@ export class CheckboxQuestionComponent implements OnInit {
       duplicate: false,
       answer: false,
     });
-    this.options.push(newQuestion);
+    this.item.answers.push(newQuestion);
   }
 
   removeCheckbox(index) {
-    this.options.splice(index, 1);
+    this.item.answers.splice(index, 1);
   }
 
   // checkDuplicate() {
@@ -46,14 +48,18 @@ export class CheckboxQuestionComponent implements OnInit {
   // }
 
   updateAnswers(question) {
-    this.options[question].answer = true;
+    this.item.answers[question].answer = true;
   }
 
   saveQuestion() {
-    let final = Object.assign(new quizDto(), {
-      question: this.question,
-      answers: this.options,
+    let final = Object.assign(new questionDto(), {
+      question: this.item.question,
+      answers: this.item.answers,
+      type: 'checkbox',
+      collapsed: true
     });    
+    console.log(final);
+    
 
     this.savedQuestion.emit(final);
   }
