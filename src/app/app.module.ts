@@ -15,8 +15,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { PanelModule } from 'primeng/panel';
-import {MenuModule} from 'primeng/menu';
-import {MenuItem} from 'primeng/api';
+import { MenuModule } from 'primeng/menu';
+import { SlideMenuModule } from 'primeng/slidemenu';
+import { RadioQuestionComponent } from './radio-question/radio-question.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {MenuItem} from 'primeng/api';
     QuizQuestionComponent,
     QuizComponent,
     CheckboxQuestionComponent,
+    RadioQuestionComponent,
   ],
   imports: [
     FormsModule,
@@ -34,7 +36,8 @@ import {MenuItem} from 'primeng/api';
     CheckboxModule,
     RadioButtonModule,
     PanelModule,
-    MenuModule
+    SlideMenuModule,
+    MenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

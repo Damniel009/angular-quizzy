@@ -32,7 +32,7 @@
         </div>
       </ng-template>
 
-      <ng-template #radioTemplate> </ng-template>
+      <ng-template #radioTemplate> hello </ng-template>
 
       <ng-container
         *ngIf="question.type === 'checkbox'; then checkboxTemplate"
@@ -51,7 +51,8 @@
     type="button"
     icon="pi pi-plus"
     title="Add Column"
-    (click)="addColumn()"
+    (click)="menu.toggle($event)"
     [disabled]="finalQuestions.length === 20"
   ></button>
+  <p-slideMenu #menu [model]="items" [popup]="true" [viewportHeight]="190"></p-slideMenu>
 </div>

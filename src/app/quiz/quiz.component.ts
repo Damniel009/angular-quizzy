@@ -10,21 +10,26 @@ export class QuizComponent implements OnInit {
   columns;
   finalQuestions: questionDto[] = [];
 
+  items = [
+    {
+      label: 'Checkbox',
+      icon: 'pi pi-fw pi-check-square',
+      command: () => {
+        this.addCheckbox();
+      }
+    },
+    {
+      label: 'Radiobutton',
+      icon: 'pi pi-fw pi-check-circle',
+      command: () => {
+        this.addRadiobutton();
+      }
+    }
+  ];
+
   ngOnInit() {}
 
-  // addQuestionToForm(newQuestion) {
-  //   this.questions.push(newQuestion);
-  //   console.log(this.questions);
-  // }
-
-  // removeQuestionFromForm(question){
-  //   console.log(this.columns[question]);
-
-  //   this.columns.splice(question, 1);
-  //   console.log(this.columns);
-  // }
-
-  addColumn() {
+  addCheckbox() {
     this.finalQuestions.push({
       question: '',
       answers: [{ label: 'Option1', duplicate: false, answer: false }],
@@ -33,28 +38,23 @@ export class QuizComponent implements OnInit {
     });
   }
 
+  addRadiobutton() {
+    this.finalQuestions.push({
+      question: '',
+      answers: [{ label: 'Option1', duplicate: false, answer: false }],
+      type: 'radio',
+      collapsed: false,
+    });
+  }
+
   removeQuestion(columnToBeRemoved) {
-    let index = this.columns.indexOf(columnToBeRemoved);
-    this.columns.splice(index, 1);
-    // console.log(index);
-
-    // this.finalQuestions.filter((question) => {
-    //     console.log(this.finalQuestions.indexOf(question));
-
-    //   return index === this.columns.indexOf(question);
-    // });
-
-    //   this.finalQuestions.forEach((question) => {
-    //     console.log(this.finalQuestions.indexOf(question));
-
-    //    if(index === this.columns.indexOf(question)){
-
-    //    }
-    // });
+    let index = this.finalQuestions.indexOf(columnToBeRemoved);
+    this.finalQuestions.splice(index, 1);
+    console.log(this.finalQuestions);
   }
 
   addQuestionToForm(newQuestion: questionDto, index) {
-    this.finalQuestions[index] = newQuestion
+    this.finalQuestions[index] = newQuestion;
     console.log(this.finalQuestions);
   }
 }
