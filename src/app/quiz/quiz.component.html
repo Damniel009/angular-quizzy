@@ -74,7 +74,10 @@
                 (click)="removeQuestion(question)"
               ></button>
             </ng-template>
-            <app-text-question> </app-text-question>
+            <app-text-question
+              [item]="question"
+              (savedQuestion)="addQuestionToForm($event, i)"
+            ></app-text-question>
           </p-panel>
         </div>
       </ng-template>
@@ -98,6 +101,16 @@
     pButton
     pRipple
     type="button"
+    label="Create quiz"
+    title="Create quiz"
+    (click)="finishQuiz()"
+  ></button>
+
+  <button
+    class="ml-2"
+    pButton
+    pRipple
+    type="button"
     icon="pi pi-plus"
     title="Add Column"
     (click)="menu.toggle($event)"
@@ -107,6 +120,6 @@
     #menu
     [model]="items"
     [popup]="true"
-    [viewportHeight]="150"
+    [viewportHeight]="200"
   ></p-slideMenu>
 </div>

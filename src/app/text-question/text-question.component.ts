@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { questionDto } from '../quiz/questionDto';
 
 @Component({
@@ -7,10 +7,21 @@ import { questionDto } from '../quiz/questionDto';
   styleUrls: ['./text-question.component.css']
 })
 export class TextQuestionComponent implements OnInit {
-  // @Input() item: questionDto;
+  @Input() item: questionDto;
+  @Output() savedQuestion = new EventEmitter<Object>();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  saveQuestion() {
+    let final = Object.assign(new questionDto(), {
+      question: this.item.question,
+      textAnswer: this.item.textAnswer,
+      type: 'text',
+      collapsed: true,
+    });
+    this.savedQuestion.emit(final);
   }
 
 }

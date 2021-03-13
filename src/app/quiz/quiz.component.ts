@@ -40,6 +40,7 @@ export class QuizComponent implements OnInit {
     this.finalQuestions.push({
       question: '',
       answers: [{ label: 'Option1', duplicate: false, answer: false }],
+      textAnswer: undefined,
       type: 'checkbox',
       collapsed: false,
     });
@@ -49,6 +50,7 @@ export class QuizComponent implements OnInit {
     this.finalQuestions.push({
       question: '',
       answers: [{ label: 'Option1', duplicate: false, answer: false }],
+      textAnswer: undefined,
       type: 'radio',
       collapsed: false,
     });
@@ -57,7 +59,8 @@ export class QuizComponent implements OnInit {
   addTextarea(){
     this.finalQuestions.push({
       question: '',
-      answers: [{ label: 'Option1', duplicate: false, answer: false }],
+      answers: undefined,
+      textAnswer: '',
       type: 'text',
       collapsed: false,
     });
@@ -72,5 +75,9 @@ export class QuizComponent implements OnInit {
   addQuestionToForm(newQuestion: questionDto, index) {
     this.finalQuestions[index] = newQuestion;
     console.log(this.finalQuestions);
+  }
+
+  finishQuiz(){
+    
   }
 }
