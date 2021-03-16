@@ -23,6 +23,7 @@ import { TextQuestionComponent } from './quiz/text-question/text-question.compon
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AppRoutingModule } from './app-routing.module';
 import { ResultsComponent } from './results/results.component';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ResultsComponent } from './results/results.component';
     InputTextareaModule,
     MenuModule,
     AppRoutingModule,
+    ChartModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

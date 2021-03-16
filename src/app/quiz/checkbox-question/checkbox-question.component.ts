@@ -49,7 +49,6 @@ export class CheckboxQuestionComponent implements OnInit {
 
   updateAnswers(question) {
     this.item.answers[question].answer = true;
-    
   }
 
   saveQuestion() {
