@@ -10,11 +10,12 @@ export class RadioQuestionComponent implements OnInit {
   @Input() item: questionDto;
   @Output() savedQuestion = new EventEmitter<Object>();
 
-  radios = [];
+  radios: any;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   removeRadio(index) {
     this.item.answers.splice(index, 1);
@@ -28,6 +29,7 @@ export class RadioQuestionComponent implements OnInit {
         this.item.answers[index].answer = false;
       }
     });
+    // this.item.answers[radio].selectedOption = this.item.answers[radio].label
   }
 
   addRadio() {
@@ -45,6 +47,7 @@ export class RadioQuestionComponent implements OnInit {
       answers: this.item.answers,
       type: 'radio',
       collapsed: true,
+      selectedOption: this.item.selectedOption
     });    
     this.savedQuestion.emit(final);
   }

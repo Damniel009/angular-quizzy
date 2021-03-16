@@ -39,20 +39,22 @@ export class QuizComponent implements OnInit {
   addCheckbox() {
     this.finalQuestions.push({
       question: '',
-      answers: [{ label: 'Option1', duplicate: false, answer: false }],
+      answers: [{ label: 'Option1', duplicate: false, answer: false}],
       textAnswer: undefined,
       type: 'checkbox',
       collapsed: false,
+      selectedOption: null
     });
   }
 
   addRadiobutton() {
     this.finalQuestions.push({
       question: '',
-      answers: [{ label: 'Option1', duplicate: false, answer: false }],
+      answers: [{ label: 'Option1', duplicate: false, answer: false}],
       textAnswer: undefined,
       type: 'radio',
       collapsed: false,
+      selectedOption: undefined
     });
   }
 
@@ -63,6 +65,7 @@ export class QuizComponent implements OnInit {
       textAnswer: '',
       type: 'text',
       collapsed: false,
+      selectedOption: undefined
     });
   }
 

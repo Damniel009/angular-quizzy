@@ -20,17 +20,23 @@
         title="Remove Column"
         (click)="removeCheckbox(i)"
       ></button>
-      <p-checkbox (onChange)="updateAnswers(i)" inputId="{{ i }}"></p-checkbox>
+      <p-checkbox
+        name="groupname"
+        [value]="option.label"
+        (onChange)="updateAnswers(i)"
+        [(ngModel)]="item.selectedOption"
+        inputId="{{ i }}"
+      ></p-checkbox>
       <label class="checkbox-option" for="{{ i }}"
         ><input
           class="checkbox-option-label-input"
           type="text"
           pInputText
-          [(ngModel)]="item.answers[i].label"
+          [(ngModel)]="option.label"
       /></label>
 
       <i
-        *ngIf="item.answers[i].duplicate"
+        *ngIf="option.duplicate"
         class="pi pi-exclamation-circle"
         style="color: red"
       ></i>

@@ -6,4 +6,5 @@ export class questionDto {
   textAnswer: string;
   type: string;
   collapsed: false;
+  selectedOption;
 }

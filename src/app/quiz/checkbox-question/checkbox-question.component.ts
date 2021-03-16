@@ -49,6 +49,7 @@ export class CheckboxQuestionComponent implements OnInit {
 
   updateAnswers(question) {
     this.item.answers[question].answer = true;
+    
   }
 
   saveQuestion() {
@@ -57,6 +58,7 @@ export class CheckboxQuestionComponent implements OnInit {
       answers: this.item.answers,
       type: 'checkbox',
       collapsed: true,
+      selectedOption: new Set(this.item.selectedOption)
     });
     this.savedQuestion.emit(final);
   }

@@ -23,8 +23,8 @@
 
       <p-radioButton
         name="groupname"
-        value="{{ item.answers[i].label }}"
-        [(ngModel)]="radios"
+        [value]="option.label"
+        [(ngModel)]="item.selectedOption"
         inputId="{{ i }}"
         (onClick)="updateAnswers(i)"
       ></p-radioButton>
@@ -33,11 +33,11 @@
           class="checkbox-option-label-input"
           type="text"
           pInputText
-          [(ngModel)]="item.answers[i].label"
+          [(ngModel)]="option.label"
       /></label>
 
       <i
-        *ngIf="item.answers[i].duplicate"
+        *ngIf="option.duplicate"
         class="pi pi-exclamation-circle"
         style="color: red"
       ></i>
