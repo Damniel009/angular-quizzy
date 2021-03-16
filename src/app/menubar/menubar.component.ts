@@ -18,6 +18,9 @@ export class MenubarComponent implements OnInit {
       {
         label: 'Results',
         icon: 'pi pi-fw pi-users',
+      },{
+        label: 'Logout',
+        icon: 'pi pi-fw pi-sign-out',
       },
     ];
   }
