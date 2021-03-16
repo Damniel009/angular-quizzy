@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { questionDto } from './questionDto';
+import { questionDto } from '../dtos/questionDto';
 
 @Component({
   selector: 'app-quiz',

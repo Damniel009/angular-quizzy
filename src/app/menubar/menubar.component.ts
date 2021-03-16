@@ -14,10 +14,12 @@ export class MenubarComponent implements OnInit {
       {
         label: 'Create',
         icon: 'pi pi-fw pi-pencil',
+        routerLink: ['/quiz']
       },
       {
         label: 'Results',
         icon: 'pi pi-fw pi-users',
+        routerLink: ['/rezults']
       },{
         label: 'Logout',
         icon: 'pi pi-fw pi-sign-out',

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //components
 import { QuizComponent } from './quiz/quiz.component';
 import { AppComponent } from './app.component';
-import { CheckboxQuestionComponent } from './checkbox-question/checkbox-question.component';
+import { CheckboxQuestionComponent } from './quiz/checkbox-question/checkbox-question.component';
 
 //primeng
 import { ButtonModule } from 'primeng/button';
@@ -16,11 +16,13 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { PanelModule } from 'primeng/panel';
 import { MenuModule } from 'primeng/menu';
 import { SlideMenuModule } from 'primeng/slidemenu';
-import { RadioQuestionComponent } from './radio-question/radio-question.component';
+import { RadioQuestionComponent } from './quiz/radio-question/radio-question.component';
 import { MenubarComponent } from './menubar/menubar.component';
 import { MenubarModule } from 'primeng/menubar';
-import { TextQuestionComponent } from './text-question/text-question.component';
+import { TextQuestionComponent } from './quiz/text-question/text-question.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AppRoutingModule } from './app-routing.module';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     RadioQuestionComponent,
     MenubarComponent,
     TextQuestionComponent,
+    ResultsComponent,
   ],
   imports: [
     FormsModule,
@@ -44,6 +47,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     SlideMenuModule,
     InputTextareaModule,
     MenuModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

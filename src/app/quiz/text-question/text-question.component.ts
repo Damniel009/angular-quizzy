@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { questionDto } from '../quiz/questionDto';
+import { questionDto } from '../../dtos/questionDto';
 
 @Component({
   selector: 'app-text-question',

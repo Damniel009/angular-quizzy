@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { questionDto } from '../quiz/questionDto';
+import { questionDto } from '../../dtos/questionDto';
 
 @Component({
   selector: 'app-radio-question',
