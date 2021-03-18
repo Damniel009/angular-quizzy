@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { QuizService } from 'src/app/services/quiz.service';
 import { questionDto } from '../../dtos/questionDto';
 
+// import { QuizService } from '../services/test.service';
 @Component({
   selector: 'app-checkbox-question',
   templateUrl: './checkbox-question.component.html',
@@ -13,6 +15,8 @@ export class CheckboxQuestionComponent implements OnInit {
   options = [{ label: 'Option1', duplicate: false, answer: false }];
 
   @Output() savedQuestion = new EventEmitter<Object>();
+
+  constructor(private quizService: QuizService) {}
 
   ngOnInit() {}
 
@@ -57,8 +61,22 @@ export class CheckboxQuestionComponent implements OnInit {
       answers: this.item.answers,
       type: 'checkbox',
       collapsed: true,
-      selectedOption: new Set(this.item.selectedOption)
+      selectedOption: new Set(this.item.selectedOption),
     });
+    // this.addQuestion()
     this.savedQuestion.emit(final);
+  }
+
+  addQuestion() {
+    let final = Object.assign(new questionDto(), {
+      question: this.item.question,
+      multipleAnswers: this.item.answers,
+      type: 'checkbox',
+      textAnswer: 'undefined',
+    });
+
+    this.quizService.store(final).subscribe((res: questionDto) => {
+      console.log(res);
+    });
   }
 }
