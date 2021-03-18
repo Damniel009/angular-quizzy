@@ -24,6 +24,11 @@ export class MenubarComponent implements OnInit {
         label: 'Logout',
         icon: 'pi pi-fw pi-sign-out',
       },
+      {
+        label: 'TEST',
+        icon: 'pi pi-fw pi-sign-out',
+        routerLink: ['/test']
+      },
     ];
   }
 }

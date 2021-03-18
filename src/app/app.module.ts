@@ -3,6 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//for services
+import { HttpClientModule } from '@angular/common/http';
+
 //components
 import { QuizComponent } from './quiz/quiz.component';
 import { AppComponent } from './app.component';
@@ -24,6 +27,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AppRoutingModule } from './app-routing.module';
 import { ResultsComponent } from './results/results.component';
 import { ChartModule } from 'primeng/chart';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +38,11 @@ import { ChartModule } from 'primeng/chart';
     MenubarComponent,
     TextQuestionComponent,
     ResultsComponent,
+    TestComponent,
   ],
   imports: [
     FormsModule,
+    HttpClientModule,
     MenubarModule,
     BrowserModule,
     BrowserAnimationsModule,
