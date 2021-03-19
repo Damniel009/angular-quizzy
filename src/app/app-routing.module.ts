@@ -6,6 +6,7 @@ import { ResultsComponent } from './results/results.component';
 
 //test
 import { TestComponent } from './test/test.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/quiz', pathMatch: 'full' },
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'test',
     component: TestComponent,
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
   },
 ];
 

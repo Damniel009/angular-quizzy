@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { signupDto } from '../dtos/signupDto';
 
 @Component({
   selector: 'app-signup',
@@ -6,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  newUser: signupDto = {
+    email: '',
+    password: '',
+    name: '',
+  }
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
+  signupUser(){
+    this.authService.signup(this.newUser).subscribe(res => {
+      console.log(res);
+      
+    },
+    err => {
+      console.log(err);
+    })
+  }
 }

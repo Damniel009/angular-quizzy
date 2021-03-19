@@ -1,1 +1,18 @@
-<p>signup works!</p>
+<div class="mt-4">
+  <h5>Signup</h5>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="email">Email</label>
+      <input id="email" type="text" pInputText [(ngModel)]="newUser.email"/>
+    </div>
+    <div class="p-field">
+      <label for="name">Username</label>
+      <input id="name" type="text" pInputText [(ngModel)]="newUser.name"/>
+    </div>
+    <div class="p-field">
+        <label for="password">Password</label>
+        <input id="password" type="password" pInputText [(ngModel)]="newUser.password"/>
+      </div>
+  </div>
+  <button pButton pRipple type="button" label="Submit" (click)="signupUser()"></button>
+</div>
