@@ -28,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ResultsComponent } from './results/results.component';
 import { ChartModule } from 'primeng/chart';
 import { TestComponent } from './test/test.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TestComponent } from './test/test.component';
     TextQuestionComponent,
     ResultsComponent,
     TestComponent,
+    SignupComponent,
   ],
   imports: [
     FormsModule,

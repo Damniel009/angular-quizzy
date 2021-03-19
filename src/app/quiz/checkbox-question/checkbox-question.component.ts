@@ -63,20 +63,6 @@ export class CheckboxQuestionComponent implements OnInit {
       collapsed: true,
       selectedOption: new Set(this.item.selectedOption),
     });
-    // this.addQuestion()
     this.savedQuestion.emit(final);
-  }
-
-  addQuestion() {
-    let final = Object.assign(new questionDto(), {
-      question: this.item.question,
-      multipleAnswers: this.item.answers,
-      type: 'checkbox',
-      textAnswer: 'undefined',
-    });
-
-    this.quizService.store(final).subscribe((res: questionDto) => {
-      console.log(res);
-    });
   }
 }

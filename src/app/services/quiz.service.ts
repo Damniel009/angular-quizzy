@@ -13,13 +13,12 @@ import { questionDto } from '../dtos/questionDto';
   providedIn: 'root',
 })
 export class QuizService {
-  question: questionDto[];
   baseUrl = 'http://localhost:8080/';
   constructor(private http: HttpClient) {}
 
-  store(question: questionDto): Observable<questionDto> {
-    return this.http.post<questionDto>(
-      `${this.baseUrl}quiz/post`,
+  saveQuestion(question: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}quiz/save`,
       question,
       {}
     );

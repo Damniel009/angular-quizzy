@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { questionDto } from '../dtos/questionDto';
+import { QuizService } from '../services/quiz.service';
 
 @Component({
   selector: 'app-quiz',
@@ -16,56 +17,58 @@ export class QuizComponent implements OnInit {
       icon: 'pi pi-fw pi-check-square',
       command: () => {
         this.addCheckbox();
-      }
+      },
     },
     {
       label: 'Radiobutton',
       icon: 'pi pi-fw pi-check-circle',
       command: () => {
         this.addRadiobutton();
-      }
+      },
     },
     {
       label: 'Textarea',
       icon: 'pi pi-fw pi-check-square',
       command: () => {
         this.addTextarea();
-      }
-    }
+      },
+    },
   ];
+
+  constructor(private quizService: QuizService) {}
 
   ngOnInit() {}
 
   addCheckbox() {
     this.finalQuestions.push({
       question: '',
-      answers: [{ label: 'Option1', duplicate: false, answer: false}],
+      answers: [{ label: 'Option1', duplicate: false, answer: false }],
       textAnswer: undefined,
       type: 'checkbox',
       collapsed: false,
-      selectedOption: null
+      selectedOption: null,
     });
   }
 
   addRadiobutton() {
     this.finalQuestions.push({
       question: '',
-      answers: [{ label: 'Option1', duplicate: false, answer: false}],
+      answers: [{ label: 'Option1', duplicate: false, answer: false }],
       textAnswer: undefined,
       type: 'radio',
       collapsed: false,
-      selectedOption: undefined
+      selectedOption: undefined,
     });
   }
 
-  addTextarea(){
+  addTextarea() {
     this.finalQuestions.push({
       question: '',
       answers: undefined,
       textAnswer: '',
       type: 'text',
       collapsed: false,
-      selectedOption: undefined
+      selectedOption: undefined,
     });
   }
 
@@ -80,7 +83,11 @@ export class QuizComponent implements OnInit {
     console.log(this.finalQuestions);
   }
 
-  finishQuiz(){
-    
+  finishQuiz() {
+    let final = { questions: this.finalQuestions };
+
+    this.quizService.saveQuestion(final).subscribe((res) => {
+      console.log(res);
+    });
   }
 }
