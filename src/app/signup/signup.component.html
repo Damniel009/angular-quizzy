@@ -1,18 +1,81 @@
-<div class="mt-4">
-  <h5>Signup</h5>
-  <div class="p-fluid">
-    <div class="p-field">
-      <label for="email">Email</label>
-      <input id="email" type="text" pInputText [(ngModel)]="newUser.email"/>
-    </div>
-    <div class="p-field">
-      <label for="name">Username</label>
-      <input id="name" type="text" pInputText [(ngModel)]="newUser.name"/>
-    </div>
-    <div class="p-field">
-        <label for="password">Password</label>
-        <input id="password" type="password" pInputText [(ngModel)]="newUser.password"/>
+<div>
+  <div *ngIf="!isLoginPage" class="mt-4">
+    <h5>Sign up</h5>
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="email">Email</label>
+        <input id="email" type="text" pInputText [(ngModel)]="newUser.email" />
       </div>
+      <div class="p-field">
+        <label for="name">Username</label>
+        <input id="name" type="text" pInputText [(ngModel)]="newUser.name" />
+      </div>
+      <div class="p-field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          [(ngModel)]="newUser.password"
+        />
+      </div>
+    </div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Submit"
+      (click)="signupUser()"
+    ></button>
   </div>
-  <button pButton pRipple type="button" label="Submit" (click)="signupUser()"></button>
+
+  <div *ngIf="isLoginPage" class="mt-4">
+    <h5>Sign in</h5>
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="text"
+          pInputText
+          [(ngModel)]="loginData.email"
+        />
+      </div>
+      <div class="p-field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          [(ngModel)]="loginData.password"
+        />
+      </div>
+    </div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Submit"
+      (click)="loginUser()"
+    ></button>
+  </div>
+  
+  <div class="mt-5">
+    <button
+      *ngIf="isLoginPage"
+      pButton
+      pRipple
+      type="button"
+      label="Switch to sign up"
+      (click)="isLoginPage = false"
+    ></button>
+    <button
+      *ngIf="!isLoginPage"
+      pButton
+      pRipple
+      type="button"
+      label="Switch to sign in"
+      (click)="isLoginPage = true"
+    ></button>
+  </div>
 </div>

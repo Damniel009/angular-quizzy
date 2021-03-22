@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //for services
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/interceptor/auth-interceptor';
 
 //components
 import { QuizComponent } from './quiz/quiz.component';
@@ -29,6 +30,7 @@ import { ResultsComponent } from './results/results.component';
 import { ChartModule } from 'primeng/chart';
 import { TestComponent } from './test/test.component';
 import { SignupComponent } from './signup/signup.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { SignupComponent } from './signup/signup.component';
     ResultsComponent,
     TestComponent,
     SignupComponent,
+    DashboardComponent,
   ],
   imports: [
     FormsModule,
@@ -59,7 +62,9 @@ import { SignupComponent } from './signup/signup.component';
     AppRoutingModule,
     ChartModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

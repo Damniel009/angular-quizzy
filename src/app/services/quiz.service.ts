@@ -1,5 +1,6 @@
 import {
   HttpClient,
+  HttpHeaders,
   HttpErrorResponse,
   HttpParams,
 } from '@angular/common/http';
@@ -14,7 +15,19 @@ import { questionDto } from '../dtos/questionDto';
 })
 export class QuizService {
   baseUrl = 'http://localhost:8080/';
+
+  // httpOptions = {
+  //   headers: new HttpHeaders({
+  //     Authorization: 'Bearer '
+  //   })
+  // };
+
   constructor(private http: HttpClient) {}
+
+  createAuthorizationHeader(headers: Headers) {
+    headers.append('Authorization', 'Basic ' +
+      btoa('username:password')); 
+  }
 
   saveQuestion(question: any): Observable<any> {
     return this.http.post<any>(
