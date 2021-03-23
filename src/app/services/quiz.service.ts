@@ -16,18 +16,7 @@ import { questionDto } from '../dtos/questionDto';
 export class QuizService {
   baseUrl = 'http://localhost:8080/';
 
-  // httpOptions = {
-  //   headers: new HttpHeaders({
-  //     Authorization: 'Bearer '
-  //   })
-  // };
-
   constructor(private http: HttpClient) {}
-
-  createAuthorizationHeader(headers: Headers) {
-    headers.append('Authorization', 'Basic ' +
-      btoa('username:password')); 
-  }
 
   saveQuestion(question: any): Observable<any> {
     return this.http.post<any>(
@@ -35,5 +24,16 @@ export class QuizService {
       question,
       {}
     );
+  }
+
+  getQuizzes(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}quiz/quizzes`)
+  }
+
+  deleteQuiz(quizId) {
+    return this.http.delete(`${this.baseUrl}quiz/delete/` + quizId).subscribe(res => {
+      console.log('smt');
+      
+    })
   }
 }

@@ -20,13 +20,12 @@ export class MenubarComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    // this.isUserAuthenticated = this.authService.getIsAuthenticated();
+    this.isUserAuthenticated = this.authService.getIsAuthenticated();
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe((isAuth) => {
         this.isUserAuthenticated = isAuth;
         this.updateMenuVisibility();
-        console.log(this.isUserAuthenticated);
       });
 
     this.items = [

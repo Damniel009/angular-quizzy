@@ -1,1 +1,13 @@
-<p>dashboard works!</p>
+<div class="p-d-inline-flex" *ngFor="let quiz of quizList; let i = index">
+  <div class="p-mr-2 p-shadow-13 p-2">
+    {{ quiz._id }}
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-trash"
+      class="p-button-danger"
+      (click)="deleteQuiz(quiz._id)"
+    ></button>
+  </div>
+</div>
