@@ -74,7 +74,7 @@ export class AuthService {
     return this.token;
   }
 
-  getUserId(){
+  getUserId() {
     return this.userId;
   }
 
@@ -106,7 +106,6 @@ export class AuthService {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);
-
   }
 
   private clearAuthData() {
@@ -125,7 +124,7 @@ export class AuthService {
     return {
       token: token,
       expirationDate: new Date(expirationDate),
-      userId: userId
+      userId: userId,
     };
   }
 }

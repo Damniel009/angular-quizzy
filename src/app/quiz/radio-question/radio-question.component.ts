@@ -14,8 +14,7 @@ export class RadioQuestionComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   removeRadio(index) {
     this.item.answers.splice(index, 1);
@@ -47,8 +46,8 @@ export class RadioQuestionComponent implements OnInit {
       answers: this.item.answers,
       type: 'radio',
       collapsed: true,
-      selectedOption: this.item.selectedOption
-    });    
+      selectedOption: this.item.selectedOption,
+    });
     this.savedQuestion.emit(final);
   }
 }

@@ -4,15 +4,14 @@ import { questionDto } from '../../dtos/questionDto';
 @Component({
   selector: 'app-text-question',
   templateUrl: './text-question.component.html',
-  styleUrls: ['./text-question.component.css']
+  styleUrls: ['./text-question.component.css'],
 })
 export class TextQuestionComponent implements OnInit {
   @Input() item: questionDto;
   @Output() savedQuestion = new EventEmitter<Object>();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   saveQuestion() {
     let final = Object.assign(new questionDto(), {
@@ -23,5 +22,4 @@ export class TextQuestionComponent implements OnInit {
     });
     this.savedQuestion.emit(final);
   }
-
 }

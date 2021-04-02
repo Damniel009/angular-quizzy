@@ -30,11 +30,11 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {}
 
   signupUser() {
-    this.authService.signup(this.newUser)
-    this.isLoginPage = true
+    this.authService.signup(this.newUser);
+    this.isLoginPage = true;
   }
 
   loginUser() {
-    this.authService.login(this.loginData)
+    this.authService.login(this.loginData);
   }
 }

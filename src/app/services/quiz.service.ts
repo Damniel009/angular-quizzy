@@ -20,28 +20,24 @@ export class QuizService {
   constructor(private http: HttpClient) {}
 
   saveQuestion(question: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}quiz/save`,
-      question,
-      {}
-    );
+    return this.http.post<any>(`${this.baseUrl}quiz/save`, question, {});
   }
 
   getOwnQuizzes(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}quiz/quizzes`)
+    return this.http.get<any>(`${this.baseUrl}quiz/quizzes`);
   }
 
   getAllQuizzes(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}quiz/quizzes/all`)
+    return this.http.get<any>(`${this.baseUrl}quiz/quizzes/all`);
   }
 
-  getQuiz(quizId): Observable<quizDto>{
-    return this.http.get<quizDto>(`${this.baseUrl}quiz/` + quizId)
+  getQuiz(quizId): Observable<quizDto> {
+    return this.http.get<quizDto>(`${this.baseUrl}quiz/` + quizId);
   }
 
   deleteQuiz(quizId) {
-    return this.http.delete(`${this.baseUrl}quiz/delete/` + quizId).subscribe(res => {
-
-    })
+    return this.http
+      .delete(`${this.baseUrl}quiz/delete/` + quizId)
+      .subscribe((res) => {});
   }
 }
