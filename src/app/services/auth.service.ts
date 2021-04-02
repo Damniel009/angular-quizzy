@@ -31,10 +31,7 @@ export class AuthService {
 
   login(user: signinDto) {
     this.http
-      .post<userDto>(
-        `${this.baseUrl}auth/login`,
-        user
-      )
+      .post<userDto>(`${this.baseUrl}auth/login`, user)
       .subscribe((res) => {
         const token = res.token;
         this.token = token;
@@ -65,9 +62,9 @@ export class AuthService {
     const expiresIn = authData.expirationDate.getTime() - now.getTime();
     if (expiresIn > 0) {
       this.token = authData.token;
-      this.isAuthenticated = true;
       this.userId = authData.userId;
-      this.role = authData.role;
+      this.role = authData.role;      
+      this.isAuthenticated = true;
       this.setAuthTimer(expiresIn / 1000);
       this.authStatusListener.next(true);
     }
@@ -110,7 +107,12 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string, role: string) {
+  private saveAuthData(
+    token: string,
+    expirationDate: Date,
+    userId: string,
+    role: string
+  ) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);

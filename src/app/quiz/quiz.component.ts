@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { questionDto } from '../dtos/questionDto';
 import { QuizService } from '../services/quiz.service';
 
@@ -35,7 +36,7 @@ export class QuizComponent implements OnInit {
     },
   ];
 
-  constructor(private quizService: QuizService) {}
+  constructor(private quizService: QuizService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -89,5 +90,7 @@ export class QuizComponent implements OnInit {
     this.quizService.saveQuestion(final).subscribe((res) => {
       console.log(res);
     });
+
+    this.router.navigate(['/dashboard']);
   }
 }

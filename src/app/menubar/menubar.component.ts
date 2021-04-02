@@ -20,7 +20,7 @@ export class MenubarComponent implements OnInit {
 
   ngOnInit() {
     this.isUserAuthenticated = this.authService.getIsAuthenticated();
-    
+    this.role = this.authService.getRole();
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe((isAuth) => {
