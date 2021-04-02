@@ -31,6 +31,8 @@ import { ChartModule } from 'primeng/chart';
 import { TestComponent } from './test/test.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CommonModule } from '@angular/common';
+import { TakeQuizComponent } from './take-quiz/take-quiz.component';
 
 @NgModule({
   declarations: [
@@ -44,9 +46,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     TestComponent,
     SignupComponent,
     DashboardComponent,
+    TakeQuizComponent,
   ],
   imports: [
     FormsModule,
+    CommonModule,
     HttpClientModule,
     MenubarModule,
     BrowserModule,

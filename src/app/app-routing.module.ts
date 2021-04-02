@@ -9,6 +9,7 @@ import { TestComponent } from './test/test.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthenticationGuard } from './services/guard/authentication-guard.guard';
+import { TakeQuizComponent } from './take-quiz/take-quiz.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/quiz', pathMatch: 'full' },
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'quiz/:id',
+    component: TakeQuizComponent,
     canActivate: [AuthenticationGuard]
   },
 ];

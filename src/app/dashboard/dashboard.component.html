@@ -1,13 +1,27 @@
-<div class="p-d-inline-flex" *ngFor="let quiz of quizList; let i = index">
-  <div class="p-mr-2 p-shadow-13 p-2">
-    {{ quiz._id }}
-    <button
-      pButton
-      pRipple
-      type="button"
-      icon="pi pi-trash"
-      class="p-button-danger"
-      (click)="deleteQuiz(quiz._id)"
-    ></button>
+<div>
+  <h2>List of quizes</h2>
+  <div class="p-d-inline-flex" *ngFor="let quiz of quizList; let i = index">
+    <div class="p-mr-2 p-shadow-13 w-auto p-2">
+      {{ quiz._id }}
+      <div class="mx-3 mt-1">
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-trash"
+          class="p-button-danger"
+          (click)="deleteQuiz(quiz._id, i)"
+        ></button>
+
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="take quiz"
+          class="float-right"
+          (click)="takeQuiz(quiz._id)"
+        ></button>
+      </div>
+    </div>
   </div>
 </div>

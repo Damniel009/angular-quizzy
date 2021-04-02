@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuizService } from '../services/quiz.service';
 
 @Component({
@@ -10,19 +11,30 @@ export class DashboardComponent implements OnInit {
 
   quizList = []
 
-  constructor(private quizService: QuizService) { }
+  constructor(
+    private quizService: QuizService,
+    private router: Router,
+    private route: ActivatedRoute
+    ) { }
 
   ngOnInit(): void {
-    this.quizService.getQuizzes().subscribe(res => {
-      console.log(res);
+    this.quizService.getOwnQuizzes().subscribe(res => {
       this.quizList = res.questions;
     })
   }
 
-  deleteQuiz(quizId){
-    console.log(quizId);
-    
-    this.quizService.deleteQuiz(quizId)
+  deleteQuiz(quizId, index){
+    this.quizService.deleteQuiz(quizId);
+    this.quizList.slice(index, 1);
+  }
+
+  takeQuiz(quizId, index){
+    this.quizService.getQuiz(quizId).subscribe(res => {      
+      //dashboard/quiz/6059af77bca04f0e04dfdeeb
+      //this.router.navigate(['quiz', res._id], {relativeTo: this.route})
+      
+      this.router.navigate(['quiz', res._id])
+    });
   }
 
 }

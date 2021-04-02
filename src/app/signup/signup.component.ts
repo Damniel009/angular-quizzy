@@ -31,6 +31,7 @@ export class SignupComponent implements OnInit {
 
   signupUser() {
     this.authService.signup(this.newUser)
+    this.isLoginPage = true
   }
 
   loginUser() {

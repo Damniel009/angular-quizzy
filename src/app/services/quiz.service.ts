@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { quizDto } from '../dtos/finalQuizDto';
 import { questionDto } from '../dtos/questionDto';
 
 @Injectable({
@@ -26,14 +27,21 @@ export class QuizService {
     );
   }
 
-  getQuizzes(): Observable<any> {
+  getOwnQuizzes(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}quiz/quizzes`)
+  }
+
+  getAllQuizzes(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}quiz/quizzes/all`)
+  }
+
+  getQuiz(quizId): Observable<quizDto>{
+    return this.http.get<quizDto>(`${this.baseUrl}quiz/` + quizId)
   }
 
   deleteQuiz(quizId) {
     return this.http.delete(`${this.baseUrl}quiz/delete/` + quizId).subscribe(res => {
-      console.log('smt');
-      
+
     })
   }
 }
