@@ -14,11 +14,13 @@ export class MenubarComponent implements OnInit {
 
   private authListenerSubs: Subscription;
   isUserAuthenticated: boolean = false;
+  role;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.isUserAuthenticated = this.authService.getIsAuthenticated();
+    this.role = this.authService.getRole();
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe((isAuth) => {
@@ -36,13 +38,13 @@ export class MenubarComponent implements OnInit {
       {
         label: 'Create',
         icon: 'pi pi-fw pi-pencil',
-        visible: this.isUserAuthenticated,
+        visible: this.isUserAuthenticated && this.role === 'prof',
         routerLink: ['/quiz'],
       },
       {
         label: 'Results',
         icon: 'pi pi-fw pi-users',
-        visible: this.isUserAuthenticated,
+        visible: this.isUserAuthenticated && this.role === 'prof',
         routerLink: ['/rezults'],
       },
       {
@@ -53,11 +55,6 @@ export class MenubarComponent implements OnInit {
           this.authService.logout();
         },
       },
-      // {
-      //   label: 'TEST',
-      //   icon: 'pi pi-fw pi-sign-out',
-      //   routerLink: ['/test']
-      // },
       {
         label: 'Signup',
         icon: 'pi pi-plus',
@@ -78,13 +75,13 @@ export class MenubarComponent implements OnInit {
       {
         label: 'Create',
         icon: 'pi pi-fw pi-pencil',
-        visible: this.isUserAuthenticated,
+        visible: this.isUserAuthenticated && this.role === 'prof',
         routerLink: ['/quiz'],
       },
       {
         label: 'Results',
         icon: 'pi pi-fw pi-users',
-        visible: this.isUserAuthenticated,
+        visible: this.isUserAuthenticated && this.role === 'prof',
         routerLink: ['/rezults'],
       },
       {
@@ -95,11 +92,6 @@ export class MenubarComponent implements OnInit {
           this.authService.logout();
         },
       },
-      // {
-      //   label: 'TEST',
-      //   icon: 'pi pi-fw pi-sign-out',
-      //   routerLink: ['/test']
-      // },
       {
         label: 'Signup',
         icon: 'pi pi-plus',
