@@ -9,9 +9,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './menubar.component.html',
   styleUrls: ['./menubar.component.css'],
 })
-export class MenubarComponent implements OnInit, OnDestroy {
-  private usersub: Subscription;
-
+export class MenubarComponent implements OnInit {
   items: MenuItem[];
 
   private authListenerSubs: Subscription;
@@ -109,9 +107,5 @@ export class MenubarComponent implements OnInit, OnDestroy {
         visible: !this.isUserAuthenticated,
       },
     ];
-  }
-
-  ngOnDestroy() {
-    this.usersub.unsubscribe();
   }
 }

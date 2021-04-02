@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { QuizService } from '../services/quiz.service';
 
 @Component({
@@ -9,17 +10,28 @@ import { QuizService } from '../services/quiz.service';
 })
 export class DashboardComponent implements OnInit {
   quizList = [];
+  role;
 
   constructor(
     private quizService: QuizService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.quizService.getOwnQuizzes().subscribe((res) => {
-      this.quizList = res.questions;
-    });
+    this.role = this.authService.getRole();
+    if (this.role === 'prof') {
+      this.quizService.getOwnQuizzes().subscribe((res) => {
+        this.quizList = res.questions;
+      });
+    }
+
+    if (this.role === 'student') {
+      this.quizService.getAllQuizzes().subscribe((res) => {
+        this.quizList = res.questions;
+      });
+    }
   }
 
   deleteQuiz(quizId, index) {

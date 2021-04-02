@@ -3,7 +3,6 @@ import { AuthService } from '../services/auth.service';
 
 import { signinDto } from '../dtos/signinDto';
 import { signupDto } from '../dtos/signupDto';
-import { userDto } from '../dtos/userDto';
 import { Router } from '@angular/router';
 
 @Component({
