@@ -104,6 +104,7 @@
     label="Create quiz"
     title="Create quiz"
     (click)="finishQuiz()"
+    [disabled]="finalQuestions.length <= 0"
   ></button>
 
   <button
@@ -114,7 +115,7 @@
     icon="pi pi-plus"
     title="Add Column"
     (click)="menu.toggle($event)"
-    [disabled]="finalQuestions.length === 20"
+    [disabled]="finalQuestions.length > 20"
   ></button>
   <p-slideMenu
     #menu
