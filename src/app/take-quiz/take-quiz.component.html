@@ -1,1 +1,47 @@
-<p>take-quiz works!</p>
+<div class="m-4">
+  <div
+    *ngFor="let question of quiz; let i = index"
+    class="p-shadow-10 p-3 mb-4"
+  >
+    <ng-template #checkboxTemplate>
+      <h4>{{ question.question }}</h4>
+      <div
+        *ngFor="let checkbox of question.answers"
+        class="p-field-checkbox d-flex align-content-center"
+      >
+        <p-checkbox name="groupname" inputId="{{ i }}"></p-checkbox>
+        <label>{{ checkbox.label }}</label>
+      </div>
+    </ng-template>
+
+    <ng-template #radioTemplate>
+      <h4>{{ question.question }}</h4>
+      <div
+        *ngFor="let checkbox of question.answers"
+        class="p-field-checkbox d-flex align-content-center"
+      >
+        <p-radioButton
+          name="groupname"
+          inputId="{{ i }}"
+          value="{{ checkbox.label }}"
+          [(ngModel)]="radios"
+        ></p-radioButton>
+        <label>{{ checkbox.label }}</label>
+      </div>
+    </ng-template>
+
+    <ng-container *ngIf="question.type === 'checkbox'; then checkboxTemplate">
+    </ng-container>
+
+    <ng-container *ngIf="question.type === 'radio'; then radioTemplate">
+    </ng-container>
+  </div>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Finish quiz"
+    title="Finish quiz"
+  ></button>
+</div>
