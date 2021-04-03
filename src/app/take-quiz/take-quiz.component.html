@@ -12,7 +12,7 @@
         <p-checkbox
           name="groupname{{ i }}"
           inputId="{{ i }}"
-          value="{{ checkbox.label }}"
+          value="{{ checkbox._id }}"
           [(ngModel)]="answer[i]"
           (onChange)="updateAnswers(i)"
         ></p-checkbox>
@@ -23,17 +23,17 @@
     <ng-template #radioTemplate>
       <h4>{{ question.question }}</h4>
       <div
-        *ngFor="let checkbox of question.answers"
+        *ngFor="let radio of question.answers"
         class="p-field-checkbox d-flex align-content-center"
       >
         <p-radioButton
           name="groupname{{ i }}"
           inputId="{{ i }}"
-          value="{{ checkbox.label }}"
+          value="{{ radio._id }}"
           [(ngModel)]="answer[i]"
           (onClick)="updateAnswers(i)"
         ></p-radioButton>
-        <label>{{ checkbox.label }}</label>
+        <label>{{ radio.label }}</label>
       </div>
     </ng-template>
 

@@ -33,6 +33,10 @@ import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CommonModule } from '@angular/common';
 import { TakeQuizComponent } from './take-quiz/take-quiz.component';
+import { ToastModule } from 'primeng/toast';
+
+//Primeng services
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -65,9 +69,11 @@ import { TakeQuizComponent } from './take-quiz/take-quiz.component';
     MenuModule,
     AppRoutingModule,
     ChartModule,
+    ToastModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })

@@ -40,4 +40,8 @@ export class QuizService {
       .delete(`${this.baseUrl}quiz/delete/` + quizId)
       .subscribe((res) => {});
   }
+
+  takeQuiz(test): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}quiz/result`, test);
+  }
 }

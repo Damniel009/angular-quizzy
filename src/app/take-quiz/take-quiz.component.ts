@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { testDto } from '../dtos/testDto';
+import { ActivatedRoute, Router } from '@angular/router';
 import { testQuestion } from '../dtos/testQuestion';
 import { QuizService } from '../services/quiz.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-take-quiz',
@@ -18,7 +18,9 @@ export class TakeQuizComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,11 +40,29 @@ export class TakeQuizComponent implements OnInit {
   updateAnswers(i) {
     this.testAnswers[i] = {
       id: this.quiz[i]._id,
-      answer: this.answer[i],
+      answers: this.answer[i],
     };
   }
 
-  finishQuiz(){
-    let final = { questions: this.testAnswers };
+  finishQuiz() {
+    let final = {
+      quizId: this.quizId,
+      quizAnswers: this.testAnswers,
+    };
+    this.quizService.takeQuiz(final).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Test taken successfully',
+        });
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+        });
+      }
+    );
+    this.router.navigate(['/dashboard']);
   }
 }
