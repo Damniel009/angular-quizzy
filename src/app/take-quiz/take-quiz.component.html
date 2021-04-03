@@ -9,7 +9,7 @@
         *ngFor="let checkbox of question.answers"
         class="p-field-checkbox d-flex align-content-center"
       >
-        <p-checkbox name="groupname" inputId="{{ i }}"></p-checkbox>
+        <p-checkbox name="groupname{{i}}" inputId="{{ i }}"></p-checkbox>
         <label>{{ checkbox.label }}</label>
       </div>
     </ng-template>
@@ -21,10 +21,10 @@
         class="p-field-checkbox d-flex align-content-center"
       >
         <p-radioButton
-          name="groupname"
+          name="groupname{{i}}"
           inputId="{{ i }}"
           value="{{ checkbox.label }}"
-          [(ngModel)]="radios"
+          [(ngModel)]="radios[i]"
         ></p-radioButton>
         <label>{{ checkbox.label }}</label>
       </div>

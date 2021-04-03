@@ -10,7 +10,7 @@ import { QuizService } from '../services/quiz.service';
 export class TakeQuizComponent implements OnInit {
   quizId: string = this.route.snapshot.paramMap.get('id');
   quiz;
-  radios
+  radios = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -20,7 +20,10 @@ export class TakeQuizComponent implements OnInit {
   ngOnInit(): void {
     this.quizService.getQuiz(this.quizId).subscribe((res) => {
       this.quiz = res.questions;
-      console.log(this.quiz);
+
+      this.quiz.forEach((question) => {
+        this.radios.push(question.answers);
+      });
     });
   }
 }
