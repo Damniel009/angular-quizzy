@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { testDto } from '../dtos/testDto';
+import { testQuestion } from '../dtos/testQuestion';
 import { QuizService } from '../services/quiz.service';
 
 @Component({
@@ -10,7 +12,9 @@ import { QuizService } from '../services/quiz.service';
 export class TakeQuizComponent implements OnInit {
   quizId: string = this.route.snapshot.paramMap.get('id');
   quiz;
-  radios = [];
+  answer = [];
+
+  testAnswers: testQuestion[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,8 +26,23 @@ export class TakeQuizComponent implements OnInit {
       this.quiz = res.questions;
 
       this.quiz.forEach((question) => {
-        this.radios.push(question.answers);
+        if (question.type === 'radio') {
+          this.answer.push(question.answers);
+        } else {
+          this.answer.push();
+        }
       });
     });
+  }
+
+  updateAnswers(i) {
+    this.testAnswers[i] = {
+      id: this.quiz[i]._id,
+      answer: this.answer[i],
+    };
+  }
+
+  finishQuiz(){
+    let final = { questions: this.testAnswers };
   }
 }

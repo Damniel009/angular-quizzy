@@ -9,7 +9,13 @@
         *ngFor="let checkbox of question.answers"
         class="p-field-checkbox d-flex align-content-center"
       >
-        <p-checkbox name="groupname{{i}}" inputId="{{ i }}"></p-checkbox>
+        <p-checkbox
+          name="groupname{{ i }}"
+          inputId="{{ i }}"
+          value="{{ checkbox.label }}"
+          [(ngModel)]="answer[i]"
+          (onChange)="updateAnswers(i)"
+        ></p-checkbox>
         <label>{{ checkbox.label }}</label>
       </div>
     </ng-template>
@@ -21,10 +27,11 @@
         class="p-field-checkbox d-flex align-content-center"
       >
         <p-radioButton
-          name="groupname{{i}}"
+          name="groupname{{ i }}"
           inputId="{{ i }}"
           value="{{ checkbox.label }}"
-          [(ngModel)]="radios[i]"
+          [(ngModel)]="answer[i]"
+          (onClick)="updateAnswers(i)"
         ></p-radioButton>
         <label>{{ checkbox.label }}</label>
       </div>
@@ -43,5 +50,6 @@
     type="button"
     label="Finish quiz"
     title="Finish quiz"
+    (click)="finishQuiz()"
   ></button>
 </div>
