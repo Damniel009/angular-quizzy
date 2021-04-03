@@ -20,12 +20,12 @@
         title="Remove Column"
         (click)="removeRadio(i)"
       ></button>
-
       <p-radioButton
         name="groupname"
         [value]="option.label"
         inputId="{{ i }}"
         (onClick)="updateAnswers(i)"
+        [(ngModel)]="radios"
       ></p-radioButton>
       <label class="checkbox-option" for="{{ i }}"
         ><input

@@ -20,15 +20,14 @@ export class RadioQuestionComponent implements OnInit {
     this.item.answers.splice(index, 1);
   }
 
-  updateAnswers(radio) {
+  updateAnswers(radioIndex) {
     this.item.answers.forEach((answer, index) => {
-      if (this.item.answers[radio] === answer) {
+      if (this.item.answers[radioIndex] === answer) {
         this.item.answers[index].answer = true;
       } else {
         this.item.answers[index].answer = false;
       }
     });
-    // this.item.answers[radio].selectedOption = this.item.answers[radio].label
   }
 
   addRadio() {
@@ -38,6 +37,7 @@ export class RadioQuestionComponent implements OnInit {
       answer: false,
     });
     this.item.answers.push(newQuestion);
+    this.radios = this.item.answers;
   }
 
   saveQuestion() {

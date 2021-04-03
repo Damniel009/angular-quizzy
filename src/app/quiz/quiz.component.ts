@@ -90,7 +90,6 @@ export class QuizComponent implements OnInit {
     this.quizService.saveQuestion(final).subscribe((res) => {
       console.log(res);
     });
-
     this.router.navigate(['/dashboard']);
   }
 }
