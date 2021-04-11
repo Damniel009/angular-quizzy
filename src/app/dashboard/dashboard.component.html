@@ -19,7 +19,17 @@
           pRipple
           type="button"
           label="take quiz"
+          *ngIf="role === 'student'"
           (click)="takeQuiz(quiz._id)"
+        ></button>
+
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="edit quiz"
+          *ngIf="role === 'prof'"
+          (click)="editQuiz(quiz._id)"
         ></button>
       </div>
     </div>

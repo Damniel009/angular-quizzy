@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private quizService: QuizService,
     private router: Router,
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
     private authService: AuthService
   ) {}
 
@@ -36,10 +36,10 @@ export class DashboardComponent implements OnInit {
 
   deleteQuiz(quizId, index) {
     this.quizService.deleteQuiz(quizId);
-    this.quizList.slice(index, 1);
+    // this.quizList.slice(index, 1);
   }
 
-  takeQuiz(quizId, index) {
+  takeQuiz(quizId) {
     this.quizService.getQuiz(quizId).subscribe((res) => {
       //dashboard/quiz/6059af77bca04f0e04dfdeeb
       //this.router.navigate(['quiz', res._id], {relativeTo: this.route})
@@ -47,4 +47,6 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['quiz', res._id]);
     });
   }
+
+  editQuiz(quizId) {}
 }

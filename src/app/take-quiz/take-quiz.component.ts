@@ -49,20 +49,30 @@ export class TakeQuizComponent implements OnInit {
       quizId: this.quizId,
       quizAnswers: this.testAnswers,
     };
-    this.quizService.takeQuiz(final).subscribe(
-      (res) => {
+    if (this.checkIfAnswered()) {
+      this.quizService.takeQuiz(final).subscribe((res) => {
         this.messageService.add({
-          severity: 'success',
-          summary: 'Test taken successfully',
+          severity: res.result >= 5 ? 'success' : 'error',
+          summary: res.result >= 5 ? 'Test taken successfully' : 'Test failed',
+          detail: res.result,
+          life: 3000,
         });
-      },
-      (err) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-        });
-      }
-    );
-    this.router.navigate(['/dashboard']);
+      });
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Please fill out questions',
+        life: 3000,
+      });
+    }
+  }
+
+  checkIfAnswered() {
+    if (this.testAnswers.length != this.quiz.length) {
+      return false;
+    }
+    return true;
   }
 }
