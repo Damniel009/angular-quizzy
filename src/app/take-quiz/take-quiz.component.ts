@@ -31,8 +31,9 @@ export class TakeQuizComponent implements OnInit {
         if (question.type === 'radio') {
           this.answer.push(question.answers);
         } else {
-          this.answer.push();
+          this.answer.push([]);
         }
+        
       });
     });
   }
@@ -42,6 +43,8 @@ export class TakeQuizComponent implements OnInit {
       id: this.quiz[i]._id,
       answers: this.answer[i],
     };
+    console.log(this.answer[i]);
+    
   }
 
   finishQuiz() {
@@ -49,6 +52,8 @@ export class TakeQuizComponent implements OnInit {
       quizId: this.quizId,
       quizAnswers: this.testAnswers,
     };
+    console.log(final);
+    
     if (this.checkIfAnswered()) {
       this.quizService.takeQuiz(final).subscribe((res) => {
         this.messageService.add({
