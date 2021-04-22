@@ -55,9 +55,9 @@ export class TakeQuizComponent implements OnInit {
       this.quizService.takeQuiz(final).subscribe((res) => {
         this.evaluateTest(res.result);
         this.messageService.add({
-          severity: this.quizResult >= 5 ? 'success' : 'error',
-          summary: this.quizResult >= 5 ? 'Test taken successfully' : 'Test failed',
-          detail: this.quizResult,
+          severity: res.note >= 5 ? 'success' : 'error',
+          summary: res.note >= 5 ? 'Test taken successfully' : 'Test failed',
+          detail: res.note,
           life: 3000,
         });
       });
@@ -88,14 +88,12 @@ export class TakeQuizComponent implements OnInit {
               }
               case 'PARTIAL': {
                 element.status = 'pi pi-exclamation-triangle';
-                console.log(1/this.quiz[index].answers.length);
-                
-                score = score + 1/this.quiz[index].answers.length;
+                // console.log(1/this.quiz[index].answers.length
                 break;
               }
               case 'SUCCESS': {
                 element.status = 'pi pi-check';
-                score++;
+                // score++;
                 break;
               }
             }
@@ -103,7 +101,7 @@ export class TakeQuizComponent implements OnInit {
         });
     });
 
-    this.quizResult = (score*10)/numberOfQuestions;
+    // this.quizResult = (score*10)/numberOfQuestions;
   }
 
   checkIfAnswered() {
