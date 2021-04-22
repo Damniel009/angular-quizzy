@@ -13,7 +13,7 @@ export class TakeQuizComponent implements OnInit {
   quizId: string = this.route.snapshot.paramMap.get('id');
   quiz;
   answer = [];
-
+  quizResult;
   testAnswers: testQuestion[] = [];
 
   constructor(
@@ -33,7 +33,6 @@ export class TakeQuizComponent implements OnInit {
         } else {
           this.answer.push([]);
         }
-        
       });
     });
   }
@@ -43,8 +42,7 @@ export class TakeQuizComponent implements OnInit {
       id: this.quiz[i]._id,
       answers: this.answer[i],
     };
-    console.log(this.answer[i]);
-    
+    // console.log(this.answer[i]);
   }
 
   finishQuiz() {
@@ -52,14 +50,14 @@ export class TakeQuizComponent implements OnInit {
       quizId: this.quizId,
       quizAnswers: this.testAnswers,
     };
-    console.log(final);
-    
+
     if (this.checkIfAnswered()) {
       this.quizService.takeQuiz(final).subscribe((res) => {
+        this.evaluateTest(res.result);
         this.messageService.add({
-          severity: res.result >= 5 ? 'success' : 'error',
-          summary: res.result >= 5 ? 'Test taken successfully' : 'Test failed',
-          detail: res.result,
+          severity: this.quizResult >= 5 ? 'success' : 'error',
+          summary: this.quizResult >= 5 ? 'Test taken successfully' : 'Test failed',
+          detail: this.quizResult,
           life: 3000,
         });
       });
@@ -72,6 +70,40 @@ export class TakeQuizComponent implements OnInit {
         life: 3000,
       });
     }
+  }
+
+  evaluateTest(results) {
+    this.quizResult = 0;
+    let numberOfQuestions = this.quiz.length;
+    let score = 0;
+    results.forEach((answer, index) => {
+      this.quiz
+        .find((question) => question._id === answer.questionId)
+        .answers.forEach((element) => {
+          if (answer.difference.includes(element._id)) {
+            switch (answer.status) {
+              case 'BAD': {
+                element.status = 'pi pi-exclamation-circle';
+                break;
+              }
+              case 'PARTIAL': {
+                element.status = 'pi pi-exclamation-triangle';
+                console.log(1/this.quiz[index].answers.length);
+                
+                score = score + 1/this.quiz[index].answers.length;
+                break;
+              }
+              case 'SUCCESS': {
+                element.status = 'pi pi-check';
+                score++;
+                break;
+              }
+            }
+          } 
+        });
+    });
+
+    this.quizResult = (score*10)/numberOfQuestions;
   }
 
   checkIfAnswered() {

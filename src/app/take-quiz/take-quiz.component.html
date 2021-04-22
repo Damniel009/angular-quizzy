@@ -18,10 +18,11 @@
         ></p-checkbox>
         <label>{{ checkbox.label }}</label>
 
-        <!-- <div class="ml-auto">
-          <i class="mr-3 pi pi-check" style="color: green"></i>
-          <i class="pi pi-exclamation-circle" style="color: red"></i>
-        </div> -->
+        <div class="ml-auto">
+          <i class={{checkbox.status}} style="color: green"></i>
+          <!-- <i class="mr-3 pi pi-exclamation-circle" style="color: red"></i>
+          <i class="pi pi-exclamation-triangle" style="color: rgb(255, 237, 74)"></i> -->
+        </div>
       </div>
     </ng-template>
 
@@ -39,6 +40,12 @@
           (onClick)="updateAnswers(i)"
         ></p-radioButton>
         <label>{{ radio.label }}</label>
+
+        <div class="ml-auto">
+          <i class={{radio.status}} style="color: green"></i>
+          <!-- <i class="mr-3 pi pi-exclamation-circle" style="color: red"></i>
+          <i class="pi pi-exclamation-triangle" style="color: rgb(255, 237, 74)"></i> -->
+        </div>
       </div>
     </ng-template>
 
