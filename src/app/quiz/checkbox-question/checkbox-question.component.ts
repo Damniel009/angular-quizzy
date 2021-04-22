@@ -14,7 +14,7 @@ export class CheckboxQuestionComponent implements OnInit {
   question: string;
   options = [{ label: 'Option1', duplicate: false, answer: false }];
 
-  opt = ['Option1']
+  // opt = ['Option1']
 
   @Output() savedQuestion = new EventEmitter<Object>();
 
@@ -29,8 +29,8 @@ export class CheckboxQuestionComponent implements OnInit {
       answer: false,
     });
     this.item.answers.push(newQuestion);
-    this.opt.push(`Option${this.item.answers.length + 1}`)
-    console.log(this.item.answers);
+    // this.opt.push(`Option${this.item.answers.length + 1}`)
+    // console.log(this.item.answers);
     
   }
 

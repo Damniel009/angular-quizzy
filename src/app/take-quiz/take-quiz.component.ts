@@ -58,7 +58,7 @@ export class TakeQuizComponent implements OnInit {
           life: 3000,
         });
       });
-      this.router.navigate(['/dashboard']);
+      // this.router.navigate(['/dashboard']);
     } else {
       this.messageService.add({
         severity: 'error',

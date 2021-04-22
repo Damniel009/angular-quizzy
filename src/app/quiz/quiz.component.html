@@ -9,8 +9,7 @@
           <p-panel
             header="{{ !question.question ? 'Question' : question.question }}"
             [toggleable]="true"
-            
-            
+            [collapsed]="question.collapsed"
           >
             <ng-template *ngIf="finalQuestions.length > 0" pTemplate="icons">
               <button
