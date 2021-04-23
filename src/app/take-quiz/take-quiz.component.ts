@@ -13,7 +13,6 @@ export class TakeQuizComponent implements OnInit {
   quizId: string = this.route.snapshot.paramMap.get('id');
   quiz;
   answer = [];
-  quizResult;
   testAnswers: testQuestion[] = [];
 
   constructor(
@@ -42,7 +41,6 @@ export class TakeQuizComponent implements OnInit {
       id: this.quiz[i]._id,
       answers: this.answer[i],
     };
-    // console.log(this.answer[i]);
   }
 
   finishQuiz() {
@@ -73,10 +71,7 @@ export class TakeQuizComponent implements OnInit {
   }
 
   evaluateTest(results) {
-    this.quizResult = 0;
-    let numberOfQuestions = this.quiz.length;
-    let score = 0;
-    results.forEach((answer, index) => {
+    results.forEach((answer) => {
       this.quiz
         .find((question) => question._id === answer.questionId)
         .answers.forEach((element) => {
@@ -84,24 +79,27 @@ export class TakeQuizComponent implements OnInit {
             switch (answer.status) {
               case 'BAD': {
                 element.status = 'pi pi-exclamation-circle';
+                element.color = 'red';
+                element.message = 'Wrong answer';
                 break;
               }
               case 'PARTIAL': {
                 element.status = 'pi pi-exclamation-triangle';
-                // console.log(1/this.quiz[index].answers.length
+                element.color = 'rgb(255, 237, 74)';
+                element.message =
+                  'Partially correct, this answer is also correct';
                 break;
               }
               case 'SUCCESS': {
                 element.status = 'pi pi-check';
-                // score++;
+                element.color = 'green';
+                element.message = 'Correct answer';
                 break;
               }
             }
-          } 
+          }
         });
     });
-
-    // this.quizResult = (score*10)/numberOfQuestions;
   }
 
   checkIfAnswered() {

@@ -18,10 +18,8 @@
         ></p-checkbox>
         <label>{{ checkbox.label }}</label>
 
-        <div class="ml-auto">
-          <i class={{checkbox.status}} style="color: green"></i>
-          <!-- <i class="mr-3 pi pi-exclamation-circle" style="color: red"></i>
-          <i class="pi pi-exclamation-triangle" style="color: rgb(255, 237, 74)"></i> -->
+        <div class="ml-auto" pTooltip="{{checkbox.message}}">
+          <i class="{{ checkbox.status }}" [style.color]="checkbox.color" ></i>
         </div>
       </div>
     </ng-template>
@@ -41,10 +39,8 @@
         ></p-radioButton>
         <label>{{ radio.label }}</label>
 
-        <div class="ml-auto">
-          <i class={{radio.status}} style="color: green"></i>
-          <!-- <i class="mr-3 pi pi-exclamation-circle" style="color: red"></i>
-          <i class="pi pi-exclamation-triangle" style="color: rgb(255, 237, 74)"></i> -->
+        <div class="ml-auto" pTooltip="{{radio.message}}">
+          <i class="{{ radio.status }}" [style.color]="radio.color"></i>
         </div>
       </div>
     </ng-template>

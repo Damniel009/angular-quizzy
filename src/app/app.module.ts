@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { CheckboxQuestionComponent } from './quiz/checkbox-question/checkbox-question.component';
 
 //primeng
+import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -69,6 +70,7 @@ import { MessageService } from 'primeng/api';
     MenuModule,
     AppRoutingModule,
     ChartModule,
+    TooltipModule,
     ToastModule,
   ],
   providers: [
