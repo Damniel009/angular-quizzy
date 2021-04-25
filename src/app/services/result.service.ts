@@ -13,5 +13,9 @@ export class ResultService {
   getOwnNotes(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}result/note`);
   }
+
+  getStudentNotes(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}result/notes`);
+  }
   
 }
