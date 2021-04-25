@@ -15,6 +15,8 @@ export class TakeQuizComponent implements OnInit {
   answer = [];
   testAnswers: testQuestion[] = [];
 
+  isTestTaken: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private quizService: QuizService,
@@ -71,6 +73,7 @@ export class TakeQuizComponent implements OnInit {
   }
 
   evaluateTest(results) {
+    this.isTestTaken = true;
     results.forEach((answer) => {
       this.quiz
         .find((question) => question._id === answer.questionId)

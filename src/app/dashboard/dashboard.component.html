@@ -4,16 +4,6 @@
     <div class="p-shadow-13 mb-3 p-2 d-flex align-items-center">
       {{ quiz._id }}
       <div class="mt-1 ml-auto">
-        <button
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-trash"
-          class="p-button-danger mr-2"
-          *ngIf="role === 'prof'"
-          (click)="deleteQuiz(quiz._id, i)"
-        ></button>
-
         <div class="d-flex align-items-center">
           <div
             class="student-note mr-4"
@@ -34,6 +24,16 @@
           ></button>
         </div>
 
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-trash"
+          class="p-button-danger mr-2"
+          *ngIf="role === 'prof'"
+          (click)="deleteQuiz(quiz._id, i)"
+        ></button>
+        
         <button
           pButton
           pRipple
