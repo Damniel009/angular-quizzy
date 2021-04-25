@@ -14,14 +14,25 @@
           (click)="deleteQuiz(quiz._id, i)"
         ></button>
 
-        <button
-          pButton
-          pRipple
-          type="button"
-          label="take quiz"
-          *ngIf="role === 'student'"
-          (click)="takeQuiz(quiz._id)"
-        ></button>
+        <div class="d-flex align-items-center">
+          <div
+            class="student-note mr-4"
+            [ngClass]="quiz.note >= 5 ? 'passing-note' : 'failing-note'"
+            *ngIf="role === 'student' && quiz.note"
+          >
+            {{ quiz.note }} / 10
+          </div>
+
+          <button
+            pButton
+            pRipple
+            [disabled]="quiz.note"
+            type="button"
+            label="take quiz"
+            *ngIf="role === 'student'"
+            (click)="takeQuiz(quiz._id)"
+          ></button>
+        </div>
 
         <button
           pButton

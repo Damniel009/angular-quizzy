@@ -1,0 +1,16 @@
+.student-note {
+  padding: 8px 8px;
+  border-radius: 3px;
+}
+
+.passing-note {
+  border: 2px #46ab46 solid;
+  font-weight: bold;
+  background-color: #bbf1bb;
+}
+
+.failing-note {
+  border: 2px #ea4d41 solid;
+  font-weight: bold;
+  background-color: #f790709c;
+}
