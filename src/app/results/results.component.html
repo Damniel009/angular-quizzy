@@ -1,4 +1,4 @@
-<p-treeTable [value]="results" [columns]="cols" (onNodeExpand)="onNodeExpand($event)">
+<p-treeTable [value]="results" [columns]="cols">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th *ngFor="let col of columns">
@@ -13,7 +13,15 @@
     let-columns="columns"
   >
     <tr>
-      <td *ngFor="let col of columns; let i = index">
+      <td
+        *ngFor="let col of columns; let i = index"
+        [ngStyle]="{
+          'background-color': rowNode.parent
+            ? 'rgb(240 240 240 / 62%)'
+            : 'white',
+          'font-weight': rowNode.parent ? '500' : 'normal'
+        }"
+      >
         <p-treeTableToggler
           [rowNode]="rowNode"
           *ngIf="i == 0"

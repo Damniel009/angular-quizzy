@@ -6,7 +6,7 @@ import { resultDto } from '../dtos/resultDto';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
-  styleUrls: ['./results.component.css'],
+  styleUrls: ['./results.component.scss'],
 })
 export class ResultsComponent implements OnInit {
   results: TreeNode<resultDto>[];
@@ -31,8 +31,6 @@ export class ResultsComponent implements OnInit {
   }
 
   formatData() {
-    // console.log(data);
-    
     let finalFormat = [];
     let formattedElement;
     this.quizzes.forEach((quizId) => {
@@ -50,15 +48,16 @@ export class ResultsComponent implements OnInit {
       let helper: any = result;
       finalFormat
         .find((element) => helper.quizId === element.data.quizId)
-        .children.push({data: {
-          quizId: '',
-          studentName: helper.studentName,
-          note: helper.note,
-        }});
+        .children.push({
+          data: {
+            quizId: '',
+            studentName: helper.studentName,
+            note: helper.note,
+          },
+        });
     });
 
     this.results = finalFormat;
-    console.log(this.results); 
   }
 
   extractQuizzes(data) {
@@ -67,10 +66,5 @@ export class ResultsComponent implements OnInit {
       quizzes.push(result.quizId);
     });
     return new Set(quizzes);
-  }
-
-  onNodeExpand(event){
-    console.log(event);
-    
   }
 }
