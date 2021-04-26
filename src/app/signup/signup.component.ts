@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
     password: '',
   };
 
-  isLoginPage = false;
+  isLoginPage = true;
 
   constructor(private authService: AuthService, private router: Router) {}
 

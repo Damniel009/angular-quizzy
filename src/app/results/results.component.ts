@@ -51,8 +51,8 @@ export class ResultsComponent implements OnInit {
         .children.push({
           data: {
             quizId: '',
-            studentName: helper.studentName,
-            note: helper.note,
+            studentName: helper.studentName, 
+            note: Math.round(helper.note * 100) / 100,
           },
         });
     });
