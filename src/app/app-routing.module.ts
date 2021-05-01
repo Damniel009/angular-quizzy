@@ -10,12 +10,18 @@ import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthenticationGuard } from './services/guard/authentication-guard.guard';
 import { TakeQuizComponent } from './take-quiz/take-quiz.component';
+import { LessonComponent } from './lesson/lesson/lesson.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/quiz', pathMatch: 'full' },
   {
     path: 'quiz',
     component: QuizComponent,
+    canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'lesson',
+    component: LessonComponent,
     canActivate: [AuthenticationGuard]
   },
   {

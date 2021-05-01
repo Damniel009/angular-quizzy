@@ -1,0 +1,21 @@
+<div class="m-4">
+  <h5>Upload a lesson for the students</h5>
+  <p-fileUpload
+    name="demo[]"
+    (onUpload)="onUpload($event)"
+    customUpload="true"
+    (uploadHandler)="myUploader($event)"
+    accept=".pdf,.doc,.docx"
+    maxFileSize="1000000"
+    fileLimit = "1"
+    [showCancelButton]="false"
+  >
+    <ng-template pTemplate="content">
+      <ul *ngIf="uploadedFiles.length">
+        <li *ngFor="let file of uploadedFiles">
+          {{ file.name }} - {{ file.size }} bytes
+        </li>
+      </ul>
+    </ng-template>
+  </p-fileUpload>
+</div>

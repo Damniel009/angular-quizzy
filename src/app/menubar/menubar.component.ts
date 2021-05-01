@@ -37,6 +37,12 @@ export class MenubarComponent implements OnInit {
         routerLink: ['/dashboard'],
       },
       {
+        label: 'Create material',
+        // icon: 'pi pi-fw pi-home',
+        visible: this.isUserAuthenticated,
+        routerLink: ['/lesson'],
+      },
+      {
         label: 'Create',
         icon: 'pi pi-fw pi-pencil',
         visible: this.isUserAuthenticated && this.role === 'prof',
@@ -72,6 +78,12 @@ export class MenubarComponent implements OnInit {
         icon: 'pi pi-fw pi-home',
         visible: this.isUserAuthenticated,
         routerLink: ['/dashboard'],
+      },
+      {
+        label: 'Create material',
+        // icon: 'pi pi-fw pi-home',
+        visible: this.isUserAuthenticated,
+        routerLink: ['/lesson'],
       },
       {
         label: 'Create',

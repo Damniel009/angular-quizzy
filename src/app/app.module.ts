@@ -36,9 +36,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
 import { TreeTableModule } from 'primeng/treetable';
+import { FileUploadModule } from 'primeng/fileupload';
 
 //Primeng services
 import { MessageService } from 'primeng/api';
+import { LessonComponent } from './lesson/lesson/lesson.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { MessageService } from 'primeng/api';
     SignupComponent,
     DashboardComponent,
     TakeQuizComponent,
+    LessonComponent,
   ],
   imports: [
     FormsModule,
@@ -69,6 +72,7 @@ import { MessageService } from 'primeng/api';
     PanelModule,
     SlideMenuModule,
     InputTextareaModule,
+    FileUploadModule,
     MenuModule,
     AppRoutingModule,
     ChartModule,
