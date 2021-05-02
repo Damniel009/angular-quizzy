@@ -1,15 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { LessonService } from 'src/app/services/lesson.service';
 
 @Component({
   selector: 'app-lesson',
   templateUrl: './lesson.component.html',
   styleUrls: ['./lesson.component.css'],
 })
-export class LessonComponent {
+export class LessonComponent implements OnInit {
   uploadedFiles: any[] = [];
+  fileToUpload: FormData = new FormData();
+  recentImage: any;
 
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private messageService: MessageService,
+    private lessonService: LessonService
+  ) {}
+
+  ngOnInit(){
+    this.lessonService.getLesson().subscribe(res => {
+      // console.log(res);
+      
+      this.recentImage = res.images[0];
+      console.log(this.recentImage);
+      
+    })
+  }
 
   onUpload(event) {
     console.log(event);
@@ -27,6 +43,12 @@ export class LessonComponent {
 
   myUploader(event) {
     console.log(event);
-    //event.files == files to upload
+    let file = event.files[0];
+    let fileName = file.name;
+    this.fileToUpload.append('caption', fileName);
+    this.fileToUpload.append('file', file);
+    this.lessonService.saveLesson(this.fileToUpload).subscribe(res => {
+      console.log(res);
+    })
   }
 }

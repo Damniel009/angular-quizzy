@@ -5,9 +5,9 @@
     (onUpload)="onUpload($event)"
     customUpload="true"
     (uploadHandler)="myUploader($event)"
-    accept=".pdf,.doc,.docx"
+    accept="image/*"
     maxFileSize="1000000"
-    fileLimit = "1"
+    fileLimit="1"
     [showCancelButton]="false"
   >
     <ng-template pTemplate="content">
@@ -18,4 +18,24 @@
       </ul>
     </ng-template>
   </p-fileUpload>
+
+ <h5>Already uploaded files</h5>
+
+ 
+  <!-- <div className="Recent">
+    <p className="Recent__Title">Recently uploaded file</p>
+    <div className="ImageBox" *ngIf="recentImage">
+      <div className="CaptionBox">
+        <p className="ImageBox__Caption">Caption</p>
+        <span className="ImageBox__CaptionValue">{{
+          recentImage.caption
+        }}</span>
+      </div>
+      <img
+        src="{'http://localhost:8080/lesson/image/'+ {{recentImage.filename}}}"
+        alt="recent-image"
+        className="Recent__Image"
+      />
+    </div>
+  </div> -->
 </div>
