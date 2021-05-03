@@ -5,23 +5,34 @@
     (onUpload)="onUpload($event)"
     customUpload="true"
     (uploadHandler)="myUploader($event)"
-    accept="image/*"
+    accept=".pdf,.doc,.docx"
     maxFileSize="1000000"
     fileLimit="1"
     [showCancelButton]="false"
   >
     <ng-template pTemplate="content">
-      <ul *ngIf="uploadedFiles.length">
-        <li *ngFor="let file of uploadedFiles">
+      <ul *ngIf="files.length">
+        <li *ngFor="let file of files">
           {{ file.name }} - {{ file.size }} bytes
         </li>
       </ul>
     </ng-template>
   </p-fileUpload>
 
- <h5>Already uploaded files</h5>
+  <h5>Already uploaded files</h5>
+  <div class="d-flex">
+    <div *ngFor="let file of uploadedFiles">
+      <button
+        class="ml-3"
+        pButton
+        type="button"
+        [label]="file._id"
+        icon="pi pi-download"
+        (click)="downloadFile(file.filename)"
+      ></button>
+    </div>
+  </div>
 
- 
   <!-- <div className="Recent">
     <p className="Recent__Title">Recently uploaded file</p>
     <div className="ImageBox" *ngIf="recentImage">
@@ -32,9 +43,10 @@
         }}</span>
       </div>
       <img
-        src="{'http://localhost:8080/lesson/image/'+ {{recentImage.filename}}}"
+        src="http://localhost:8080/lesson/image/{{recentImage.filename}}"
         alt="recent-image"
         className="Recent__Image"
+        width="200px"
       />
     </div>
   </div> -->

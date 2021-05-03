@@ -11,10 +11,27 @@ export class LessonService {
   constructor(private http: HttpClient) {}
 
   saveLesson(lesson: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}lesson/recent`, lesson, {});
+    return this.http.post<any>(`${this.baseUrl}lesson/`, lesson, {});
   }
 
-  getLesson(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}lesson`);
+  getLessonByFileName(fileName): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}lesson/file/`, fileName);
+  }
+
+  getAllLessons(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}lesson/files`);
+  }
+
+  getRecentLesson(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}lesson/recent`);
+  }
+
+  deleteLessonById(fileId): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}lesson/file/del/`, fileId);
+  }
+
+  downloadLessonById(filename): Observable<any> {
+    return this.http.post<Blob>(`${this.baseUrl}lesson/download/file`, filename, {});
+    
   }
 }
