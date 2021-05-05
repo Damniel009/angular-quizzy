@@ -36,6 +36,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
 import { TreeTableModule } from 'primeng/treetable';
+import { EditorModule } from 'primeng/editor';
 
 //Primeng services
 import { MessageService } from 'primeng/api';
@@ -74,6 +75,7 @@ import { MessageService } from 'primeng/api';
     ChartModule,
     TooltipModule,
     ToastModule,
+    EditorModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
