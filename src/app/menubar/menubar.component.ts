@@ -36,12 +36,12 @@ export class MenubarComponent implements OnInit {
         visible: this.isUserAuthenticated,
         routerLink: ['/dashboard'],
       },
-      {
-        label: 'Create material',
-        // icon: 'pi pi-fw pi-home',
-        visible: this.isUserAuthenticated,
-        routerLink: ['/lesson'],
-      },
+      // {
+      //   label: 'Create material',
+      //   // icon: 'pi pi-fw pi-home',
+      //   visible: this.isUserAuthenticated,
+      //   routerLink: ['/lesson'],
+      // },
       {
         label: 'Create',
         icon: 'pi pi-fw pi-pencil',
@@ -79,12 +79,12 @@ export class MenubarComponent implements OnInit {
         visible: this.isUserAuthenticated,
         routerLink: ['/dashboard'],
       },
-      {
-        label: 'Create material',
-        // icon: 'pi pi-fw pi-home',
-        visible: this.isUserAuthenticated,
-        routerLink: ['/lesson'],
-      },
+      // {
+      //   label: 'Create material',
+      //   // icon: 'pi pi-fw pi-home',
+      //   visible: this.isUserAuthenticated,
+      //   routerLink: ['/lesson'],
+      // },
       {
         label: 'Create',
         icon: 'pi pi-fw pi-pencil',

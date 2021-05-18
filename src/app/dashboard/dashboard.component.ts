@@ -35,7 +35,11 @@ export class DashboardComponent implements OnInit {
       this.quizService.getAllQuizzes().subscribe((res) => {
         this.quizList = res.questions;
         this.resultService.getOwnNotes().subscribe((notesRes) => {
+          console.log(notesRes);
+
           notesRes.result.forEach((testResult) => {
+            console.log(this.quizList);
+            
             this.quizList.find(
               (question) => question._id === testResult.quizId
             ).note = Math.round(testResult.note * 100) / 100;
@@ -62,4 +66,8 @@ export class DashboardComponent implements OnInit {
   }
 
   editQuiz(quizId) {}
+
+  openLesson(link){
+    window.open(link, "_blank");
+  }
 }

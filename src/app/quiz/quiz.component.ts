@@ -11,6 +11,7 @@ import { QuizService } from '../services/quiz.service';
 export class QuizComponent implements OnInit {
   columns;
   finalQuestions: questionDto[] = [];
+  materialLink;
 
   items = [
     {
@@ -85,7 +86,10 @@ export class QuizComponent implements OnInit {
   }
 
   finishQuiz() {
-    let final = { questions: this.finalQuestions };
+    let final = {
+      materialLink: this.materialLink,
+      questions: this.finalQuestions,
+    };
 
     this.quizService.saveQuestion(final).subscribe((res) => {
       console.log(res);

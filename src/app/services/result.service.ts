@@ -11,11 +11,11 @@ export class ResultService {
   constructor(private http: HttpClient) {}
 
   getOwnNotes(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}result/note`);
+    return this.http.get<any>(`${this.baseUrl}result/self/grades`);
   }
 
   getStudentNotes(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}result/notes`);
+    return this.http.get<any>(`${this.baseUrl}result/students/grades`);
   }
   
 }

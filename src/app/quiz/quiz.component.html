@@ -1,5 +1,17 @@
-<div class="mx-auto" style="width: 80%;">
+<div class="mx-auto" style="width: 80%">
   <div class="p-mt-2">
+    <div class="d-flex align-items-center p-field p-shadow-13 mx-auto p-3">
+      <h5 class="mt-2 mr-4">Add link to material: </h5>
+      <span class="p-float-label">
+        <input
+          id="float-input"
+          type="text"
+          pInputText
+          [(ngModel)]="materialLink"
+        />
+        <label for="float-input">Link</label>
+      </span>
+    </div>
     <div
       class="p-question"
       *ngFor="let question of finalQuestions; let i = index"
