@@ -40,6 +40,12 @@ import { TreeTableModule } from 'primeng/treetable';
 //Primeng services
 import { MessageService } from 'primeng/api';
 
+//Watchlist project
+import { DashboardUserComponent } from './watchlist/dashboard-user/dashboard-user.component';
+import { DashboardAdminComponent } from './watchlist/dashboard-admin/dashboard-admin.component';
+import { WatchlistRoutingModule } from './watchlist-routing.module';
+import { NavbarComponent } from './watchlist/navbar/navbar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +59,9 @@ import { MessageService } from 'primeng/api';
     SignupComponent,
     DashboardComponent,
     TakeQuizComponent,
+    DashboardUserComponent,
+    DashboardAdminComponent,
+    NavbarComponent,
   ],
   imports: [
     FormsModule,
@@ -70,10 +79,11 @@ import { MessageService } from 'primeng/api';
     SlideMenuModule,
     InputTextareaModule,
     MenuModule,
-    AppRoutingModule,
+    //AppRoutingModule,
     ChartModule,
     TooltipModule,
     ToastModule,
+    WatchlistRoutingModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
