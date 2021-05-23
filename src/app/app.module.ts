@@ -36,6 +36,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
 import { TreeTableModule } from 'primeng/treetable';
+import { SidebarModule } from 'primeng/sidebar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 //Primeng services
 import { MessageService } from 'primeng/api';
@@ -72,7 +74,9 @@ import { NavbarComponent } from './watchlist/navbar/navbar.component';
     BrowserAnimationsModule,
     ButtonModule,
     TreeTableModule,
+    OverlayPanelModule,
     InputTextModule,
+    SidebarModule,
     CheckboxModule,
     RadioButtonModule,
     PanelModule,

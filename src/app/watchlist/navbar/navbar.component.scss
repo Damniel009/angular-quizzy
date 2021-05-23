@@ -1,0 +1,30 @@
+:host ::ng-deep .p-menubar {
+  top: 0;
+  position: sticky;
+  z-index: 9999;
+  border-radius: 0px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  justify-content: space-between;
+}
+
+:host ::ng-deep .p-menubar-start {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  .p-button.p-button-icon-only.p-button-rounded {
+    height: 30px;
+  }
+}
+
+:host ::ng-deep .p-menubar-end {
+  display: none;
+}
+
+:host ::ng-deep .p-overlaypanel .p-overlaypanel-content{
+    padding: 0.5rem;
+    .p-button{
+        padding: 0.1rem 0;
+    }
+}
