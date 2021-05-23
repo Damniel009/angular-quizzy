@@ -14,10 +14,10 @@
               <p-fileUpload
                 mode="basic"
                 name="demo[]"
-                url="./upload.php"
                 accept="image/*"
-                maxFileSize="1000000"
-                (onUpload)="onBasicUpload($event)"
+                fileLimit="1"
+                customUpload="true"
+                (uploadHandler)="onBasicUpload($event)"
               ></p-fileUpload>
             </div>
             <div class="d-flex align-items-center">

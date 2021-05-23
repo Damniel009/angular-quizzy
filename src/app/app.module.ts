@@ -42,6 +42,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TagModule } from 'primeng/tag';
+import { RatingModule } from 'primeng/rating';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 
 //Primeng services
 import { MessageService } from 'primeng/api';
@@ -53,6 +55,7 @@ import { WatchlistRoutingModule } from './watchlist-routing.module';
 import { NavbarComponent } from './watchlist/navbar/navbar.component';
 import { UserPageComponent } from './watchlist/user-page/user-page.component';
 import { WatchlistPageComponent } from './watchlist/watchlist-page/watchlist-page.component';
+import { EditWatchlistComponent } from './watchlist/edit-watchlist/edit-watchlist.component';
 
 @NgModule({
   declarations: [
@@ -72,11 +75,14 @@ import { WatchlistPageComponent } from './watchlist/watchlist-page/watchlist-pag
     NavbarComponent,
     UserPageComponent,
     WatchlistPageComponent,
+    EditWatchlistComponent,
   ],
   imports: [
     FormsModule,
+    RatingModule,
     CommonModule,
     HttpClientModule,
+    DynamicDialogModule,
     MenubarModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -104,6 +110,7 @@ import { WatchlistPageComponent } from './watchlist/watchlist-page/watchlist-pag
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     MessageService,
+    DialogService,
   ],
   bootstrap: [AppComponent],
 })
