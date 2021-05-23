@@ -1,0 +1,11 @@
+:host ::ng-deep .row{
+    margin: 0;
+}
+
+:host ::ng-deep .p-button.p-fileupload-choose{
+    height: 28px;
+    width: 28px;
+    border-radius: 20px;
+    right: 28px;
+    top: 40px;
+}

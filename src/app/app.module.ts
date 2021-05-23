@@ -38,6 +38,10 @@ import { ToastModule } from 'primeng/toast';
 import { TreeTableModule } from 'primeng/treetable';
 import { SidebarModule } from 'primeng/sidebar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
+import { FileUploadModule } from 'primeng/fileupload';
+import { TagModule } from 'primeng/tag';
 
 //Primeng services
 import { MessageService } from 'primeng/api';
@@ -47,6 +51,8 @@ import { DashboardUserComponent } from './watchlist/dashboard-user/dashboard-use
 import { DashboardAdminComponent } from './watchlist/dashboard-admin/dashboard-admin.component';
 import { WatchlistRoutingModule } from './watchlist-routing.module';
 import { NavbarComponent } from './watchlist/navbar/navbar.component';
+import { UserPageComponent } from './watchlist/user-page/user-page.component';
+import { WatchlistPageComponent } from './watchlist/watchlist-page/watchlist-page.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +70,8 @@ import { NavbarComponent } from './watchlist/navbar/navbar.component';
     DashboardUserComponent,
     DashboardAdminComponent,
     NavbarComponent,
+    UserPageComponent,
+    WatchlistPageComponent,
   ],
   imports: [
     FormsModule,
@@ -72,8 +80,11 @@ import { NavbarComponent } from './watchlist/navbar/navbar.component';
     MenubarModule,
     BrowserModule,
     BrowserAnimationsModule,
+    BadgeModule,
+    AvatarModule,
     ButtonModule,
     TreeTableModule,
+    FileUploadModule,
     OverlayPanelModule,
     InputTextModule,
     SidebarModule,
@@ -81,6 +92,7 @@ import { NavbarComponent } from './watchlist/navbar/navbar.component';
     RadioButtonModule,
     PanelModule,
     SlideMenuModule,
+    TagModule,
     InputTextareaModule,
     MenuModule,
     //AppRoutingModule,
