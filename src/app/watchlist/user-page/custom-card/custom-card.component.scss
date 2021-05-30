@@ -1,32 +1,29 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
-// Variables
-$regal-blue: #034378;
-$san-juan: #2d4e68;
-$bermuda: #77d7b9;
-$white: #fff;
-$black: #000;
-$open-sans: "Open Sans", sans-serif;
-
 // Base styles
 .card {
-  //   margin-left: 0.8rem;
   border: none;
   background-color: transparent;
-  .menu-content {
-    font-size: 10px;
-    font-family: "Open Sans";
-    transform: translate(-50%, 0);
-  }
   .wrapper {
     min-height: 312.9px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 19px 38px rgba($black, 0.3), 0 15px 12px rgba($black, 0.2);
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
     &:hover {
       .data {
         transform: translateY(0);
       }
+      .menu-content {
+        // transform: translateY(0);
+      }
     }
+  }
+  .menu-content{
+    position: absolute;
+    top: -90px;
+    right: -10px;
+    width: 100%;
+    transform: translateY(calc(70px + 1em));
+    transition: transform 0.3s;
+    z-index: 1;
   }
   .data {
     position: absolute;
@@ -39,13 +36,6 @@ $open-sans: "Open Sans", sans-serif;
       position: relative;
       z-index: 1;
     }
-  }
-  .title {
-    margin-top: 10px;
-  }
-  .text {
-    height: 70px;
-    margin: 0;
   }
 }
 
@@ -76,12 +66,7 @@ $open-sans: "Open Sans", sans-serif;
       }
     }
   }
-  .header {
-    color: $white;
-    padding: 1em;
-  }
   .menu-content {
-    float: right;
     .bookmark-icon {
       cursor: pointer;
     }
@@ -91,7 +76,7 @@ $open-sans: "Open Sans", sans-serif;
     &:hover {
       opacity: 1 !important;
     }
-    color: $white;
+    color: whitesmoke;
     transform: translateY(calc(70px + 4em));
   }
 }

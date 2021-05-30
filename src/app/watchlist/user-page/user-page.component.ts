@@ -14,7 +14,7 @@ export class UserPageComponent implements OnInit {
       considering: 34,
       completed: 54,
       skipping: 36,
-      total: 174,
+      total: 134,
       avarageScore: 3.4,
     },
     movieStatistics: {
