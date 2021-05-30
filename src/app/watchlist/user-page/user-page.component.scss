@@ -1,11 +1,52 @@
-:host ::ng-deep .row{
-    margin: 0;
+:host ::ng-deep .row {
+  margin: 0;
 }
 
-:host ::ng-deep .p-button.p-fileupload-choose{
-    height: 28px;
-    width: 28px;
-    border-radius: 20px;
-    right: 28px;
-    top: 40px;
+:host ::ng-deep .col {
+  padding: 0;
+}
+
+:host ::ng-deep .p-button.p-fileupload-choose {
+  height: 28px;
+  width: 28px;
+  border-radius: 20px;
+  right: 28px;
+  top: 40px;
+}
+
+:host ::ng-deep .progress {
+  background-color: #e9ecefad;
+}
+
+:host ::ng-deep .progress-bar {
+  color: #000000;
+  font-weight: 500;
+}
+
+.bg-completed {
+  background-color: #90caf9;
+}
+
+.bg-watching {
+  background-color: #c5e1a5;
+}
+
+.bg-considering {
+  background-color: #ffde6d;
+}
+
+.bg-skipping {
+  background-color: #ef9a9a;
+}
+
+.status-button {
+  min-width: 120px;
+}
+
+.entry-page-link {
+  &:hover {
+    color: #6137ab;
+    transition: 0.3s;
+    cursor: pointer;
+  }
 }

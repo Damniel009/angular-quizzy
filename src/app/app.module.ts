@@ -44,6 +44,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { CarouselModule } from 'primeng/carousel';
 
 //Primeng services
 import { MessageService } from 'primeng/api';
@@ -84,8 +86,10 @@ import { EditWatchlistComponent } from './watchlist/edit-watchlist/edit-watchlis
     HttpClientModule,
     DynamicDialogModule,
     MenubarModule,
+    CarouselModule,
     BrowserModule,
     BrowserAnimationsModule,
+    ProgressBarModule,
     BadgeModule,
     AvatarModule,
     ButtonModule,

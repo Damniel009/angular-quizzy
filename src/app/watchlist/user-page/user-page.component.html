@@ -1,35 +1,38 @@
-<div class="user-page-container p-3">
-  <div class="row">
-    <div class="col-6">
-      <div class="p-shadow-20 p-4">
-        <div class="d-flex user-details">
-          <div class="d-flex flex-column" style="min-width: 30%;">
-            <div class="d-flex justify-content-center mb-3">
-              <p-avatar
-                image="https://randomuser.me/api/portraits/men/97.jpg"
-                styleClass="p-mr-2"
-                size="xlarge"
-                shape="circle"
-              ></p-avatar>
-              <p-fileUpload
-                mode="basic"
-                name="demo[]"
-                accept="image/*"
-                fileLimit="1"
-                customUpload="true"
-                (uploadHandler)="onBasicUpload($event)"
-              ></p-fileUpload>
-            </div>
-            <div class="d-flex align-items-center">
-              <p-tag class="mr-2" value="Full Name: "></p-tag>
-              <span>Random Dude</span>
+<div class="user-page-container p-3 px-5">
+  <div>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="p-shadow-20 p-4">
+          <div class="d-flex user-details">
+            <div class="d-flex mb-1">
+              <div class="d-flex justify-content-center">
+                <p-avatar
+                  image="https://randomuser.me/api/portraits/men/97.jpg"
+                  styleClass="p-mr-2"
+                  size="xlarge"
+                  shape="circle"
+                ></p-avatar>
+                <p-fileUpload
+                  mode="basic"
+                  name="demo[]"
+                  accept="image/*"
+                  fileLimit="1"
+                  customUpload="true"
+                  (uploadHandler)="onBasicUpload($event)"
+                ></p-fileUpload>
+              </div>
+              <div class="d-flex flex-column mt-2">
+                <p-tag class="mr-2" value="Full Name: "></p-tag>
+                <span class="mr-2">Random Dude</span>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="col-sm-9">
+        <div class="p-shadow-20 p-4">
           <div>
-            <!-- <div class="d-flex align-items-center">
-              <p-tag class="mr-2" value="Full Name: "></p-tag>
-              <span>Varga Daniel</span>
-            </div> -->
             <div class="d-flex flex-column align-items-center">
               <p-tag class="mr-auto" value="Bio: "></p-tag>
               <span class="pl-1"
@@ -44,6 +47,349 @@
         </div>
       </div>
     </div>
-    <div class="col-6"></div>
+
+    <div class="row">
+      <div class="col mt-3">
+        <div class="row">
+          <div class="p-shadow-20 p-4 w-100">
+            <div>
+              <h3 class="px-3">Series Statistics</h3>
+              <div class="progress mx-3">
+                <div
+                  pTooltip="Completed"
+                  tooltipPosition="top"
+                  class="progress-bar bg-completed"
+                  role="progressbar"
+                  [ngStyle]="{
+                    width: calculateProgress(
+                      userStatistics.showStatistics.completed,
+                      userStatistics.showStatistics.total
+                    )
+                  }"
+                >
+                  {{ userStatistics.showStatistics.completed }}
+                </div>
+                <div
+                  pTooltip="Watching"
+                  tooltipPosition="top"
+                  class="progress-bar bg-watching"
+                  role="progressbar"
+                  [ngStyle]="{
+                    width: calculateProgress(
+                      userStatistics.showStatistics.watching,
+                      userStatistics.showStatistics.total
+                    )
+                  }"
+                >
+                  {{ userStatistics.showStatistics.watching }}
+                </div>
+                <div
+                  pTooltip="Considering"
+                  tooltipPosition="top"
+                  class="progress-bar bg-considering"
+                  role="progressbar"
+                  [ngStyle]="{
+                    width: calculateProgress(
+                      userStatistics.showStatistics.considering,
+                      userStatistics.showStatistics.total
+                    )
+                  }"
+                >
+                  {{ userStatistics.showStatistics.considering }}
+                </div>
+                <div
+                  pTooltip="Skipping"
+                  tooltipPosition="top"
+                  class="progress-bar bg-skipping"
+                  role="progressbar"
+                  [ngStyle]="{
+                    width: calculateProgress(
+                      userStatistics.showStatistics.skipping,
+                      userStatistics.showStatistics.total
+                    )
+                  }"
+                >
+                  {{ userStatistics.showStatistics.skipping }}
+                </div>
+              </div>
+
+              <div class="row mx-3 mt-3">
+                <div class="col status-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#90caf9"
+                    class="bi bi-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span class="ml-2"> Completed </span>
+                </div>
+
+                <div class="col status-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#c5e1a5"
+                    class="bi bi-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span class="ml-2"> Watching </span>
+                </div>
+
+                <div class="col status-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#ffde6d"
+                    class="bi bi-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span class="ml-2"> Considering </span>
+                </div>
+
+                <div class="col status-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#ef9a9a"
+                    class="bi bi-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span class="ml-2"> Skipping </span>
+                </div>
+              </div>
+
+              <div class="row d-flex mt-2">
+                <div class="col-sm d-flex">
+                  <h5 class="mr-3">Avarage rating:</h5>
+                  <p-tag
+                    [value]="userStatistics.showStatistics.avarageScore"
+                  ></p-tag>
+                </div>
+                <div class="col-sm d-flex">
+                  <h5 class="mr-3">Total entries:</h5>
+                  <p-tag [value]="userStatistics.showStatistics.total"></p-tag>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="p-shadow-20 p-4 w-100">
+            <div>
+              <h3 class="px-3">Movies Statistics</h3>
+              <div class="progress mx-3">
+                <div
+                  pTooltip="Completed"
+                  tooltipPosition="top"
+                  class="progress-bar bg-completed"
+                  role="progressbar"
+                  [ngStyle]="{
+                    width: calculateProgress(
+                      userStatistics.movieStatistics.completed,
+                      userStatistics.movieStatistics.total
+                    )
+                  }"
+                >
+                  {{ userStatistics.movieStatistics.completed }}
+                </div>
+                <div
+                  pTooltip="Watching"
+                  tooltipPosition="top"
+                  class="progress-bar bg-watching"
+                  role="progressbar"
+                  [ngStyle]="{
+                    width: calculateProgress(
+                      userStatistics.movieStatistics.watching,
+                      userStatistics.movieStatistics.total
+                    )
+                  }"
+                >
+                  {{ userStatistics.movieStatistics.watching }}
+                </div>
+                <div
+                  pTooltip="Considering"
+                  tooltipPosition="top"
+                  class="progress-bar bg-considering"
+                  role="progressbar"
+                  [ngStyle]="{
+                    width: calculateProgress(
+                      userStatistics.movieStatistics.considering,
+                      userStatistics.movieStatistics.total
+                    )
+                  }"
+                >
+                  {{ userStatistics.movieStatistics.considering }}
+                </div>
+                <div
+                  pTooltip="Skipping"
+                  tooltipPosition="top"
+                  class="progress-bar bg-skipping"
+                  role="progressbar"
+                  [ngStyle]="{
+                    width: calculateProgress(
+                      userStatistics.movieStatistics.skipping,
+                      userStatistics.movieStatistics.total
+                    )
+                  }"
+                >
+                  {{ userStatistics.movieStatistics.skipping }}
+                </div>
+              </div>
+
+              <div class="row mx-3 mt-3">
+                <div class="col status-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#90caf9"
+                    class="bi bi-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span class="ml-2"> Completed </span>
+                </div>
+
+                <div class="col status-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#c5e1a5"
+                    class="bi bi-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span class="ml-2"> Watching </span>
+                </div>
+
+                <div class="col status-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#ffde6d"
+                    class="bi bi-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span class="ml-2"> Considering </span>
+                </div>
+
+                <div class="col status-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#ef9a9a"
+                    class="bi bi-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span class="ml-2"> Skipping </span>
+                </div>
+              </div>
+
+              <div class="row d-flex mt-2">
+                <div class="col-sm d-flex">
+                  <h5 class="mr-3">Avarage rating:</h5>
+                  <p-tag
+                    [value]="userStatistics.movieStatistics.avarageScore"
+                  ></p-tag>
+                </div>
+                <div class="col-sm d-flex">
+                  <h5 class="mr-3">Total entries:</h5>
+                  <p-tag [value]="userStatistics.movieStatistics.total"></p-tag>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mt-3">
+        <div class="row h-100">
+          <div class="p-shadow-20 p-4 w-100">
+            <div>
+              <h5 class="px-3">Last Series Updates:</h5>
+              <hr
+                style="border-top: 1px solid #e2e2e2; margin-left: 20px"
+                class="w-25"
+              />
+
+              <div
+                class="ml-2 mb-2"
+                *ngFor="
+                  let showhistory of userHistory.showHistory;
+                  let i = index
+                "
+              >
+                <div class="d-flex justify-content-between">
+                  <span
+                    class="entry-page-link"
+                    (click)="redirectToEntry(showhistory.id)"
+                    >{{ i + 1 }}. {{ showhistory.title }}</span
+                  >
+                  <span class="text-muted ml-5">{{
+                    showhistory.editDate
+                  }}</span>
+                </div>
+              </div>
+
+              <h5 class="px-3 mt-4">Last Movie Updates:</h5>
+              <hr
+                style="border-top: 1px solid #e2e2e2; margin-left: 20px"
+                class="w-25"
+              />
+
+              <div
+                class="ml-2 mb-2"
+                *ngFor="
+                  let moviehistory of userHistory.movieHistory;
+                  let i = index
+                "
+              >
+                <div class="d-flex justify-content-between">
+                  <span
+                    class="entry-page-link"
+                    (click)="redirectToEntry(moviehistory.id)"
+                    >{{ i + 1 }}. {{ moviehistory.title }}</span
+                  >
+                  <span class="text-muted ml-5">{{
+                    moviehistory.editDate
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 mt-3">
+        <div class="p-shadow-20 p-4 w-100">
+          <h3>Favorites</h3>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
