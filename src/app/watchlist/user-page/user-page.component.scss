@@ -1,9 +1,18 @@
+.user-page-container{
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 :host ::ng-deep .row {
   margin: 0;
 }
 
 :host ::ng-deep .col {
   padding: 0;
+}
+
+:host ::ng-deep .col-12 {
+  padding-left: 0;
 }
 
 :host ::ng-deep .p-button.p-fileupload-choose {

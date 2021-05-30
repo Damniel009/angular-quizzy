@@ -1,4 +1,4 @@
-<div class="user-page-container p-3 px-5">
+<div class="user-page-container p-3">
   <div>
     <div class="row">
       <div class="col-sm-3">
@@ -387,7 +387,21 @@
     <div class="row">
       <div class="col-12 mt-3">
         <div class="p-shadow-20 p-4 w-100">
-          <h3>Favorites</h3>
+          <h3 class="mb-3 ml-3">Favorites</h3>
+          <div>
+            <p-carousel
+              [value]="products"
+              styleClass="custom-carousel"
+              [numVisible]="4"
+              [numScroll]="1"
+              [circular]="true"
+              [responsiveOptions]="responsiveOptions"
+            >
+              <ng-template let-product pTemplate="item">
+                <app-custom-card [cardContent]="product"></app-custom-card>
+              </ng-template>
+            </p-carousel>
+          </div>
         </div>
       </div>
     </div>

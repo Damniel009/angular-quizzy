@@ -58,6 +58,7 @@ import { NavbarComponent } from './watchlist/navbar/navbar.component';
 import { UserPageComponent } from './watchlist/user-page/user-page.component';
 import { WatchlistPageComponent } from './watchlist/watchlist-page/watchlist-page.component';
 import { EditWatchlistComponent } from './watchlist/edit-watchlist/edit-watchlist.component';
+import { CustomCardComponent } from './watchlist/user-page/custom-card/custom-card.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { EditWatchlistComponent } from './watchlist/edit-watchlist/edit-watchlis
     UserPageComponent,
     WatchlistPageComponent,
     EditWatchlistComponent,
+    CustomCardComponent,
   ],
   imports: [
     FormsModule,
