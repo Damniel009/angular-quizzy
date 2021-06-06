@@ -25,7 +25,7 @@ export class UserService {
   login(email, passw) {
     this.http
       .post<any>(
-        `${this.baseUrl}auth/login?email=${email}&passwor${passw}`,
+        `${this.baseUrl}auth/login?email=${email}&password=${passw}`,
         null
       )
       .subscribe((res) => {
@@ -71,9 +71,11 @@ export class UserService {
   logout() {
     this.token = null;
     this.role = null;
+    localStorage.removeItem('token')
+    localStorage.removeItem('role')
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
-    this.router.navigate(['/signup']);
+    this.router.navigate(['/login']);
   }
 
   private saveAuthData(token: string, role: string) {

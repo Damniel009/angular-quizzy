@@ -12,11 +12,25 @@ export class LoginComponent implements OnInit {
     passw: 'Password123',
   };
 
+  newUser = {
+    email: '',
+    password: '',
+    name: '',
+  };
+
+  isLoginPage = true;
+  isCaptcha = false;
+
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
 
   loginUser() {
     this.userService.login(this.userDto.email, this.userDto.passw);
+  }
+
+  showResponse(event) {
+    
+    // this.messageService.add({severity:'info', summary:'Succees', detail: 'User Responded', sticky: true});
   }
 }
