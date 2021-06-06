@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { UserService } from './watchlist/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,9 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit{
   title = 'MySeriesWatchlist';
 
-  constructor(private authService: AuthService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(){
-    this.authService.autoLogin();
+    this.userService.autoLogin();
   }
 }

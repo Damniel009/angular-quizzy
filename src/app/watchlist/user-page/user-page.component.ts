@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { userHistoryDto } from '../dtos/userHistoryDto';
 import { userStatisticsDto } from '../dtos/userStatisticsDto';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-user-page',
@@ -8,6 +10,10 @@ import { userStatisticsDto } from '../dtos/userStatisticsDto';
   styleUrls: ['./user-page.component.scss'],
 })
 export class UserPageComponent implements OnInit {
+  @ViewChild('uploader') upload;
+  fileToUpload: FormData = new FormData();
+  image;
+
   userStatistics: userStatisticsDto = {
     showStatistics: {
       watching: 10,
@@ -78,8 +84,11 @@ export class UserPageComponent implements OnInit {
 
   responsiveOptions;
   products;
-  
-  constructor() {
+
+  constructor(
+    private userService: UserService,
+    private messageService: MessageService
+  ) {
     this.responsiveOptions = [
       {
         breakpoint: '1128px',
@@ -100,13 +109,25 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userService.getUserData().subscribe((res) => {
+      // console.log(res)
+    });
+
+    this.userService.getUserPicture().subscribe(
+      (res) => {},
+      (err) => {
+        this.image = err.error.text;
+      }
+    );
+
     this.products = [
       {
         id: '1000',
         code: 'f230fh0g3',
         title: 'Bamboo Watch',
         description: 'Product Description',
-        poster: 'https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
+        poster:
+          'https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
         year: '2001',
         price: 65,
         category: 'Accessories',
@@ -119,7 +140,8 @@ export class UserPageComponent implements OnInit {
         code: 'nvklal433',
         title: 'Black Watch',
         description: 'Product Description',
-        poster: 'https://m.media-amazon.com/images/M/MV5BMDJhMGRjN2QtNDUxYy00NGM3LThjNGQtMmZiZTRhNjM4YzUxL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
+        poster:
+          'https://m.media-amazon.com/images/M/MV5BMDJhMGRjN2QtNDUxYy00NGM3LThjNGQtMmZiZTRhNjM4YzUxL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
         year: '2001',
         price: 72,
         category: 'Accessories',
@@ -132,7 +154,8 @@ export class UserPageComponent implements OnInit {
         code: 'zz21cz3c1',
         title: 'Blue Band',
         description: 'Product Description',
-        poster: 'https://m.media-amazon.com/images/M/MV5BZGJhNWRiOWQtMjI4OS00ZjcxLTgwMTAtMzQ2ODkxY2JkOTVlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg',
+        poster:
+          'https://m.media-amazon.com/images/M/MV5BZGJhNWRiOWQtMjI4OS00ZjcxLTgwMTAtMzQ2ODkxY2JkOTVlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg',
         year: '2001',
         price: 79,
         category: 'Fitness',
@@ -145,7 +168,8 @@ export class UserPageComponent implements OnInit {
         code: '244wgerg2',
         title: 'Blue T-Shirt',
         description: 'Product Description',
-        poster: 'https://m.media-amazon.com/images/M/MV5BOGU0OWQyMjItYzA4Zi00MDFiLThiZWQtZmEyNWRiODAzYzNmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg',
+        poster:
+          'https://m.media-amazon.com/images/M/MV5BOGU0OWQyMjItYzA4Zi00MDFiLThiZWQtZmEyNWRiODAzYzNmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg',
         year: '2001',
         price: 29,
         category: 'Clothing',
@@ -158,7 +182,8 @@ export class UserPageComponent implements OnInit {
         code: 'h456wer53',
         title: 'Bracelet',
         description: 'Product Description',
-        poster: '"https://m.media-amazon.com/images/M/MV5BZjEyMmUyYmYtNTAwYi00OWUwLWJlNzEtMDM2N2QxNzIwMTdjXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg',
+        poster:
+          '"https://m.media-amazon.com/images/M/MV5BZjEyMmUyYmYtNTAwYi00OWUwLWJlNzEtMDM2N2QxNzIwMTdjXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg',
         year: '2001',
         price: 15,
         category: 'Accessories',
@@ -170,7 +195,22 @@ export class UserPageComponent implements OnInit {
   }
 
   onBasicUpload(event) {
-    console.log(event);
+    let file = event.files[0];
+    this.fileToUpload.append('image', file);
+    this.userService.editUserPicture(this.fileToUpload).subscribe((res) => {
+      this.messageService.add({
+        severity: 'info',
+        summary: 'File Uploaded',
+        detail: '',
+      });
+      this.userService.getUserPicture().subscribe(
+        (res) => {},
+        (err) => {
+          this.image = err.error.text;
+        }
+      );
+    });
+    this.upload.clear();
   }
 
   calculateProgress(type, total) {

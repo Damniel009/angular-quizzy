@@ -59,6 +59,8 @@ import { UserPageComponent } from './watchlist/user-page/user-page.component';
 import { WatchlistPageComponent } from './watchlist/watchlist-page/watchlist-page.component';
 import { EditWatchlistComponent } from './watchlist/edit-watchlist/edit-watchlist.component';
 import { CustomCardComponent } from './watchlist/user-page/custom-card/custom-card.component';
+import { LoginComponent } from './watchlist/login/login.component';
+import { AuthWatchlistInterceptor } from './watchlist/services/interceptor/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -80,6 +82,7 @@ import { CustomCardComponent } from './watchlist/user-page/custom-card/custom-ca
     WatchlistPageComponent,
     EditWatchlistComponent,
     CustomCardComponent,
+    LoginComponent,
   ],
   imports: [
     FormsModule,
@@ -114,7 +117,7 @@ import { CustomCardComponent } from './watchlist/user-page/custom-card/custom-ca
     WatchlistRoutingModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthWatchlistInterceptor, multi: true },
     MessageService,
     DialogService,
   ],

@@ -7,12 +7,13 @@
             <div class="d-flex mb-1">
               <div class="d-flex justify-content-center">
                 <p-avatar
-                  image="https://randomuser.me/api/portraits/men/97.jpg"
+                  image="{{image}}"
                   styleClass="p-mr-2"
                   size="xlarge"
                   shape="circle"
                 ></p-avatar>
                 <p-fileUpload
+                  #uploader
                   mode="basic"
                   name="demo[]"
                   accept="image/*"
@@ -30,8 +31,8 @@
         </div>
       </div>
 
-      <div class="col-sm-9">
-        <div class="p-shadow-20 p-4">
+      <div class="col-sm-9 h-100">
+        <div class="p-shadow-20 p-4 h-100 row">
           <div>
             <div class="d-flex flex-column align-items-center">
               <p-tag class="mr-auto" value="Bio: "></p-tag>

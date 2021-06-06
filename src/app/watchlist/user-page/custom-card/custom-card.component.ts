@@ -11,7 +11,7 @@ export class CustomCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.cardContent);
+    // console.log(this.cardContent);
     
   }
 
