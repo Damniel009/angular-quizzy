@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { userDataDto } from '../dtos/userDataDto';
 import { userHistoryDto } from '../dtos/userHistoryDto';
 import { userStatisticsDto } from '../dtos/userStatisticsDto';
 import { UserDataService } from '../services/user-data.service';
@@ -34,57 +35,58 @@ export class UserPageComponent implements OnInit {
     },
   };
 
-  userHistory: userHistoryDto = {
-    showHistory: [
-      {
-        title: 'Game of Thrones',
-        currentEpisode: 1,
-        totalEpisodes: 2,
-        id: 'string',
-        editDate: '05.21.2021',
-      },
-      {
-        title: 'Bones',
-        currentEpisode: 1,
-        totalEpisodes: 2,
-        id: 'string',
-        editDate: '05.13.2021',
-      },
-      {
-        title: 'Dr. House',
-        currentEpisode: 1,
-        totalEpisodes: 2,
-        id: 'string',
-        editDate: '05.05.2021',
-      },
-    ],
-    movieHistory: [
-      {
-        title: 'Shrek 2',
-        currentEpisode: 1,
-        totalEpisodes: 2,
-        id: 'string',
-        editDate: '05.05.2021',
-      },
-      {
-        title: 'Dumb & Dumber',
-        currentEpisode: 1,
-        totalEpisodes: 2,
-        id: 'string',
-        editDate: '02.04.2021',
-      },
-      {
-        title: 'Home Alone',
-        currentEpisode: 1,
-        totalEpisodes: 2,
-        id: 'string',
-        editDate: '23.03.2021',
-      },
-    ],
-  };
+  // userHistory: userHistoryDto = {
+  //   showHistory: [
+  //     {
+  //       title: 'Game of Thrones',
+  //       currentEpisode: 1,
+  //       totalEpisodes: 2,
+  //       id: 'string',
+  //       editDate: '05.21.2021',
+  //     },
+  //     {
+  //       title: 'Bones',
+  //       currentEpisode: 1,
+  //       totalEpisodes: 2,
+  //       id: 'string',
+  //       editDate: '05.13.2021',
+  //     },
+  //     {
+  //       title: 'Dr. House',
+  //       currentEpisode: 1,
+  //       totalEpisodes: 2,
+  //       id: 'string',
+  //       editDate: '05.05.2021',
+  //     },
+  //   ],
+  //   movieHistory: [
+  //     {
+  //       title: 'Shrek 2',
+  //       currentEpisode: 1,
+  //       totalEpisodes: 2,
+  //       id: 'string',
+  //       editDate: '05.05.2021',
+  //     },
+  //     {
+  //       title: 'Dumb & Dumber',
+  //       currentEpisode: 1,
+  //       totalEpisodes: 2,
+  //       id: 'string',
+  //       editDate: '02.04.2021',
+  //     },
+  //     {
+  //       title: 'Home Alone',
+  //       currentEpisode: 1,
+  //       totalEpisodes: 2,
+  //       id: 'string',
+  //       editDate: '23.03.2021',
+  //     },
+  //   ],
+  // };
 
   responsiveOptions;
-  products;
+
+  userData: userDataDto;
 
   constructor(
     private userDataService: UserDataService,
@@ -111,7 +113,38 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userDataService.getUserData().subscribe((res) => {
-      console.log(res)
+      let helperResponse: userDataDto = {
+        userDescription: null,
+        userFavorites: null,
+        userHistory: null,
+        userStatistics: {
+          showStatistics: null,
+          movieStatistics: null,
+        },
+      };
+
+      res.forEach((element) => {
+        Object.keys(element).forEach((key) => {
+          if (key !== 'userStatistics') {
+            helperResponse[key] = element[key];
+          }
+        });
+      });
+
+      res[2].userStatistics.forEach((element) => {
+        Object.keys(element).forEach((key) => {
+          helperResponse.userStatistics[key] = element[key];
+        });
+      });
+
+      Object.keys(helperResponse.userStatistics).forEach((key) => {
+        helperResponse.userStatistics[key].forEach((element) => {
+          helperResponse.userStatistics[key] = element;
+        });
+      });
+
+      this.userData = helperResponse;
+      console.log(this.userData);
     });
 
     this.userDataService.getUserPicture().subscribe(
@@ -120,79 +153,6 @@ export class UserPageComponent implements OnInit {
         this.image = err.error.text;
       }
     );
-
-    this.products = [
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        title: 'Bamboo Watch',
-        description: 'Product Description',
-        poster:
-          'https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
-        year: '2001',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-      },
-      {
-        id: '1001',
-        code: 'nvklal433',
-        title: 'Black Watch',
-        description: 'Product Description',
-        poster:
-          'https://m.media-amazon.com/images/M/MV5BMDJhMGRjN2QtNDUxYy00NGM3LThjNGQtMmZiZTRhNjM4YzUxL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
-        year: '2001',
-        price: 72,
-        category: 'Accessories',
-        quantity: 61,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-      },
-      {
-        id: '1002',
-        code: 'zz21cz3c1',
-        title: 'Blue Band',
-        description: 'Product Description',
-        poster:
-          'https://m.media-amazon.com/images/M/MV5BZGJhNWRiOWQtMjI4OS00ZjcxLTgwMTAtMzQ2ODkxY2JkOTVlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg',
-        year: '2001',
-        price: 79,
-        category: 'Fitness',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3,
-      },
-      {
-        id: '1003',
-        code: '244wgerg2',
-        title: 'Blue T-Shirt',
-        description: 'Product Description',
-        poster:
-          'https://m.media-amazon.com/images/M/MV5BOGU0OWQyMjItYzA4Zi00MDFiLThiZWQtZmEyNWRiODAzYzNmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg',
-        year: '2001',
-        price: 29,
-        category: 'Clothing',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-      },
-      {
-        id: '1004',
-        code: 'h456wer53',
-        title: 'Bracelet',
-        description: 'Product Description',
-        poster:
-          '"https://m.media-amazon.com/images/M/MV5BZjEyMmUyYmYtNTAwYi00OWUwLWJlNzEtMDM2N2QxNzIwMTdjXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg',
-        year: '2001',
-        price: 15,
-        category: 'Accessories',
-        quantity: 73,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-      },
-    ];
   }
 
   onBasicUpload(event) {

@@ -11,6 +11,7 @@ export class CustomCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   toggleBookmark(entryId){

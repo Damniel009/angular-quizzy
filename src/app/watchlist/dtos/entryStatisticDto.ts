@@ -1,7 +1,7 @@
 export class entryStatisticDto {
   watching: number;
-  considering: number;
-  completed: number;
+  plannedToWatch: number;
+  finished: number;
   skipping: number;
   total: number;
   avarageScore: number;

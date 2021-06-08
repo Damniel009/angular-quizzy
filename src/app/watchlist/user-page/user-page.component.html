@@ -1,4 +1,4 @@
-<div class="user-page-container p-3">
+<div *ngIf="userData" class="user-page-container p-3">
   <div>
     <div class="row">
       <div class="col-sm-3">
@@ -7,7 +7,7 @@
             <div class="d-flex mb-1">
               <div class="d-flex justify-content-center">
                 <p-avatar
-                  image="{{image}}"
+                  image="{{ image }}"
                   styleClass="p-mr-2"
                   size="xlarge"
                   shape="circle"
@@ -22,9 +22,11 @@
                   (uploadHandler)="onBasicUpload($event)"
                 ></p-fileUpload>
               </div>
-              <div class="d-flex flex-column mt-2">
+              <div class="d-flex flex-column mt-2 justify-content-star">
                 <p-tag class="mr-2" value="Full Name: "></p-tag>
-                <span class="mr-2">Random Dude</span>
+                <span class="mr-2">{{
+                  userData.userDescription.fullname
+                }}</span>
               </div>
             </div>
           </div>
@@ -36,13 +38,9 @@
           <div>
             <div class="d-flex flex-column align-items-center">
               <p-tag class="mr-auto" value="Bio: "></p-tag>
-              <span class="pl-1"
-                >Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown
-                printer took a galley of type and scrambled it to make a type
-                specimen book.</span
-              >
+              <span class="pl-1 mr-auto">{{
+                userData.userDescription.bio
+              }}</span>
             </div>
           </div>
         </div>
@@ -63,12 +61,12 @@
                   role="progressbar"
                   [ngStyle]="{
                     width: calculateProgress(
-                      userStatistics.showStatistics.completed,
-                      userStatistics.showStatistics.total
+                      userData.userStatistics.showStatistics.finished,
+                      userData.userStatistics.showStatistics.total
                     )
                   }"
                 >
-                  {{ userStatistics.showStatistics.completed }}
+                  {{ userData.userStatistics.showStatistics.finished }}
                 </div>
                 <div
                   pTooltip="Watching"
@@ -77,12 +75,12 @@
                   role="progressbar"
                   [ngStyle]="{
                     width: calculateProgress(
-                      userStatistics.showStatistics.watching,
-                      userStatistics.showStatistics.total
+                      userData.userStatistics.showStatistics.watching,
+                      userData.userStatistics.showStatistics.total
                     )
                   }"
                 >
-                  {{ userStatistics.showStatistics.watching }}
+                  {{ userData.userStatistics.showStatistics.watching }}
                 </div>
                 <div
                   pTooltip="Considering"
@@ -91,12 +89,12 @@
                   role="progressbar"
                   [ngStyle]="{
                     width: calculateProgress(
-                      userStatistics.showStatistics.considering,
-                      userStatistics.showStatistics.total
+                      userData.userStatistics.showStatistics.plannedToWatch,
+                      userData.userStatistics.showStatistics.total
                     )
                   }"
                 >
-                  {{ userStatistics.showStatistics.considering }}
+                  {{ userData.userStatistics.showStatistics.plannedToWatch }}
                 </div>
                 <div
                   pTooltip="Skipping"
@@ -105,12 +103,12 @@
                   role="progressbar"
                   [ngStyle]="{
                     width: calculateProgress(
-                      userStatistics.showStatistics.skipping,
-                      userStatistics.showStatistics.total
+                      userData.userStatistics.showStatistics.skipping,
+                      userData.userStatistics.showStatistics.total
                     )
                   }"
                 >
-                  {{ userStatistics.showStatistics.skipping }}
+                  {{ userData.userStatistics.showStatistics.skipping }}
                 </div>
               </div>
 
@@ -176,12 +174,16 @@
                 <div class="col-sm d-flex">
                   <h5 class="mr-3">Avarage rating:</h5>
                   <p-tag
-                    [value]="userStatistics.showStatistics.avarageScore"
+                    [value]="
+                      userData.userStatistics.showStatistics.avarageScore
+                    "
                   ></p-tag>
                 </div>
                 <div class="col-sm d-flex">
                   <h5 class="mr-3">Total entries:</h5>
-                  <p-tag [value]="userStatistics.showStatistics.total"></p-tag>
+                  <p-tag
+                    [value]="userData.userStatistics.showStatistics.total"
+                  ></p-tag>
                 </div>
               </div>
             </div>
@@ -200,12 +202,12 @@
                   role="progressbar"
                   [ngStyle]="{
                     width: calculateProgress(
-                      userStatistics.movieStatistics.completed,
-                      userStatistics.movieStatistics.total
+                      userData.userStatistics.movieStatistics.finished,
+                      userData.userStatistics.movieStatistics.total
                     )
                   }"
                 >
-                  {{ userStatistics.movieStatistics.completed }}
+                  {{ userData.userStatistics.movieStatistics.finished }}
                 </div>
                 <div
                   pTooltip="Watching"
@@ -214,12 +216,12 @@
                   role="progressbar"
                   [ngStyle]="{
                     width: calculateProgress(
-                      userStatistics.movieStatistics.watching,
-                      userStatistics.movieStatistics.total
+                      userData.userStatistics.movieStatistics.watching,
+                      userData.userStatistics.movieStatistics.total
                     )
                   }"
                 >
-                  {{ userStatistics.movieStatistics.watching }}
+                  {{ userData.userStatistics.movieStatistics.watching }}
                 </div>
                 <div
                   pTooltip="Considering"
@@ -228,12 +230,12 @@
                   role="progressbar"
                   [ngStyle]="{
                     width: calculateProgress(
-                      userStatistics.movieStatistics.considering,
-                      userStatistics.movieStatistics.total
+                      userData.userStatistics.movieStatistics.plannedToWatch,
+                      userData.userStatistics.movieStatistics.total
                     )
                   }"
                 >
-                  {{ userStatistics.movieStatistics.considering }}
+                  {{ userData.userStatistics.movieStatistics.plannedToWatch }}
                 </div>
                 <div
                   pTooltip="Skipping"
@@ -242,12 +244,12 @@
                   role="progressbar"
                   [ngStyle]="{
                     width: calculateProgress(
-                      userStatistics.movieStatistics.skipping,
-                      userStatistics.movieStatistics.total
+                      userData.userStatistics.movieStatistics.skipping,
+                      userData.userStatistics.movieStatistics.total
                     )
                   }"
                 >
-                  {{ userStatistics.movieStatistics.skipping }}
+                  {{ userData.userStatistics.movieStatistics.skipping }}
                 </div>
               </div>
 
@@ -313,12 +315,16 @@
                 <div class="col-sm d-flex">
                   <h5 class="mr-3">Avarage rating:</h5>
                   <p-tag
-                    [value]="userStatistics.movieStatistics.avarageScore"
+                    [value]="
+                      userData.userStatistics.movieStatistics.avarageScore
+                    "
                   ></p-tag>
                 </div>
                 <div class="col-sm d-flex">
                   <h5 class="mr-3">Total entries:</h5>
-                  <p-tag [value]="userStatistics.movieStatistics.total"></p-tag>
+                  <p-tag
+                    [value]="userData.userStatistics.movieStatistics.total"
+                  ></p-tag>
                 </div>
               </div>
             </div>
@@ -338,45 +344,15 @@
 
               <div
                 class="ml-2 mb-2"
-                *ngFor="
-                  let showhistory of userHistory.showHistory;
-                  let i = index
-                "
+                *ngFor="let history of userData?.userHistory; let i = index"
               >
                 <div class="d-flex justify-content-between">
                   <span
                     class="entry-page-link"
-                    (click)="redirectToEntry(showhistory.id)"
-                    >{{ i + 1 }}. {{ showhistory.title }}</span
+                    (click)="redirectToEntry(history.id)"
+                    >{{ i + 1 }}. {{ history.title }}</span
                   >
-                  <span class="text-muted ml-5">{{
-                    showhistory.editDate
-                  }}</span>
-                </div>
-              </div>
-
-              <h5 class="px-3 mt-4">Last Movie Updates:</h5>
-              <hr
-                style="border-top: 1px solid #e2e2e2; margin-left: 20px"
-                class="w-25"
-              />
-
-              <div
-                class="ml-2 mb-2"
-                *ngFor="
-                  let moviehistory of userHistory.movieHistory;
-                  let i = index
-                "
-              >
-                <div class="d-flex justify-content-between">
-                  <span
-                    class="entry-page-link"
-                    (click)="redirectToEntry(moviehistory.id)"
-                    >{{ i + 1 }}. {{ moviehistory.title }}</span
-                  >
-                  <span class="text-muted ml-5">{{
-                    moviehistory.editDate
-                  }}</span>
+                  <span class="text-muted ml-5">{{ history.editDate }}</span>
                 </div>
               </div>
             </div>
@@ -391,15 +367,15 @@
           <h3 class="mb-3 ml-3">Favorites</h3>
           <div>
             <p-carousel
-              [value]="products"
+              [value]="userData.userFavorites"
               styleClass="custom-carousel"
               [numVisible]="4"
               [numScroll]="1"
               [circular]="true"
               [responsiveOptions]="responsiveOptions"
             >
-              <ng-template let-product pTemplate="item">
-                <app-custom-card [cardContent]="product"></app-custom-card>
+              <ng-template let-favorite pTemplate="item">
+                <app-custom-card [cardContent]="favorite"></app-custom-card>
               </ng-template>
             </p-carousel>
           </div>

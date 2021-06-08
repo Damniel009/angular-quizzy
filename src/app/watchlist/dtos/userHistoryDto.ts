@@ -1,6 +1,10 @@
-import { entryHistoryDto } from "./entryHistoryDto";
+import { entryHistoryDto } from './entryHistoryDto';
 
 export class userHistoryDto {
-    showHistory: entryHistoryDto[];
-    movieHistory: entryHistoryDto[];
+  currentEpisode: string;
+  //total 10 mindig
+  currentSituation: string;
+  editDate: string;
+  title: string;
+  totalEpisodes: string;
 }
