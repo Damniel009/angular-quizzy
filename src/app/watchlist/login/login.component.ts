@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
         });
       },
       (err) => {
-        console.log(err);
         switch (err.status) {
           case 406: {
             this.messageService.add({

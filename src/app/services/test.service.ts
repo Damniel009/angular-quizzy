@@ -19,7 +19,6 @@ export class TestService {
   constructor(private http: HttpClient) {}
 
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
 
     // return an observable with a user friendly message
     return throwError('Error! something went wrong.');

@@ -111,7 +111,7 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userDataService.getUserData().subscribe((res) => {
-      // console.log(res)
+      console.log(res)
     });
 
     this.userDataService.getUserPicture().subscribe(

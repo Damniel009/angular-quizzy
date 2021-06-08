@@ -29,32 +29,12 @@ export class CheckboxQuestionComponent implements OnInit {
       answer: false,
     });
     this.item.answers.push(newQuestion);
-    // this.opt.push(`Option${this.item.answers.length + 1}`)
-    // console.log(this.item.answers);
     
   }
 
   removeCheckbox(index) {
     this.item.answers.splice(index, 1);
   }
-
-  // checkDuplicate() {
-  //   let uniq = this.options.filter(
-  //     (v, i, a) => a.findIndex((t) => t.label === v.label) != i
-  //   );
-
-  //   console.log(this.options);
-
-  //   if(uniq[0] && (this.options[this.options.length - 1] === uniq[0])){
-  //     this.options[this.options.length - 1].duplicate = true;
-  //   }
-
-  //   let uniq = this.options.filter((option, index, all) => {
-  //     all.findIndex((optionFromAll) => {
-  //       optionFromAll.label === option.label;
-  //     }) === index;
-  //   });
-  // }
 
   updateAnswers(question) {
     this.item.answers[question].answer = true;

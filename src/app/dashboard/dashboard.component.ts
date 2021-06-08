@@ -40,7 +40,6 @@ export class DashboardComponent implements OnInit {
               (question) => question._id === testResult.quizId
             ).note = Math.round(testResult.note * 100) / 100;
           });
-          console.log(this.quizList);
           
         });
       });

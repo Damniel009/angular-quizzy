@@ -76,19 +76,16 @@ export class QuizComponent implements OnInit {
   removeQuestion(columnToBeRemoved) {
     let index = this.finalQuestions.indexOf(columnToBeRemoved);
     this.finalQuestions.splice(index, 1);
-    console.log(this.finalQuestions);
   }
 
   addQuestionToForm(newQuestion: questionDto, index) {
     this.finalQuestions[index] = newQuestion;
-    console.log(this.finalQuestions);
   }
 
   finishQuiz() {
     let final = { questions: this.finalQuestions };
 
     this.quizService.saveQuestion(final).subscribe((res) => {
-      console.log(res);
     });
     this.router.navigate(['/dashboard']);
   }
