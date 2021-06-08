@@ -1,4 +1,4 @@
-<div class="watchlist-container p-3">
+<div *ngIf="shows" class="watchlist-container p-3">
   <h4>Watchlist</h4>
   <div class="p-shadow-20 p-4 mt-3">
     <div class="filter-options d-flex justify-content-between w-50">
@@ -10,13 +10,14 @@
           name="group1"
           value="Completed"
           [(ngModel)]="selectedFilter"
+          (onChange)="filterResults($event.checked, 'finished')"
           inputId="completed"
         ></p-checkbox>
         <p-tag
           styleClass="p-mr-2 ml-2"
           for="completed"
           severity="info"
-          value="Completed ({{ numberCompleted }})"
+          value="Completed ({{ statusNumbers.finished }})"
         ></p-tag>
       </div>
 
@@ -25,13 +26,14 @@
           name="group1"
           value="Watching"
           [(ngModel)]="selectedFilter"
+          (onChange)="filterResults($event.checked, 'watching')"
           inputId="watching"
         ></p-checkbox>
         <p-tag
           styleClass="p-mr-2 ml-2"
           for="watching"
           severity="success"
-          value="Watching ({{ numberWatching }})"
+          value="Watching ({{ statusNumbers.watching }})"
         ></p-tag>
       </div>
 
@@ -40,13 +42,14 @@
           name="group1"
           value="Considering"
           [(ngModel)]="selectedFilter"
+          (onChange)="filterResults($event.checked, 'planned')"
           inputId="considering"
         ></p-checkbox>
         <p-tag
           styleClass="p-mr-2 ml-2"
           for="considering"
           severity="warning"
-          value="Considering ({{ numberConsidering }})"
+          value="Considering ({{ statusNumbers.planned }})"
         ></p-tag>
       </div>
 
@@ -55,28 +58,30 @@
           name="group1"
           value="Skipping"
           [(ngModel)]="selectedFilter"
+          (onChange)="filterResults($event.checked, 'skipping')"
           inputId="skipping"
         ></p-checkbox>
         <p-tag
           styleClass="p-mr-2 ml-2"
           for="skipping"
           severity="danger"
-          value="Skipping ({{ numberSkipping }})"
+          value="Skipping ({{ statusNumbers.skipping }})"
         ></p-tag>
       </div>
     </div>
   </div>
-  <div class="p-shadow-20 p-4 mt-4">
+
+  <div *ngIf="shows.length > 0" class="p-shadow-20 p-4 mt-4">
     <div *ngFor="let show of shows; let i = index">
-      <div class="show-container d-flex align-items-center my-3 pb-3">
+      <div *ngIf="show.isVisible" class="show-container d-flex align-items-center my-3 pb-3">
         <img height="90" src="{{ show.poster }}" class="mr-2" />
         <h3>{{ show.title }}</h3>
         <div class="d-flex ml-auto align-items-center">
           <p-tag
             styleClass="p-mr-2 ml-2"
             for="watching"
-            severity="{{ setStatusColor(show.status) }}"
-            value="{{ setStatus(show.status) }}"
+            severity="{{ setStatusColor(show.currentSituation) }}"
+            value="{{ setStatus(show.currentSituation) }}"
           ></p-tag>
           <div class="episode-counter ml-4">
             <div class="d-flex align-items-center ml-3">
@@ -85,7 +90,7 @@
                 tooltipPosition="top"
                 class="pi pi-eye mr-2"
               ></i>
-              {{ show.currentEpisode ? show.currentEpisode : 0 }} /
+              {{ show.episodesWatched ? show.episodesWatched : 0 }} /
               {{ show.totalEpisodes ? show.totalEpisodes : "1" }}
               <button
                 pButton
@@ -93,11 +98,17 @@
                 type="button"
                 icon="pi pi-plus"
                 class="p-button-rounded p-button-text"
+                (click)="increaseProgress(show.watchlistID)"
+                [disabled]="show.episodesWatched === show.totalEpisodes"
               ></button>
             </div>
           </div>
           <div class="ml-4">
-            <p-rating [(ngModel)]="show.rating" [cancel]="false"></p-rating>
+            <p-rating
+              [(ngModel)]="show.rating"
+              [cancel]="false"
+              (onRate)="changeRating($event.value, show.watchlistID)"
+            ></p-rating>
           </div>
           <button
             pButton
@@ -113,4 +124,8 @@
       </div>
     </div>
   </div>
+
+  <!-- <div *ngIf="filterResultEmpty" class="p-shadow-20 p-4 mt-4">
+    <h3>No watchlist elements to show</h3>
+  </div> -->
 </div>

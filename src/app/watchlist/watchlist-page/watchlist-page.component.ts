@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
+import { statusDto } from '../dtos/statusDto';
 import { watchlistDto } from '../dtos/watchlistDto';
 import { EditWatchlistComponent } from '../edit-watchlist/edit-watchlist.component';
+import { UserDataService } from '../services/user-data.service';
 
 @Component({
   selector: 'app-watchlist-page',
@@ -11,54 +13,48 @@ import { EditWatchlistComponent } from '../edit-watchlist/edit-watchlist.compone
 export class WatchlistPageComponent implements OnInit {
   selectedFilter: string[] = [];
 
-  numberCompleted = '972';
-  numberWatching = '8';
-  numberConsidering = '53';
-  numberSkipping = '1834';
+  statusNumbers = new statusDto();
 
-  shows: watchlistDto[] = [
-    {
-      poster:
-        'https://m.media-amazon.com/images/M/MV5BMDJhMGRjN2QtNDUxYy00NGM3LThjNGQtMmZiZTRhNjM4YzUxL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
-      title: 'Shrek 2',
-      status: 'watching',
-      totalEpisodes: null,
-      currentEpisode: null,
-      rating: null,
-    },
-    {
-      poster:
-        'https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
-      title: 'Shrek',
-      status: 'completed',
-      totalEpisodes: null,
-      currentEpisode: 1,
-      rating: null,
-    },
-    {
-      poster:
-        'https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
-      title: 'Shrek 3',
-      status: 'considering',
-      totalEpisodes: null,
-      currentEpisode: null,
-      rating: null,
-    },
-  ];
+  shows: watchlistDto[] = [];
+  selectedFilters = [];
 
-  constructor(public dialogService: DialogService) {}
+  constructor(
+    private dialogService: DialogService,
+    private userDataService: UserDataService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userDataService.getUserWatchlist().subscribe((res) => {
+      this.formatResponse(res[0]);
+    });
+  }
+
+  formatResponse(response) {
+    let initialState = {};
+    Object.keys(response).forEach((key) => {
+      initialState[key] = response[key][0];
+    });
+
+    Object.keys(initialState).forEach((key) => {
+      this.statusNumbers[key] = initialState[key].total;
+      initialState[key].shows.forEach((show) => {
+        show.isVisible = true;
+        this.shows.push(show);
+      });
+    });
+
+    console.log(this.shows);
+  }
 
   setStatus(showStatus) {
     let status = '';
     switch (showStatus) {
-      case 'completed': {
-        status = 'Completed';
+      case 'finished': {
+        status = 'Finished';
         break;
       }
-      case 'considering': {
-        status = 'Considering';
+      case 'planned': {
+        status = 'Planned';
         break;
       }
       case 'watching': {
@@ -76,11 +72,11 @@ export class WatchlistPageComponent implements OnInit {
   setStatusColor(showStatus) {
     let severity = '';
     switch (showStatus) {
-      case 'completed': {
+      case 'finished': {
         severity = 'info';
         break;
       }
-      case 'considering': {
+      case 'planned': {
         severity = 'warning';
         break;
       }
@@ -103,7 +99,64 @@ export class WatchlistPageComponent implements OnInit {
       },
       header: `Edit ${show.title}`,
       width: '70%',
-      dismissableMask: true
+      dismissableMask: true,
     });
+  }
+
+  increaseProgress(id) {
+    this.userDataService.editWatchlistProgress(id, 1).subscribe((res) => {
+      this.shows.forEach((show) => {
+        if (show.watchlistID === id) {
+          show.episodesWatched++;
+        }
+      });
+    });
+  }
+
+  changeRating(value, id) {
+    this.userDataService.editWatchlistRating(id, value).subscribe((res) => {
+      this.shows.forEach((show) => {
+        if (show.watchlistID === id) {
+          show.rating = value;
+        }
+      });
+    });
+  }
+
+  filteredShows = [];
+
+  filterResults(isAdded, filter) {
+    if (isAdded) {
+      this.selectedFilters.push(filter);
+    } else {
+      const index = this.selectedFilters.indexOf(filter);
+      this.selectedFilters.splice(index, 1);
+      this.shows.forEach((show) => {
+        if (show.currentSituation === filter) {
+          this.filteredShows.splice(
+            this.filteredShows.indexOf(show.watchlistID)
+          );
+        }
+      });
+    }
+
+    this.selectedFilters.forEach((filtexr) => {
+      this.shows.forEach((show) => {
+        if (!this.filteredShows.includes(show.watchlistID)) {
+          if (show.currentSituation === filtexr) {
+            show.isVisible = true;
+            this.filteredShows.push(show.watchlistID);
+          } else {
+            show.isVisible = false;
+          }
+        }
+      });
+    });
+
+    if (this.selectedFilters.length === 0) {
+      this.shows.forEach((show) => {
+        show.isVisible = true;
+      });
+    }
   }
 }

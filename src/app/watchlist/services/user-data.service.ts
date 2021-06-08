@@ -26,4 +26,24 @@ export class UserDataService {
   getUserPicture(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}user/userData/image`);
   }
+
+  getUserWatchlist(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}user/watchlist`);
+  }
+
+  editWatchlistProgress(id, value): Observable<any> {
+    return this.http.put<any>(
+      `${this.baseUrl}user/watchlist/change/progress?watchlistID=${id}&toAdd=${value}`,
+      {}
+    );
+  }
+
+  editWatchlistRating(id, value): Observable<any> {
+    return this.http.put<any>(
+      `${this.baseUrl}user/watchlist/change/rating?watchlistID=${id}&rating=${value}`,
+      {}
+    );
+  }
+
+  //user/watchlist/change/progress?watchlistID=8&toAdd=50
 }

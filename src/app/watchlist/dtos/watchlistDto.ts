@@ -1,8 +1,11 @@
 export class watchlistDto {
     poster: string;
     title: string;
-    status: string;
+    currentSituation: string;
     totalEpisodes: number;
-    currentEpisode: number;
+    episodesWatched: number;
     rating: number;
+    watchlistID: string;
+    favorite: string;
+    isVisible: boolean;
 }
