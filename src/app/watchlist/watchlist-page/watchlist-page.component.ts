@@ -17,6 +17,7 @@ export class WatchlistPageComponent implements OnInit {
 
   shows: watchlistDto[] = [];
   selectedFilters = [];
+  filteredShows = [];
 
   constructor(
     private dialogService: DialogService,
@@ -122,8 +123,6 @@ export class WatchlistPageComponent implements OnInit {
       });
     });
   }
-
-  filteredShows = [];
 
   filterResults(isAdded, filter) {
     if (isAdded) {

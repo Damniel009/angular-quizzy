@@ -73,7 +73,10 @@
 
   <div *ngIf="shows.length > 0" class="p-shadow-20 p-4 mt-4">
     <div *ngFor="let show of shows; let i = index">
-      <div *ngIf="show.isVisible" class="show-container d-flex align-items-center my-3 pb-3">
+      <div
+        *ngIf="show.isVisible"
+        class="show-container d-flex align-items-center my-3 pb-3"
+      >
         <img height="90" src="{{ show.poster }}" class="mr-2" />
         <h3>{{ show.title }}</h3>
         <div class="d-flex ml-auto align-items-center">

@@ -45,5 +45,12 @@ export class UserDataService {
     );
   }
 
+  toggleFavorite(id): Observable<any> {
+    return this.http.put<any>(
+      `${this.baseUrl}user/userData/toggleFavorite?watchlistID=${id}`,
+      {}
+    );
+  }
+
   //user/watchlist/change/progress?watchlistID=8&toAdd=50
 }

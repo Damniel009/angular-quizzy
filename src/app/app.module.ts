@@ -47,6 +47,8 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { CarouselModule } from 'primeng/carousel';
 import { CaptchaModule } from 'primeng/captcha';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
 
 //Primeng services
 import { MessageService } from 'primeng/api';
@@ -97,6 +99,7 @@ import { AuthWatchlistInterceptor } from './watchlist/services/interceptor/auth-
     BrowserAnimationsModule,
     ProgressBarModule,
     BadgeModule,
+    DropdownModule,
     CaptchaModule,
     AvatarModule,
     ButtonModule,
@@ -109,6 +112,7 @@ import { AuthWatchlistInterceptor } from './watchlist/services/interceptor/auth-
     RadioButtonModule,
     PanelModule,
     SlideMenuModule,
+    InputNumberModule,
     TagModule,
     InputTextareaModule,
     MenuModule,
