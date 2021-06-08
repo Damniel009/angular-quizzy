@@ -94,19 +94,4 @@ export class UserService {
       role: role,
     };
   }
-
-  getUserData(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}user/userData?userID=`);
-  }
-
-  editUserPicture(picture: FormData): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}user/userData/editPicture`,
-      picture
-    );
-  }
-
-  getUserPicture(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}user/userData/image`);
-  }
 }

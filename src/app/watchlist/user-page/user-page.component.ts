@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { userHistoryDto } from '../dtos/userHistoryDto';
 import { userStatisticsDto } from '../dtos/userStatisticsDto';
+import { UserDataService } from '../services/user-data.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -86,7 +87,7 @@ export class UserPageComponent implements OnInit {
   products;
 
   constructor(
-    private userService: UserService,
+    private userDataService: UserDataService,
     private messageService: MessageService
   ) {
     this.responsiveOptions = [
@@ -109,11 +110,11 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUserData().subscribe((res) => {
+    this.userDataService.getUserData().subscribe((res) => {
       // console.log(res)
     });
 
-    this.userService.getUserPicture().subscribe(
+    this.userDataService.getUserPicture().subscribe(
       (res) => {},
       (err) => {
         this.image = err.error.text;
@@ -197,13 +198,13 @@ export class UserPageComponent implements OnInit {
   onBasicUpload(event) {
     let file = event.files[0];
     this.fileToUpload.append('image', file);
-    this.userService.editUserPicture(this.fileToUpload).subscribe((res) => {
+    this.userDataService.editUserPicture(this.fileToUpload).subscribe((res) => {
       this.messageService.add({
         severity: 'info',
         summary: 'File Uploaded',
         detail: '',
       });
-      this.userService.getUserPicture().subscribe(
+      this.userDataService.getUserPicture().subscribe(
         (res) => {},
         (err) => {
           this.image = err.error.text;
