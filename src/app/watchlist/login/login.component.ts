@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { signupDto } from 'src/app/dtos/signupDto';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -9,28 +11,88 @@ import { UserService } from '../services/user.service';
 export class LoginComponent implements OnInit {
   userDto = {
     email: 'daniel.lengyel99@gmail.com',
-    passw: 'Password123',
+    password: 'Password123',
   };
 
-  newUser = {
-    email: '',
-    password: '',
-    name: '',
+  newUser: signupDto = {
+    email: 'newuser@gmail.com',
+    password: '123456',
+    name: 'New User',
   };
 
   isLoginPage = true;
   isCaptcha = false;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {}
 
   loginUser() {
-    this.userService.login(this.userDto.email, this.userDto.passw);
+    this.userService.login(this.userDto.email, this.userDto.password);
   }
 
-  showResponse(event) {
-    
-    // this.messageService.add({severity:'info', summary:'Succees', detail: 'User Responded', sticky: true});
+  signupUser() {
+    this.userService.signup(this.newUser).subscribe(
+      (res) => {
+        this.isLoginPage = true;
+        this.messageService.add({
+          severity: 'success',
+          summary: `User ${this.newUser.name} was created successfully`,
+          detail: '',
+        });
+      },
+      (err) => {
+        console.log(err);
+        switch (err.status) {
+          case 406: {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Incorrect email format',
+              detail: '',
+            });
+            break;
+          }
+          case 403: {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Email already in use',
+              detail: '',
+            });
+            break;
+          }
+          default: {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Something went wrong',
+              detail: '',
+            });
+            break;
+          }
+        }
+      }
+    );
+  }
+
+  verifyForm(value) {
+    if (value) {
+      return value ? false : true;
+    } else {
+      if (this.isLoginPage) {
+        if (this.userDto.email && this.userDto.password) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        if (this.newUser.email && this.newUser.password && this.newUser.name) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
   }
 }

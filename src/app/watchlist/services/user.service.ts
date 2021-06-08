@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { signupDto } from 'src/app/dtos/signupDto';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +17,11 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signup(newUser) {
-    this.http
-      .post(`${this.baseUrl}auth/signup`, newUser)
-      .subscribe((res) => {});
+  signup(newUser: signupDto): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}auth/signup?email=${newUser.email}&fullname=${newUser.name}&password=${newUser.password}`,
+      newUser
+    );
   }
 
   login(email, passw) {
@@ -71,8 +73,8 @@ export class UserService {
   logout() {
     this.token = null;
     this.role = null;
-    localStorage.removeItem('token')
-    localStorage.removeItem('role')
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
     this.router.navigate(['/login']);

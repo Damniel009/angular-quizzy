@@ -10,7 +10,15 @@
             type="text"
             pInputText
             [(ngModel)]="userDto.email"
+            aria-describedby="username2-help"
+            [ngClass]="{ 'ng-invalid ng-dirty': verifyForm(userDto.email) }"
           />
+          <small
+            *ngIf="verifyForm(userDto.email)"
+            id="username2-help"
+            class="p-error"
+            >Please fill out this field</small
+          >
         </div>
         <div class="p-field">
           <label for="password">Password</label>
@@ -18,8 +26,16 @@
             id="password"
             type="password"
             pInputText
-            [(ngModel)]="userDto.passw"
+            [(ngModel)]="userDto.password"
+            aria-describedby="username2-help"
+            [ngClass]="{ 'ng-invalid ng-dirty': verifyForm(userDto.password) }"
           />
+          <small
+            *ngIf="verifyForm(userDto.password)"
+            id="username2-help"
+            class="p-error"
+            >Please fill out this field</small
+          >
         </div>
       </div>
 
@@ -29,6 +45,7 @@
         type="button"
         label="Submit"
         (click)="loginUser()"
+        [disabled]="verifyForm()"
       ></button>
     </div>
 
@@ -42,11 +59,32 @@
             type="text"
             pInputText
             [(ngModel)]="newUser.email"
+            aria-describedby="username2-help"
+            [ngClass]="{ 'ng-invalid ng-dirty': verifyForm(newUser.email) }"
           />
+          <small
+            *ngIf="verifyForm(newUser.email)"
+            id="username2-help"
+            class="p-error"
+            >Please fill out this field</small
+          >
         </div>
         <div class="p-field">
           <label for="name">Username</label>
-          <input id="name" type="text" pInputText [(ngModel)]="newUser.name" />
+          <input
+            id="name"
+            type="text"
+            pInputText
+            [(ngModel)]="newUser.name"
+            aria-describedby="username2-help"
+            [ngClass]="{ 'ng-invalid ng-dirty': verifyForm(newUser.name) }"
+          />
+          <small
+            *ngIf="verifyForm(newUser.name)"
+            id="username2-help"
+            class="p-error"
+            >Please fill out this field</small
+          >
         </div>
         <div class="p-field">
           <label for="password">Password</label>
@@ -55,7 +93,15 @@
             type="password"
             pInputText
             [(ngModel)]="newUser.password"
+            aria-describedby="username2-help"
+            [ngClass]="{ 'ng-invalid ng-dirty': verifyForm(newUser.password) }"
           />
+          <small
+            *ngIf="verifyForm(newUser.password)"
+            id="username2-help"
+            class="p-error"
+            >Please fill out this field</small
+          >
         </div>
       </div>
       <button
@@ -64,13 +110,8 @@
         type="button"
         label="Submit"
         (click)="signupUser()"
-        [disabled]="!isCaptcha"
+        [disabled]="verifyForm()"
       ></button>
-
-      <!-- <p-captcha
-        siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-        (onResponse)="isCaptcha = true"
-      ></p-captcha> -->
     </div>
 
     <div class="mt-5">
