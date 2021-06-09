@@ -23,6 +23,13 @@ export class UserDataService {
     );
   }
 
+  editUserBio(bio): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}user/userData/editBio?bio=${bio}`,
+      {}
+    );
+  }
+
   getUserPicture(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}user/userData/image`);
   }
@@ -48,6 +55,13 @@ export class UserDataService {
   toggleFavorite(id): Observable<any> {
     return this.http.put<any>(
       `${this.baseUrl}user/userData/toggleFavorite?watchlistID=${id}`,
+      {}
+    );
+  }
+
+  editWatchlistStatus(watchlistId, showId, status): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}user/watchlist/change/status?watchlistID=${watchlistId}&status=${status}&showID=${showId}`,
       {}
     );
   }

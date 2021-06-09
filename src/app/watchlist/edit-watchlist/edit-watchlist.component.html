@@ -1,9 +1,23 @@
 <div>
-  <div class="row">
-    <div class="col-2">
-      <img height="200" src="{{ show.poster }}" class="mr-2" />
+  <div class="row mb-4">
+    <div class="col-3">
+      <img width="100%" src="{{ show.poster }}" class="mr-2" />
     </div>
-    <div class="col justify-content-start">
+    <div class="col-8 justify-content-start">
+      <div class="mt-2 row align-items-center">
+        <p-tag
+          styleClass="p-mr-2 mr-2"
+          for="completed"
+          value="This show's status: "
+        ></p-tag>
+        <p-dropdown
+          [options]="statuses"
+          [(ngModel)]="show.currentSituation"
+          optionLabel="name"
+          optionValue="code"
+          (onChange)="changeStatus(show.watchlistID, show.showid, $event.value)"
+        ></p-dropdown>
+      </div>
       <div class="row align-items-center">
         <p-tag
           styleClass="p-mr-2 mr-2"
@@ -43,7 +57,6 @@
           styleClass="p-button-outlined"
           (click)="toggleFavorite(show.watchlistID)"
         >
-          <!-- <ng-template pTemplate="content"> -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -71,16 +84,7 @@
               d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"
             />
           </svg>
-          <!-- </ng-template> -->
         </p-button>
-      </div>
-      <div class="mt-2 row align-items-center">
-        <p-tag
-          styleClass="p-mr-2 mr-2"
-          for="completed"
-          value="This show's status: "
-        ></p-tag>
-        <p-dropdown [options]="statuses" [(ngModel)]="show.currentSituation" placeholder="Status.." optionLabel="name" [showClear]="true"></p-dropdown>
       </div>
       <!-- <div class="mt-2 row align-items-center"></div> -->
     </div>

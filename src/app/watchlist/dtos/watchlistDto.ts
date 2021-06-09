@@ -8,4 +8,5 @@ export class watchlistDto {
     watchlistID: string;
     favorite: string;
     isVisible: boolean;
+    showid: string;
 }

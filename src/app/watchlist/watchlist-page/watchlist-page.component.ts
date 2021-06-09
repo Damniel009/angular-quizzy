@@ -99,7 +99,9 @@ export class WatchlistPageComponent implements OnInit {
         show: show,
       },
       header: `Edit ${show.title}`,
-      width: '70%',
+      width: '50%',
+      height: '70%',
+      baseZIndex: 9999,
       dismissableMask: true,
     });
   }

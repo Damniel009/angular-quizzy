@@ -11,7 +11,17 @@ import { UserDataService } from '../services/user-data.service';
 export class EditWatchlistComponent implements OnInit {
   show: watchlistDto;
 
-  statuses = ['Completed', 'Watching', 'Considering', 'Skipping']
+  changesToSave = {
+    // status: this.show.currentSituation,
+
+  }
+
+  statuses = [
+    { name: 'Completed', code: 'finished' },
+    { name: 'Watching', code: 'watching' },
+    { name: 'Considering', code: 'planned' },
+    { name: 'Skipping', code: 'skipping' },
+  ];
 
   constructor(
     public ref: DynamicDialogRef,
@@ -21,7 +31,13 @@ export class EditWatchlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.show = this.config.data.show;
-    console.log(this.show.favorite);
+    console.log(this.show);
+    this.changesToSave = {
+      status: this.show.currentSituation,
+      episode: this.show.episodesWatched,
+      isFavorite: this.show.favorite,
+      
+    }
   }
 
   changeRating(value, id) {
@@ -31,8 +47,6 @@ export class EditWatchlistComponent implements OnInit {
   }
 
   increaseProgress(id, value) {
-    // console.log(id);
-
     this.userDataService.editWatchlistProgress(id, value).subscribe((res) => {
       this.show.episodesWatched = value;
     });
@@ -40,7 +54,14 @@ export class EditWatchlistComponent implements OnInit {
 
   toggleFavorite(id) {
     this.userDataService.toggleFavorite(id).subscribe((res) => {
-      this.show.favorite == '1' ? '1' : '0';
+      this.show.favorite = this.show.favorite === '1' ? '0' : '1';
+    });
+  }
+
+  changeStatus(watchlistId, showId, value) {
+    console.log(value);
+    this.userDataService.editWatchlistStatus(watchlistId, showId, value).subscribe((res) => {
+      this.show.currentSituation = value;
     });
   }
 }
