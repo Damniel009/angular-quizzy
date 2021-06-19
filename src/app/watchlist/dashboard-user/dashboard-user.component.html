@@ -1,5 +1,67 @@
-<div class="user-home-container">
-  <div class="p-shadow-1 p-4">
-    <p>dashboard-user works!</p>
+<div *ngIf="dashBoardData" class="user-home-container p-3">
+  <div class="p-shadow-20 p-4">
+    <h4 class="mb-4">Popular Shows</h4>
+    <div>
+      <p-carousel
+        [value]="dashBoardData.popularShows"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-show pTemplate="item">
+          <app-custom-card [cardContent]="show"></app-custom-card>
+        </ng-template>
+      </p-carousel>
+    </div>
+    <hr style="border-top: 1px solid #e2e2e2; margin-left: 20px" class="w-50 mx-auto mb-3" />
+    <h4 class="mb-4">Best Rated Shows</h4>
+    <div>
+      <p-carousel
+        [value]="dashBoardData.bestRatedShows"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-show pTemplate="item">
+          <app-custom-card [cardContent]="show"></app-custom-card>
+        </ng-template>
+      </p-carousel>
+    </div>
+    <hr style="border-top: 1px solid #e2e2e2; margin-left: 20px" class="w-50 mx-auto mb-3" />
+    <h4 class="mb-4">Currently Airing Shows</h4>
+    <div>
+      <p-carousel
+        [value]="dashBoardData.currentlyAiringShows"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-show pTemplate="item">
+          <app-custom-card [cardContent]="show"></app-custom-card>
+        </ng-template>
+      </p-carousel>
+    </div>
+    <hr style="border-top: 1px solid #e2e2e2; margin-left: 20px" class="w-50 mx-auto mb-3" />
+    <h4 class="mb-4">You Might Enjoy</h4>
+    <div>
+      <p-carousel
+        [value]="dashBoardData.youMightEnjoy"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-show pTemplate="item">
+          <app-custom-card [cardContent]="show"></app-custom-card>
+        </ng-template>
+      </p-carousel>
+    </div>
   </div>
 </div>

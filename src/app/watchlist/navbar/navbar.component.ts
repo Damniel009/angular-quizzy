@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { ShowService } from '../services/show.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -17,10 +18,18 @@ export class NavbarComponent implements OnInit {
   visibleSidebar;
   searchType = null;
   items: MenuItem[];
+  options
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private showService: ShowService
+  ) {}
 
   ngOnInit(): void {
+    this.showService.getMenuOptions().subscribe((res) => {
+      this.options = res
+    });
     this.isUserAuthenticated = this.userService.getIsAuthenticated();
     this.role = this.userService.getRole();
     this.authListenerSubs = this.userService
@@ -92,5 +101,9 @@ export class NavbarComponent implements OnInit {
         visible: !this.isUserAuthenticated,
       },
     ];
+  }
+
+  redirectGenre(genre){
+    
   }
 }

@@ -31,7 +31,6 @@ export class EditWatchlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.show = this.config.data.show;
-    console.log(this.show);
     this.changesToSave = {
       status: this.show.currentSituation,
       episode: this.show.episodesWatched,

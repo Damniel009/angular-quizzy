@@ -144,7 +144,6 @@ export class UserPageComponent implements OnInit {
       });
 
       this.userData = helperResponse;
-      console.log(this.userData);
     });
 
     this.userDataService.getUserPicture().subscribe(

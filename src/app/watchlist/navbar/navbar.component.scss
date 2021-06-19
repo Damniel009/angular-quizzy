@@ -28,3 +28,11 @@
         padding: 0.1rem 0;
     }
 }
+
+.entry-page-link {
+  &:hover {
+    color: #6137ab;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+}

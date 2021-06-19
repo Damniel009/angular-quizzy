@@ -34,7 +34,7 @@
 
 <p-sidebar
   [(visible)]="visibleSidebar"
-  [fullScreen]="true"
+  [fullScreen]="false"
   [baseZIndex]="10000"
 >
   <button
@@ -45,6 +45,11 @@
     class="p-button-outlined"
     (click)="redirectToHome()"
   ></button>
+  <div class="ml-1 mt-2" *ngFor="let option of options">
+    <h4 (click)="redirectGenre(option)" class="entry-page-link">
+      {{ option }}
+    </h4>
+  </div>
 </p-sidebar>
 
 <p-overlayPanel #op [dismissable]="true">

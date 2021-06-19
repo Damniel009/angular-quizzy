@@ -43,8 +43,6 @@ export class WatchlistPageComponent implements OnInit {
         this.shows.push(show);
       });
     });
-
-    console.log(this.shows);
   }
 
   setStatus(showStatus) {
