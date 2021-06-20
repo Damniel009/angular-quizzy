@@ -1,0 +1,276 @@
+<div class="watchlist-container p-3">
+  <div *ngIf="showInfo.entryInfo" class="row mt-3">
+    <div class="col-4 ml-2">
+      <div class="d-flex align-items-center">
+        <h1 class="mr-2">{{ showInfo.entryInfo.title }}</h1>
+      </div>
+      <h6 class="text-muted">{{ showInfo.entryInfo.year }}</h6>
+    </div>
+
+    <div class="col d-flex flex-row justify-content-end mr-5">
+      <div class="ml-4">
+        <div class="mt-1 d-flex justify-content-center align-items-center">
+          <button
+            pButton
+            icon="pi pi-pencil"
+            icon="{{ status ? null : 'pi pi-pencil' }}"
+            pRipple
+            type="button"
+            label="{{ status ? (status | titlecase) : 'Add to watchlist' }}"
+            class="p-button-outlined"
+            (click)="op.toggle($event)"
+          ></button>
+        </div>
+      </div>
+      <div class="ml-4">
+        <h6>Avg. rating</h6>
+        <div class="d-flex justify-content-center align-items-center">
+          <p-tag
+            styleClass="p-mr-2"
+            icon="pi pi-star"
+            value=" {{ showInfo.entryInfo.rating }}"
+          ></p-tag>
+        </div>
+      </div>
+      <div class="ml-4">
+        <h6>Popularity</h6>
+        <div class="d-flex justify-content-center align-items-center">
+          <p-tag
+            styleClass="p-mr-2"
+            value="{{ showInfo.entryInfo.popularity }}"
+          ></p-tag>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div *ngIf="showInfo.entryInfo" class="col p-shadow-20 p-4 mr-4">
+      <div class="row">
+        <div class="col-3">
+          <img
+            width="100%"
+            src="{{ showInfo.entryInfo.poster }}"
+            class="mr-2"
+          />
+        </div>
+        <div class="col justify-content-start">
+          <p class="show-plot">
+            {{ showInfo.entryInfo.plot }}
+          </p>
+          <hr
+            style="border-top: 1px solid #e2e2e2; margin-left: 20px"
+            class="w-25"
+          />
+
+          <div class="d-flex align-items-center mb-2">
+            <span class="mr-2"> Actors: </span>
+
+            <p-tag
+              *ngFor="let actor of showInfo.entryInfo.actors.split(', ')"
+              styleClass="p-mr-2 ml-2"
+              value="{{ actor }}"
+            ></p-tag>
+          </div>
+
+          <div class="d-flex align-items-center mb-2">
+            <span class="mr-2"> Genres: </span>
+            <p-tag
+              *ngFor="let genre of showInfo.entryInfo.genre.split(', ')"
+              styleClass="p-mr-2 ml-2"
+              value="{{ genre }}"
+            ></p-tag>
+          </div>
+
+          <div class="d-flex align-items-center mb-2">
+            <span class="mr-2"> Language: </span>
+            <p-tag
+              styleClass="p-mr-2 ml-2"
+              value="{{ showInfo.entryInfo.language }}"
+            ></p-tag>
+          </div>
+
+          <div
+            *ngIf="showInfo.entryInfo.type !== 'movie'"
+            class="d-flex align-items-center mb-2"
+          >
+            <span class="mr-2"> Seasons: </span>
+            <p-tag
+              styleClass="p-mr-2 ml-2"
+              value="{{ showInfo.entryInfo.seasons }}"
+            ></p-tag>
+          </div>
+
+          <div
+            *ngIf="showInfo.entryInfo.type !== 'movie'"
+            class="d-flex align-items-center mb-2"
+          >
+            <span class="mr-2"> Episodes: </span>
+            <p-tag
+              styleClass="p-mr-2 ml-2"
+              value="{{ showInfo.entryInfo.episodes }}"
+            ></p-tag>
+          </div>
+
+          <div class="d-flex align-items-center mb-2">
+            <span class="mr-2">
+              {{
+                showInfo.entryInfo.type === "movie"
+                  ? "Duration: "
+                  : "Episode duration: "
+              }}
+            </span>
+            <p-tag
+              styleClass="p-mr-2 ml-2"
+              value="{{ showInfo.entryInfo.runtime }}"
+            ></p-tag>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showInfo.entryReview" class="row mt-3 p-shadow-20 p-4">
+    <div class="col-10">
+      <h3 class="mb-4">Reviews</h3>
+    </div>
+    <div class="col text-right">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Add review"
+        class="p-button-outlined py-0"
+        (click)="displayAddReview = true"
+      ></button>
+    </div>
+    <div class="col">
+      <div class="mb-2" *ngFor="let review of this.showInfo.entryReview">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center">
+            <h5 class="mb-0">Review by {{ review.username }}</h5>
+            <button
+              *ngIf="review.userid === userId"
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-danger p-button-text"
+              (click)="removeReview(review.reviewid)"
+            ></button>
+          </div>
+          <p-rating
+            [(ngModel)]="review.rating"
+            [readonly]="true"
+            [cancel]="false"
+          ></p-rating>
+        </div>
+        <h6 class="timestamp text-muted">{{ review.timestamp }}</h6>
+        <p class="my-2">{{ review.review }}</p>
+        <div class="d-flex align-items-center">
+          <p-tag
+            styleClass="p-mr-2 ml-2"
+            value="{{ review.likecounter }} user found this helpful."
+          ></p-tag>
+          <p class="mb-0 mr-2">Was this review helpful?</p>
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Yes"
+            class="p-button-outlined py-0"
+            (click)="likeRating(review.reviewid)"
+          ></button>
+        </div>
+        <hr
+          style="border-top: 1px solid #e2e2e2; margin-left: 20px"
+          class="w-25"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  header="Add review"
+  [(visible)]="displayAddReview"
+  [dismissableMask]="true"
+  [modal]="true"
+>
+  <p class="mb-0">Your rating:</p>
+  <p-rating [(ngModel)]="newReview.rating" [cancel]="false"></p-rating>
+
+  <span class="mt-3 p-float-label mb-2">
+    <textarea
+      [(ngModel)]="newReview.review"
+      id="float-input"
+      rows="5"
+      cols="30"
+      pInputTextarea
+    ></textarea>
+    <label for="float-input">Review</label>
+  </span>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Submit"
+    class="p-button-outlined"
+    [disabled]="verifyForm(newReview.review) || verifyForm(newReview.rating)"
+    (click)="addReview(showInfo.entryInfo.id)"
+  ></button>
+</p-dialog>
+
+<p-overlayPanel #op [dismissable]="true">
+  <ng-template pTemplate>
+    <div class="d-flex align-items-center px-2">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Completed"
+        class="p-button-text"
+        (click)="
+          status = 'finished'; addToWatchlist(showInfo.entryInfo.id, status); op.hide($event)
+        "
+      ></button>
+    </div>
+    <div class="d-flex align-items-center px-2">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Watching"
+        class="p-button-text"
+        (click)="
+          status = 'watching'; addToWatchlist(showInfo.entryInfo.id, status); op.hide($event)
+        "
+      ></button>
+    </div>
+    <div class="d-flex align-items-center px-2">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Considering"
+        class="p-button-text"
+        (click)="
+          status = 'considering'; addToWatchlist(showInfo.entryInfo.id, status); op.hide($event)
+        "
+      ></button>
+    </div>
+    <div class="d-flex align-items-center px-2">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Skipping"
+        class="p-button-text"
+        (click)="
+          status = 'skipping'; addToWatchlist(showInfo.entryInfo.id, status); op.hide($event)
+        "
+      ></button>
+    </div>
+  </ng-template>
+</p-overlayPanel>

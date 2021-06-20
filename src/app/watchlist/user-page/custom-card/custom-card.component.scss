@@ -16,7 +16,7 @@
       }
     }
   }
-  .menu-content{
+  .menu-content {
     position: absolute;
     top: -90px;
     right: -10px;
@@ -78,5 +78,14 @@
     }
     color: whitesmoke;
     transform: translateY(calc(70px + 4em));
+  }
+
+  .title {
+    &:hover {
+      font-weight: bolder;
+      text-decoration: underline;
+      transition: 0.3s;
+      cursor: pointer;
+    }
   }
 }

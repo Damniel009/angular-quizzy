@@ -18,4 +18,27 @@ export class ShowService {
   getMenuOptions(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}home/genres`);
   }
+
+  getShowInfo(id): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}show/info/${id}`);
+  }
+
+  likeReview(id): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}show/info/like/review?reviewID=${id}`
+    );
+  }
+
+  addReview(showId, rating, review): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}show/info/add/review?review=${review}&showID=${showId}&rating=${rating}`,
+      {}
+    );
+  }
+
+  removeReview(id): Observable<any> {
+    return this.http.delete<any>(
+      `${this.baseUrl}admin/remove/review?reviewID=${id}`
+    );
+  }
 }

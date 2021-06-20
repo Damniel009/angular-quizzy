@@ -49,6 +49,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { CaptchaModule } from 'primeng/captcha';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
 
 //Primeng services
 import { MessageService } from 'primeng/api';
@@ -64,6 +65,7 @@ import { EditWatchlistComponent } from './watchlist/edit-watchlist/edit-watchlis
 import { CustomCardComponent } from './watchlist/user-page/custom-card/custom-card.component';
 import { LoginComponent } from './watchlist/login/login.component';
 import { AuthWatchlistInterceptor } from './watchlist/services/interceptor/auth-interceptor';
+import { ShowPageComponent } from './watchlist/show-page/show-page.component';
 
 @NgModule({
   declarations: [
@@ -86,12 +88,14 @@ import { AuthWatchlistInterceptor } from './watchlist/services/interceptor/auth-
     EditWatchlistComponent,
     CustomCardComponent,
     LoginComponent,
+    ShowPageComponent,
   ],
   imports: [
     FormsModule,
     RatingModule,
     CommonModule,
     HttpClientModule,
+    DialogModule,
     DynamicDialogModule,
     MenubarModule,
     CarouselModule,

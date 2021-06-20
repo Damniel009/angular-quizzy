@@ -7,6 +7,7 @@ import { UserPageComponent } from './watchlist/user-page/user-page.component';
 import { WatchlistPageComponent } from './watchlist/watchlist-page/watchlist-page.component';
 import { LoginComponent } from './watchlist/login/login.component';
 import { AuthenticationWatchlistGuard } from './watchlist/services/guard/authentication-guard.guard';
+import { ShowPageComponent } from './watchlist/show-page/show-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,7 +21,7 @@ const routes: Routes = [
     canActivate: [AuthenticationWatchlistGuard],
   },
   {
-    path: 'user',
+    path: 'user/:id',
     component: UserPageComponent,
     canActivate: [AuthenticationWatchlistGuard],
   },
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'show/:id/:title',
+    component: ShowPageComponent,
   },
 ];
 

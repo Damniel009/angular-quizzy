@@ -12,8 +12,10 @@ export class UserDataService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getUserData(): Observable<userDataDto[]> {
-    return this.http.get<userDataDto[]>(`${this.baseUrl}user/userData?userID=`);
+  getUserData(id): Observable<userDataDto[]> {
+    return this.http.get<userDataDto[]>(
+      `${this.baseUrl}user/userData?userID=${id}`
+    );
   }
 
   editUserPicture(picture: FormData): Observable<any> {

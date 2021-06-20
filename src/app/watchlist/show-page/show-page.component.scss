@@ -1,0 +1,30 @@
+:host ::ng-deep .row {
+  margin: 0;
+}
+
+:host ::ng-deep .col, .col-12 {
+  padding: 0;
+}
+
+:host ::ng-deep .ml-2.p-tag {
+    margin-left: 0 !important;
+}
+
+h1, h6 {
+  margin: 0;
+}
+
+.show-plot, .review {
+  text-indent: 20px;
+}
+
+.timestamp{
+    font-size: 12px;
+}
+
+:host ::ng-deep .p-overlaypanel .p-overlaypanel-content{
+  padding: 0.5rem;
+  .p-button{
+      padding: 0.1rem 0;
+  }
+}

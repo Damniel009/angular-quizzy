@@ -35,7 +35,6 @@ export class EditWatchlistComponent implements OnInit {
       status: this.show.currentSituation,
       episode: this.show.episodesWatched,
       isFavorite: this.show.favorite,
-      
     }
   }
 

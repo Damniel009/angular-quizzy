@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserDataService } from '../../services/user-data.service';
 
 @Component({
@@ -10,14 +11,14 @@ export class CustomCardComponent implements OnInit {
   @Input() cardContent;
   @Input() isUserPage = false;
 
-  constructor(private userDataService: UserDataService) {}
+  constructor(
+    private userDataService: UserDataService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-    // console.log(this.cardContent);
-  }
+  ngOnInit(): void {}
 
   toggleFavorite(id) {
-    
     this.userDataService.toggleFavorite(id).subscribe((res) => {
       // this.show.favorite = this.show.favorite === '1' ? '0' : '1';
     });
@@ -25,5 +26,10 @@ export class CustomCardComponent implements OnInit {
 
   setPoster(img) {
     return `url(${img})`;
+  }
+
+  openShowPage(id, title) {
+    const trimmedTitle = title.split(' ').join('');
+    this.router.navigate(['/show', id, trimmedTitle]);
   }
 }

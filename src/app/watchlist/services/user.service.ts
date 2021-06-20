@@ -14,6 +14,7 @@ export class UserService {
   private isAuthenticated: boolean = false;
   private authStatusListener = new Subject<boolean>();
   private role: string;
+  private userId;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -33,11 +34,12 @@ export class UserService {
       .subscribe((res) => {
         const token = res[0].token;
         this.token = token;
+        this.userId = res[0].userId;
         if (token) {
           this.isAuthenticated = true;
           this.role = res[0].role;
           this.authStatusListener.next(true);
-          this.saveAuthData(token, this.role);
+          this.saveAuthData(token, this.role, this.userId);
           this.router.navigate(['/home']);
         }
       });
@@ -56,6 +58,10 @@ export class UserService {
 
   getToken() {
     return this.token;
+  }
+
+  getUserId(){
+    return this.userId;
   }
 
   getRole() {
@@ -80,20 +86,23 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
-  private saveAuthData(token: string, role: string) {
+  private saveAuthData(token: string, role: string, userId: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
+    localStorage.setItem('userId', userId);
   }
 
   private getAuthData() {
     let token = localStorage.getItem('token');
     let role = localStorage.getItem('role');
+    let userId = localStorage.getItem('userId');
     if (!token) {
       return;
     }
     return {
       token: token,
       role: role,
+      userId: userId
     };
   }
 }

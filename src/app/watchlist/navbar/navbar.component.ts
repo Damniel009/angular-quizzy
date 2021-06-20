@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
         label: 'User',
         icon: 'pi pi-fw pi-user',
         visible: this.isUserAuthenticated,
-        routerLink: ['/user'],
+        routerLink: ['/user/self'],
       },
       {
         icon: 'pi pi-fw pi-sign-out',
@@ -85,7 +85,7 @@ export class NavbarComponent implements OnInit {
         label: 'User',
         icon: 'pi pi-fw pi-user',
         visible: this.isUserAuthenticated,
-        routerLink: ['/user'],
+        routerLink: ['/user/self'],
       },
       {
         icon: 'pi pi-fw pi-sign-out',

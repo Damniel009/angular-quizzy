@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { userDataDto } from '../dtos/userDataDto';
 import { userHistoryDto } from '../dtos/userHistoryDto';
@@ -13,82 +14,16 @@ import { UserService } from '../services/user.service';
 })
 export class UserPageComponent implements OnInit {
   @ViewChild('uploader') upload;
+  userId: string = this.route.snapshot.paramMap.get('id') === 'self' ? '' : this.route.snapshot.paramMap.get('id');
   fileToUpload: FormData = new FormData();
   image;
-
-  userStatistics: userStatisticsDto = {
-    showStatistics: {
-      watching: 10,
-      considering: 34,
-      completed: 54,
-      skipping: 36,
-      total: 134,
-      avarageScore: 3.4,
-    },
-    movieStatistics: {
-      watching: 12,
-      considering: 3,
-      completed: 121,
-      skipping: 33,
-      total: 169,
-      avarageScore: 4.1,
-    },
-  };
-
-  // userHistory: userHistoryDto = {
-  //   showHistory: [
-  //     {
-  //       title: 'Game of Thrones',
-  //       currentEpisode: 1,
-  //       totalEpisodes: 2,
-  //       id: 'string',
-  //       editDate: '05.21.2021',
-  //     },
-  //     {
-  //       title: 'Bones',
-  //       currentEpisode: 1,
-  //       totalEpisodes: 2,
-  //       id: 'string',
-  //       editDate: '05.13.2021',
-  //     },
-  //     {
-  //       title: 'Dr. House',
-  //       currentEpisode: 1,
-  //       totalEpisodes: 2,
-  //       id: 'string',
-  //       editDate: '05.05.2021',
-  //     },
-  //   ],
-  //   movieHistory: [
-  //     {
-  //       title: 'Shrek 2',
-  //       currentEpisode: 1,
-  //       totalEpisodes: 2,
-  //       id: 'string',
-  //       editDate: '05.05.2021',
-  //     },
-  //     {
-  //       title: 'Dumb & Dumber',
-  //       currentEpisode: 1,
-  //       totalEpisodes: 2,
-  //       id: 'string',
-  //       editDate: '02.04.2021',
-  //     },
-  //     {
-  //       title: 'Home Alone',
-  //       currentEpisode: 1,
-  //       totalEpisodes: 2,
-  //       id: 'string',
-  //       editDate: '23.03.2021',
-  //     },
-  //   ],
-  // };
 
   responsiveOptions;
 
   userData: userDataDto;
 
   constructor(
+    private route: ActivatedRoute,
     private userDataService: UserDataService,
     private messageService: MessageService
   ) {
@@ -112,7 +47,7 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userDataService.getUserData().subscribe((res) => {
+    this.userDataService.getUserData(this.userId).subscribe((res) => {
       let helperResponse: userDataDto = {
         userDescription: null,
         userFavorites: null,
