@@ -1,11 +1,11 @@
 <div *ngIf="userData" class="user-page-container p-3">
   <div>
     <div class="row">
-      <div class="col-sm-3">
-        <div class="p-shadow-20 p-4">
+      <div class="col-lg-3">
+        <div class="p-shadow-20 p-4 h-100">
           <div class="d-flex user-details">
-            <div class="d-flex mb-1">
-              <div class="d-flex justify-content-center">
+            <div class="row d-flex mb-1">
+              <div class="col d-flex justify-content-center">
                 <p-avatar
                   image="{{ image }}"
                   styleClass="p-mr-2"
@@ -22,7 +22,7 @@
                   (uploadHandler)="onBasicUpload($event)"
                 ></p-fileUpload>
               </div>
-              <div class="d-flex flex-column mt-2 justify-content-star">
+              <div class="col d-flex flex-column mt-2 justify-content-star">
                 <p-tag class="mr-2" value="Full Name: "></p-tag>
                 <span class="mr-2">{{
                   userData.userDescription.fullname
@@ -33,14 +33,49 @@
         </div>
       </div>
 
-      <div class="col-sm-9">
-        <div class="p-shadow-20 p-4">
+      <div class="col ">
+        <div class="p-shadow-20 p-4 h-100">
           <div>
-            <div class="d-flex flex-column align-items-center">
-              <p-tag class="mr-auto" value="Bio: "></p-tag>
-              <span class="pl-1 mr-auto">{{
-                userData.userDescription.bio
-              }}</span>
+            <div class="d-flex flex-column">
+              <div class="d-flex align-items-center">
+                <p-tag class="mr-auto" value="Bio: "></p-tag>
+                <button
+                  pButton
+                  pRipple
+                  pTooltip="Edit bio"
+                  tooltipPosition="top"
+                  type="button"
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-text ml-3"
+                  (click)="isBioEdit = true"
+                ></button>
+              </div>
+              <div *ngIf="!isBioEdit">
+                <span class="pl-1 mr-auto">{{
+                  userData.userDescription.bio
+                }}</span>
+              </div>
+
+              <div *ngIf="isBioEdit">
+                <span class="p-float-label">
+                  <textarea
+                    id="float-input"
+                    rows="3"
+                    class="w-100"
+                    pInputTextarea
+                    [(ngModel)]="userData.userDescription.bio"
+                  ></textarea>
+                  <label for="float-input">Edit bio</label>
+                </span>
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  label="Primary"
+                  class="p-button-outlined"
+                  (click)="editBio(userData.userDescription.bio)"
+                ></button>
+              </div>
             </div>
           </div>
         </div>
@@ -375,7 +410,10 @@
               [responsiveOptions]="responsiveOptions"
             >
               <ng-template let-favorite pTemplate="item">
-                <app-custom-card [cardContent]="favorite" [isUserPage]="true"></app-custom-card>
+                <app-custom-card
+                  [cardContent]="favorite"
+                  [isUserPage]="true"
+                ></app-custom-card>
               </ng-template>
             </p-carousel>
           </div>

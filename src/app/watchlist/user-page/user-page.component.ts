@@ -14,13 +14,19 @@ import { UserService } from '../services/user.service';
 })
 export class UserPageComponent implements OnInit {
   @ViewChild('uploader') upload;
-  userId: string = this.route.snapshot.paramMap.get('id') === 'self' ? '' : this.route.snapshot.paramMap.get('id');
+  userId: string =
+    this.route.snapshot.paramMap.get('id') === 'self'
+      ? ''
+      : this.route.snapshot.paramMap.get('id');
+
   fileToUpload: FormData = new FormData();
   image;
 
   responsiveOptions;
 
   userData: userDataDto;
+
+  isBioEdit = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -113,4 +119,15 @@ export class UserPageComponent implements OnInit {
   }
 
   redirectToEntry(entryId) {}
+
+  editBio(bio) {
+    this.userDataService.editUserBio(bio).subscribe((res) => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Bio updated',
+        detail: '',
+      });
+      this.isBioEdit = false;
+    });
+  }
 }
