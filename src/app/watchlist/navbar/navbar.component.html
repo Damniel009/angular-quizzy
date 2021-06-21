@@ -20,13 +20,14 @@
         (click)="op.toggle($event)"
       ></button>
 
-      <input type="text" pInputText placeholder="Keyword" />
+      <input [(ngModel)]="searchKeyword" type="text" pInputText placeholder="Keyword" />
       <button
         type="button"
         pButton
         pRipple
         icon="pi pi-search"
         styleClass="p-button-warn"
+        (click)="search()"
       ></button>
     </div>
   </ng-template>

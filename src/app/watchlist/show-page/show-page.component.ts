@@ -34,7 +34,7 @@ export class ShowPageComponent implements OnInit {
     private showService: ShowService,
     private userDataService: UserDataService,
     private messageService: MessageService,
-    private dialogService: DialogService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -70,24 +70,47 @@ export class ShowPageComponent implements OnInit {
   }
 
   likeRating(reviewId) {
-    this.showService.likeReview(reviewId).subscribe((res) => {});
+    this.showService.likeReview(reviewId).subscribe((res) => {
+      let helper = this.showInfo.entryReview.find(
+        (review) => review.reviewid === reviewId
+      ).likecounter;
+      let helperNumber = parseInt(helper) + 1;
+      this.showInfo.entryReview.find(
+        (review) => review.reviewid === reviewId
+      ).likecounter = `${helperNumber}`;
+    });
   }
 
   addReview(id) {
     this.displayAddReview = false;
-    this.showService
-      .addReview(id, this.newReview.rating, this.newReview.review)
-      .subscribe((res) => {
+    const rating = this.newReview.rating;
+    const review = this.newReview.review;
+    this.showService.addReview(id, rating, review).subscribe(
+      (res) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Review added',
           detail: '',
         });
-      });
+        this.showInfo.entryReview.push({
+          reviewid: '',
+          userid: this.userId,
+          username: '',
+          showid: '',
+          rating: `${rating}`,
+          review: `${review}`,
+          likecounter: '0',
+          timestamp: `${new Date()}`,
+        });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
     this.newReview = {
       rating: null,
-      review: null
-    }
+      review: null,
+    };
   }
 
   removeReview(id) {
@@ -105,10 +128,8 @@ export class ShowPageComponent implements OnInit {
   }
 
   addToWatchlist(showId, status) {
-    this.userDataService.editWatchlistStatus('', showId, status ).subscribe(res => {
-
-    })
+    this.userDataService
+      .editWatchlistStatus('', showId, status)
+      .subscribe((res) => {});
   }
-
-  
 }

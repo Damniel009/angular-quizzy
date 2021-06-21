@@ -16,9 +16,12 @@ export class NavbarComponent implements OnInit {
   role;
 
   visibleSidebar;
+
   searchType = null;
+  searchKeyword = '';
+
   items: MenuItem[];
-  options
+  options;
 
   constructor(
     private router: Router,
@@ -28,7 +31,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.showService.getMenuOptions().subscribe((res) => {
-      this.options = res
+      this.options = res;
     });
     this.isUserAuthenticated = this.userService.getIsAuthenticated();
     this.role = this.userService.getRole();
@@ -103,7 +106,14 @@ export class NavbarComponent implements OnInit {
     ];
   }
 
-  redirectGenre(genre){
-    
+  redirectGenre(genre) {}
+
+  search() {
+    this.showService
+      .search(this.searchType, this.searchKeyword)
+      .subscribe((res) => {
+        console.log(res);
+        
+      });
   }
 }

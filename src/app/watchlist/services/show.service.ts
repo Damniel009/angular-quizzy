@@ -24,8 +24,9 @@ export class ShowService {
   }
 
   likeReview(id): Observable<any> {
-    return this.http.get<any>(
-      `${this.baseUrl}show/info/like/review?reviewID=${id}`
+    return this.http.post<any>(
+      `${this.baseUrl}show/info/like/review?reviewID=${id}`,
+      {}
     );
   }
 
@@ -39,6 +40,13 @@ export class ShowService {
   removeReview(id): Observable<any> {
     return this.http.delete<any>(
       `${this.baseUrl}admin/remove/review?reviewID=${id}`
+    );
+  }
+
+  search(type, keyword): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}search?type=${type}&keyword=${keyword}`,
+      {}
     );
   }
 }
