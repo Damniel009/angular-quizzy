@@ -1,1 +1,85 @@
-<p>manage-entries works!</p>
+<div class="user-page-container p-3">
+  <div class="p-shadow-20 p-4 h-100">
+    <h2 class="mb-4">Add a new entry</h2>
+
+    <div class="row d-flex align-items-center">
+      <div class="p-field-radiobutton mr-3">
+        <p-radioButton
+          name="addOption"
+          value="title"
+          [(ngModel)]="addOption"
+          inputId="addOption1"
+          (onClick)="selectedOption = 'title'; newEntryId = ''"
+        ></p-radioButton>
+        <label class="mb-0" for="addOption1">Title</label>
+      </div>
+      <div class="p-field-radiobutton">
+        <p-radioButton
+          name="addOption"
+          value="id"
+          [(ngModel)]="addOption"
+          inputId="addOption2"
+          (onClick)="selectedOption = 'id'; newEntryTitle = ''"
+        ></p-radioButton>
+        <label class="mb-0" for="addOption2">Id</label>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <span *ngIf="selectedOption === 'title'" class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          placeholder="Add by title"
+          [(ngModel)]="newEntryTitle"
+        />
+      </span>
+
+      <span *ngIf="selectedOption === 'id'" class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          placeholder="Add by IMDb ID"
+          [(ngModel)]="newEntryId"
+        />
+      </span>
+    </div>
+
+    <div class="row">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Add new entry"
+        class="p-button-outlined"
+        (click)="addEntry()"
+      ></button>
+    </div>
+  </div>
+
+  <div class="p-shadow-20 p-4 h-100">
+    <h2 class="mb-4">Refresh popularity</h2>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Refresh"
+      class="p-button-outlined"
+      (click)="refreshPopularity()"
+    ></button>
+  </div>
+
+  <div class="p-shadow-20 p-4 h-100">
+    <h2 class="mb-4">Refresh ratings</h2>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Refresh"
+      class="p-button-outlined"
+      (click)="refreshRatings()"
+    ></button>
+  </div>
+</div>

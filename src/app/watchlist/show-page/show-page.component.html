@@ -8,7 +8,21 @@
     </div>
 
     <div class="col d-flex flex-row justify-content-end mr-5">
-      <div class="ml-4">
+      <div *ngIf="userRole === 'admin'">
+        <div class="mt-1 d-flex justify-content-center align-items-center">
+          <button
+            pButton
+            icon="pi pi-pencil"
+            icon="pi pi-trash"
+            pRipple
+            type="button"
+            label="Delete show"
+            class="p-button-outlined p-button-danger"
+            (click)="deleteShow(showInfo.entryInfo.title)"
+          ></button>
+        </div>
+      </div>
+      <div *ngIf="userRole !== 'admin'" class="ml-4">
         <div class="mt-1 d-flex justify-content-center align-items-center">
           <button
             pButton
@@ -232,7 +246,9 @@
         label="Completed"
         class="p-button-text"
         (click)="
-          status = 'finished'; addToWatchlist(showInfo.entryInfo.id, status); op.hide($event)
+          status = 'finished';
+          addToWatchlist(showInfo.entryInfo.id, status);
+          op.hide($event)
         "
       ></button>
     </div>
@@ -244,7 +260,9 @@
         label="Watching"
         class="p-button-text"
         (click)="
-          status = 'watching'; addToWatchlist(showInfo.entryInfo.id, status); op.hide($event)
+          status = 'watching';
+          addToWatchlist(showInfo.entryInfo.id, status);
+          op.hide($event)
         "
       ></button>
     </div>
@@ -256,7 +274,9 @@
         label="Considering"
         class="p-button-text"
         (click)="
-          status = 'considering'; addToWatchlist(showInfo.entryInfo.id, status); op.hide($event)
+          status = 'considering';
+          addToWatchlist(showInfo.entryInfo.id, status);
+          op.hide($event)
         "
       ></button>
     </div>
@@ -268,7 +288,9 @@
         label="Skipping"
         class="p-button-text"
         (click)="
-          status = 'skipping'; addToWatchlist(showInfo.entryInfo.id, status); op.hide($event)
+          status = 'skipping';
+          addToWatchlist(showInfo.entryInfo.id, status);
+          op.hide($event)
         "
       ></button>
     </div>

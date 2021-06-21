@@ -7,6 +7,7 @@ import { entryPageDto } from '../dtos/entryPageDto';
 import { entryReviewDto } from '../dtos/entryReviewDto';
 import { watchlistDto } from '../dtos/watchlistDto';
 import { EditWatchlistComponent } from '../edit-watchlist/edit-watchlist.component';
+import { AdminService } from '../services/admin.service';
 import { ShowService } from '../services/show.service';
 import { UserDataService } from '../services/user-data.service';
 import { UserService } from '../services/user.service';
@@ -28,16 +29,20 @@ export class ShowPageComponent implements OnInit {
   };
 
   userId = localStorage.getItem('userId');
+  userRole = localStorage.getItem('role');
 
   constructor(
     private route: ActivatedRoute,
     private showService: ShowService,
     private userDataService: UserDataService,
     private messageService: MessageService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private adminService: AdminService
   ) {}
 
   ngOnInit(): void {
+    console.log(this.userRole);
+
     this.showService.getShowInfo(this.showId).subscribe((res) => {
       this.showInfo.entryInfo = this.formatInfoResponse(res[0]);
       this.formatReviewResponse(res[1]);
@@ -131,5 +136,16 @@ export class ShowPageComponent implements OnInit {
     this.userDataService
       .editWatchlistStatus('', showId, status)
       .subscribe((res) => {});
+  }
+
+  //Admin
+  deleteShow(title) {
+    this.adminService.deleteShow(title).subscribe((res) => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Entry removed',
+        detail: '',
+      });
+    });
   }
 }

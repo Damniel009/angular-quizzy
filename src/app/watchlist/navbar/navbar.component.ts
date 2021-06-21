@@ -14,6 +14,8 @@ import { UserService } from '../services/user.service';
 export class NavbarComponent implements OnInit {
   private authListenerSubs: Subscription;
   isUserAuthenticated: boolean = false;
+  isUserAdmin: boolean = false;
+
   role;
 
   visibleSidebar;
@@ -37,6 +39,7 @@ export class NavbarComponent implements OnInit {
       this.options = res;
     });
     this.isUserAuthenticated = this.userService.getIsAuthenticated();
+    this.isUserAdmin = this.userService.getIsAdmin();
     this.authListenerSubs = this.userService
       .getAuthStatusListener()
       .subscribe((isAuth) => {
@@ -58,18 +61,20 @@ export class NavbarComponent implements OnInit {
         visible: this.isUserAuthenticated && this.role !== 'admin',
         routerLink: ['/user/self'],
       },
-      {
-        icon: 'pi pi-fw pi-sign-out',
-        visible: this.isUserAuthenticated,
-        command: (event) => {
-          this.userService.logout();
-        },
-      },
+
       {
         label: 'Manage entries',
         icon: 'pi pi-book',
         routerLink: ['/admin/manage'],
         visible: this.isUserAuthenticated && this.role === 'admin',
+      },
+      {
+        icon: 'pi pi-fw pi-sign-out',
+        visible: this.isUserAuthenticated,
+        command: (event) => {
+          this.userService.logout();
+          this.role = localStorage.getItem('role');
+        },
       },
       {
         label: 'Login',
@@ -86,7 +91,6 @@ export class NavbarComponent implements OnInit {
   }
 
   updateMenuVisibility() {
-    console.log(this.role);
     this.items = [
       {
         label: 'Watchlist',
@@ -101,10 +105,17 @@ export class NavbarComponent implements OnInit {
         routerLink: ['/user/self'],
       },
       {
+        label: 'Manage entries',
+        icon: 'pi pi-book',
+        routerLink: ['/admin/manage'],
+        visible: this.isUserAuthenticated && this.role === 'admin',
+      },
+      {
         icon: 'pi pi-fw pi-sign-out',
         visible: this.isUserAuthenticated,
         command: (event) => {
           this.userService.logout();
+          this.role = localStorage.getItem('role');
         },
       },
       {

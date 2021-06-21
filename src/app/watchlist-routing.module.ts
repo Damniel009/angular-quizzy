@@ -10,6 +10,7 @@ import { AuthenticationWatchlistGuard } from './watchlist/services/guard/authent
 import { ShowPageComponent } from './watchlist/show-page/show-page.component';
 import { SearchResultComponent } from './watchlist/search-result/search-result.component';
 import { ManageEntriesComponent } from './watchlist/manage-entries/manage-entries.component';
+import { AuthorisationGuardService } from './watchlist/services/guard/authorisation-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -47,6 +48,7 @@ const routes: Routes = [
   {
     path: 'admin/manage',
     component: ManageEntriesComponent,
+    canActivate: [AuthorisationGuardService],
   },
 ];
 

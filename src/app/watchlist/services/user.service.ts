@@ -14,6 +14,7 @@ export class UserService {
   private isAuthenticated: boolean = false;
   private authStatusListener = new Subject<boolean>();
   private role: string;
+  private isAdmin: boolean = false;
   private userId;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -38,9 +39,12 @@ export class UserService {
         if (token) {
           this.isAuthenticated = true;
           this.role = res[0].role;
+          this.isAdmin = res[0].role === 'admin' ? true : false;
+          console.log(this.isAdmin);
+
           this.authStatusListener.next(true);
           this.saveAuthData(token, this.role, this.userId);
-          if (res[0].role === 'admin') {
+          if (res[0].role !== 'admin') {
             this.router.navigate(['/home']);
           } else {
             this.router.navigate(['/admin/manage']);
@@ -74,6 +78,10 @@ export class UserService {
 
   getIsAuthenticated() {
     return this.isAuthenticated;
+  }
+
+  getIsAdmin() {
+    return this.isAdmin;
   }
 
   getAuthStatusListener() {
