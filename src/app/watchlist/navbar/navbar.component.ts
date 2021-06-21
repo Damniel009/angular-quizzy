@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { SearchService } from '../search-result/search-service.service';
 import { ShowService } from '../services/show.service';
 import { UserService } from '../services/user.service';
 
@@ -26,7 +27,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private showService: ShowService
+    private showService: ShowService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -106,14 +108,17 @@ export class NavbarComponent implements OnInit {
     ];
   }
 
-  redirectGenre(genre) {}
+  redirectGenre(genre) {
+    this.router.navigate(['search/result', 'genre', genre]);
+    this.searchService.onNewSearch('genre', genre);
+  }
 
   search() {
-    this.showService
-      .search(this.searchType, this.searchKeyword)
-      .subscribe((res) => {
-        console.log(res);
-        
-      });
+    this.router.navigate([
+      'search/result',
+      this.searchType,
+      this.searchKeyword,
+    ]);
+    this.searchService.onNewSearch(this.searchType, this.searchKeyword);
   }
 }

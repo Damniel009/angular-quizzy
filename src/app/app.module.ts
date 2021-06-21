@@ -66,6 +66,7 @@ import { CustomCardComponent } from './watchlist/user-page/custom-card/custom-ca
 import { LoginComponent } from './watchlist/login/login.component';
 import { AuthWatchlistInterceptor } from './watchlist/services/interceptor/auth-interceptor';
 import { ShowPageComponent } from './watchlist/show-page/show-page.component';
+import { SearchResultComponent } from './watchlist/search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { ShowPageComponent } from './watchlist/show-page/show-page.component';
     CustomCardComponent,
     LoginComponent,
     ShowPageComponent,
+    SearchResultComponent,
   ],
   imports: [
     FormsModule,
