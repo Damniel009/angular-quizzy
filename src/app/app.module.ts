@@ -2,25 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 
 //for services
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './services/interceptor/auth-interceptor';
 
 //components
-import { QuizComponent } from './quiz/quiz.component';
 import { AppComponent } from './app.component';
-import { CheckboxQuestionComponent } from './quiz/checkbox-question/checkbox-question.component';
-import { TakeQuizComponent } from './take-quiz/take-quiz.component';
-import { RadioQuestionComponent } from './quiz/radio-question/radio-question.component';
-import { MenubarComponent } from './menubar/menubar.component';
-import { TestComponent } from './test/test.component';
-import { SignupComponent } from './signup/signup.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ResultsComponent } from './results/results.component';
-import { TextQuestionComponent } from './quiz/text-question/text-question.component';
 
 //primeng
 import { TooltipModule } from 'primeng/tooltip';
@@ -72,16 +60,6 @@ import { ManageEntriesComponent } from './watchlist/manage-entries/manage-entrie
 @NgModule({
   declarations: [
     AppComponent,
-    QuizComponent,
-    CheckboxQuestionComponent,
-    RadioQuestionComponent,
-    MenubarComponent,
-    TextQuestionComponent,
-    ResultsComponent,
-    TestComponent,
-    SignupComponent,
-    DashboardComponent,
-    TakeQuizComponent,
     DashboardUserComponent,
     DashboardAdminComponent,
     NavbarComponent,

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { signupDto } from 'src/app/dtos/signupDto';
+import { signupDto } from 'src/app/watchlist/dtos/signupDto';
 
 @Injectable({
   providedIn: 'root',

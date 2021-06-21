@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { signupDto } from 'src/app/dtos/signupDto';
+import { signupDto } from 'src/app/watchlist/dtos/signupDto';
 import { UserService } from '../services/user.service';
 
 @Component({
