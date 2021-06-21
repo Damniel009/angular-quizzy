@@ -9,6 +9,7 @@ import { LoginComponent } from './watchlist/login/login.component';
 import { AuthenticationWatchlistGuard } from './watchlist/services/guard/authentication-guard.guard';
 import { ShowPageComponent } from './watchlist/show-page/show-page.component';
 import { SearchResultComponent } from './watchlist/search-result/search-result.component';
+import { ManageEntriesComponent } from './watchlist/manage-entries/manage-entries.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: 'search/result/:type/:keyword',
     component: SearchResultComponent,
+  },
+  {
+    path: 'admin/manage',
+    component: ManageEntriesComponent,
   },
 ];
 

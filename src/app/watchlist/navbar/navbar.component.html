@@ -1,5 +1,5 @@
 <p-menubar [model]="items">
-  <ng-template pTemplate="start">
+  <ng-template *ngIf="role !== 'admin'" pTemplate="start">
     <button
       pButton
       pRipple

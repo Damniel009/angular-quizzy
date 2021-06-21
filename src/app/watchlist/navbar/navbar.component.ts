@@ -32,29 +32,30 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.role = localStorage.getItem('role');
     this.showService.getMenuOptions().subscribe((res) => {
       this.options = res;
     });
     this.isUserAuthenticated = this.userService.getIsAuthenticated();
-    this.role = this.userService.getRole();
     this.authListenerSubs = this.userService
       .getAuthStatusListener()
       .subscribe((isAuth) => {
         this.isUserAuthenticated = isAuth;
         this.role = this.userService.getRole();
+
         this.updateMenuVisibility();
       });
     this.items = [
       {
         label: 'Watchlist',
         icon: 'pi pi-fw pi-book',
-        visible: this.isUserAuthenticated,
+        visible: this.isUserAuthenticated && this.role !== 'admin',
         routerLink: ['/watchlist'],
       },
       {
         label: 'User',
         icon: 'pi pi-fw pi-user',
-        visible: this.isUserAuthenticated,
+        visible: this.isUserAuthenticated && this.role !== 'admin',
         routerLink: ['/user/self'],
       },
       {
@@ -63,6 +64,12 @@ export class NavbarComponent implements OnInit {
         command: (event) => {
           this.userService.logout();
         },
+      },
+      {
+        label: 'Manage entries',
+        icon: 'pi pi-book',
+        routerLink: ['/admin/manage'],
+        visible: this.isUserAuthenticated && this.role === 'admin',
       },
       {
         label: 'Login',
@@ -79,17 +86,18 @@ export class NavbarComponent implements OnInit {
   }
 
   updateMenuVisibility() {
+    console.log(this.role);
     this.items = [
       {
         label: 'Watchlist',
         icon: 'pi pi-fw pi-book',
-        visible: this.isUserAuthenticated,
+        visible: this.isUserAuthenticated && this.role !== 'admin',
         routerLink: ['/watchlist'],
       },
       {
         label: 'User',
         icon: 'pi pi-fw pi-user',
-        visible: this.isUserAuthenticated,
+        visible: this.isUserAuthenticated && this.role !== 'admin',
         routerLink: ['/user/self'],
       },
       {

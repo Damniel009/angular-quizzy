@@ -40,7 +40,11 @@ export class UserService {
           this.role = res[0].role;
           this.authStatusListener.next(true);
           this.saveAuthData(token, this.role, this.userId);
-          this.router.navigate(['/home']);
+          if (res[0].role === 'admin') {
+            this.router.navigate(['/home']);
+          } else {
+            this.router.navigate(['/admin/manage']);
+          }
         }
       });
   }
@@ -60,7 +64,7 @@ export class UserService {
     return this.token;
   }
 
-  getUserId(){
+  getUserId() {
     return this.userId;
   }
 
@@ -102,7 +106,7 @@ export class UserService {
     return {
       token: token,
       role: role,
-      userId: userId
+      userId: userId,
     };
   }
 }

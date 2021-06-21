@@ -67,6 +67,7 @@ import { LoginComponent } from './watchlist/login/login.component';
 import { AuthWatchlistInterceptor } from './watchlist/services/interceptor/auth-interceptor';
 import { ShowPageComponent } from './watchlist/show-page/show-page.component';
 import { SearchResultComponent } from './watchlist/search-result/search-result.component';
+import { ManageEntriesComponent } from './watchlist/manage-entries/manage-entries.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { SearchResultComponent } from './watchlist/search-result/search-result.c
     LoginComponent,
     ShowPageComponent,
     SearchResultComponent,
+    ManageEntriesComponent,
   ],
   imports: [
     FormsModule,
