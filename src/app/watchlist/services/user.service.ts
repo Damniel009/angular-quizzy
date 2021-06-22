@@ -93,6 +93,7 @@ export class UserService {
     this.role = null;
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('userId');
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
     this.router.navigate(['/login']);

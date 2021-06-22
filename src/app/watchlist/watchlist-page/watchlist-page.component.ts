@@ -54,7 +54,7 @@ export class WatchlistPageComponent implements OnInit {
         status = 'Finished';
         break;
       }
-      case 'planned': {
+      case 'planned to watch': {
         status = 'Planned';
         break;
       }
@@ -77,7 +77,7 @@ export class WatchlistPageComponent implements OnInit {
         severity = 'info';
         break;
       }
-      case 'planned': {
+      case 'planned to watch': {
         severity = 'warning';
         break;
       }

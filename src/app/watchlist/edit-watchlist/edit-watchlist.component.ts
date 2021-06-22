@@ -19,7 +19,7 @@ export class EditWatchlistComponent implements OnInit {
   statuses = [
     { name: 'Completed', code: 'finished' },
     { name: 'Watching', code: 'watching' },
-    { name: 'Considering', code: 'planned' },
+    { name: 'Considering', code: 'planned to watch' },
     { name: 'Skipping', code: 'skipping' },
   ];
 

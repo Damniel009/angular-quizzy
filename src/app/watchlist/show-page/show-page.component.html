@@ -25,6 +25,7 @@
       <div *ngIf="userRole !== 'admin'" class="ml-4">
         <div class="mt-1 d-flex justify-content-center align-items-center">
           <button
+            *ngIf="userId"
             pButton
             icon="pi pi-pencil"
             icon="{{ status ? null : 'pi pi-pencil' }}"
@@ -150,6 +151,7 @@
     </div>
     <div class="col text-right">
       <button
+        *ngIf="userId"
         pButton
         pRipple
         type="button"
@@ -158,13 +160,18 @@
         (click)="displayAddReview = true"
       ></button>
     </div>
-    <div class="col">
+    <div *ngIf="showInfo.entryReview.length > 0" class="col">
       <div class="mb-2" *ngFor="let review of this.showInfo.entryReview">
         <div class="d-flex justify-content-between">
           <div class="d-flex align-items-center">
-            <h5 class="mb-0">Review by <span class="name" (click)="openUserPage(review.userid)">{{ review.username }}</span></h5>
+            <h5 class="mb-0">
+              Review by
+              <span class="name" (click)="openUserPage(review.userid)">{{
+                review.username
+              }}</span>
+            </h5>
             <button
-              *ngIf="review.userid === userId"
+              *ngIf="review.userid === userId || userRole === 'admin'"
               pButton
               pRipple
               type="button"
@@ -200,6 +207,11 @@
           style="border-top: 1px solid #e2e2e2; margin-left: 20px"
           class="w-25"
         />
+      </div>
+    </div>
+    <div class="row">
+      <div *ngIf="showInfo.entryReview.length === 0" class="col">
+        There are no review for this entry yet.
       </div>
     </div>
   </div>
