@@ -28,3 +28,11 @@ h1, h6 {
       padding: 0.1rem 0;
   }
 }
+
+.name{
+  &:hover {
+    color: #6137ab;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+}

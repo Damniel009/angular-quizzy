@@ -13,6 +13,7 @@
                   shape="circle"
                 ></p-avatar>
                 <p-fileUpload
+                *ngIf="userId === ''"
                   #uploader
                   mode="basic"
                   name="demo[]"
@@ -33,13 +34,14 @@
         </div>
       </div>
 
-      <div class="col ">
+      <div class="col">
         <div class="p-shadow-20 p-4 h-100">
           <div>
             <div class="d-flex flex-column">
               <div class="d-flex align-items-center">
                 <p-tag class="mr-auto" value="Bio: "></p-tag>
                 <button
+                  *ngIf="userId === ''"
                   pButton
                   pRipple
                   pTooltip="Edit bio"
@@ -384,7 +386,7 @@
                 <div class="d-flex justify-content-between">
                   <span
                     class="entry-page-link"
-                    (click)="redirectToEntry(history.id)"
+                    (click)="openShowPage(history.id, history.title)"
                     >{{ i + 1 }}. {{ history.title }}</span
                   >
                   <span class="text-muted ml-5">{{ history.editDate }}</span>

@@ -162,7 +162,7 @@
       <div class="mb-2" *ngFor="let review of this.showInfo.entryReview">
         <div class="d-flex justify-content-between">
           <div class="d-flex align-items-center">
-            <h5 class="mb-0">Review by {{ review.username }}</h5>
+            <h5 class="mb-0">Review by <span class="name" (click)="openUserPage(review.userid)">{{ review.username }}</span></h5>
             <button
               *ngIf="review.userid === userId"
               pButton

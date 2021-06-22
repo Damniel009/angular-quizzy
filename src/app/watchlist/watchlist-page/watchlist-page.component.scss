@@ -1,7 +1,15 @@
 .episode-counter {
-    border: 1px solid #6137AB;
+  border: 1px solid #6137ab;
 }
 
 .show-container {
-    border-bottom: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+}
+
+.title {
+  &:hover {
+    color: #6137ab;
+    transition: 0.3s;
+    cursor: pointer;
+  }
 }

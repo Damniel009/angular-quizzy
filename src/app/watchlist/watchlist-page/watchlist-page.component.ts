@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { statusDto } from '../dtos/statusDto';
 import { watchlistDto } from '../dtos/watchlistDto';
@@ -21,7 +22,8 @@ export class WatchlistPageComponent implements OnInit {
 
   constructor(
     private dialogService: DialogService,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -157,5 +159,10 @@ export class WatchlistPageComponent implements OnInit {
         show.isVisible = true;
       });
     }
+  }
+
+  openShowPage(id, title) {
+    const trimmedTitle = title.split(' ').join('');
+    this.router.navigate(['/show', id, trimmedTitle]);
   }
 }

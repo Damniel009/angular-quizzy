@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { entryInfoDto } from '../dtos/entryInfoDto';
@@ -37,6 +37,7 @@ export class ShowPageComponent implements OnInit {
     private userDataService: UserDataService,
     private messageService: MessageService,
     private dialogService: DialogService,
+    private router: Router,
     private adminService: AdminService
   ) {}
 
@@ -136,6 +137,10 @@ export class ShowPageComponent implements OnInit {
     this.userDataService
       .editWatchlistStatus('', showId, status)
       .subscribe((res) => {});
+  }
+
+  openUserPage(userId){
+    this.router.navigate(['/user', userId]);
   }
 
   //Admin

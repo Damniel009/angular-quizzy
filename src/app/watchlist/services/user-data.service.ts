@@ -32,8 +32,8 @@ export class UserDataService {
     );
   }
 
-  getUserPicture(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}user/userData/image`);
+  getUserPicture(userId): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}user/userData/image?userId=${userId}`);
   }
 
   getUserWatchlist(): Observable<any> {

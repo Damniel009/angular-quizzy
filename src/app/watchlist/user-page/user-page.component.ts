@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { userDataDto } from '../dtos/userDataDto';
 import { userHistoryDto } from '../dtos/userHistoryDto';
@@ -14,8 +14,11 @@ import { UserService } from '../services/user.service';
 })
 export class UserPageComponent implements OnInit {
   @ViewChild('uploader') upload;
+  selfUserId = localStorage.getItem('userId');
   userId: string =
     this.route.snapshot.paramMap.get('id') === 'self'
+      ? ''
+      : this.route.snapshot.paramMap.get('id') === this.selfUserId
       ? ''
       : this.route.snapshot.paramMap.get('id');
 
@@ -31,7 +34,8 @@ export class UserPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userDataService: UserDataService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
   ) {
     this.responsiveOptions = [
       {
@@ -87,7 +91,7 @@ export class UserPageComponent implements OnInit {
       this.userData = helperResponse;
     });
 
-    this.userDataService.getUserPicture().subscribe(
+    this.userDataService.getUserPicture(this.userId).subscribe(
       (res) => {},
       (err) => {
         this.image = err.error.text;
@@ -104,7 +108,7 @@ export class UserPageComponent implements OnInit {
         summary: 'File Uploaded',
         detail: '',
       });
-      this.userDataService.getUserPicture().subscribe(
+      this.userDataService.getUserPicture(this.userId).subscribe(
         (res) => {},
         (err) => {
           this.image = err.error.text;
@@ -118,7 +122,10 @@ export class UserPageComponent implements OnInit {
     return `${Math.ceil((type * 100) / total)}%`;
   }
 
-  redirectToEntry(entryId) {}
+  openShowPage(id, title) {
+    const trimmedTitle = title.split(' ').join('');
+    this.router.navigate(['/show', id, trimmedTitle]);
+  }
 
   editBio(bio) {
     this.userDataService.editUserBio(bio).subscribe((res) => {

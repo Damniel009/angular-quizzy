@@ -78,7 +78,7 @@
         class="show-container d-flex align-items-center my-3 pb-3"
       >
         <img height="90" src="{{ show.poster }}" class="mr-2" />
-        <h3>{{ show.title }}</h3>
+        <h3 class="title" (click)="openShowPage(show.showid, show.title)">{{ show.title }}</h3>
         <div class="d-flex ml-auto align-items-center">
           <p-tag
             styleClass="p-mr-2 ml-2"
