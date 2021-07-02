@@ -3,7 +3,7 @@
     <div *ngIf="show.poster" class="col-3">
       <img width="100%" src="{{ show.poster }}" class="mr-2" />
     </div>
-    <div class="col-8 justify-content-start">
+    <div class="col justify-content-start">
       <div class="mt-2 row align-items-center">
         <p-tag
           styleClass="p-mr-2 mr-2"
@@ -32,20 +32,29 @@
       </div>
       <div class="mt-2 row align-items-center">
         <p-tag
-          styleClass="p-mr-2 mr-2"
+          styleClass="p-mr-2 mr-2 mb-2"
           for="completed"
           value="Your progression: "
         ></p-tag>
-        <p-inputNumber
-          [(ngModel)]="show.episodesWatched"
-          mode="decimal"
-          [showButtons]="true"
-          inputId="minmax-buttons"
-          [min]="0"
-          [max]="show.totalEpisodes"
-          (onInput)="increaseProgress(show.watchlistID, $event.value)"
-        >
-        </p-inputNumber>
+        <div class="d-flex">
+          <p-inputNumber
+            [(ngModel)]="show.episodesWatched"
+            mode="decimal"
+            inputId="minmax-buttons"
+            [min]="0"
+            [max]="show.totalEpisodes"
+            (onInput)="increaseProgress(show.watchlistID, $event.value)"
+          >
+          </p-inputNumber>
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Save"
+            class="p-button-outlined ml-2"
+            (click)="saveProgress(show.watchlistID)"
+          ></button>
+        </div>
       </div>
       <div class="mt-2 row align-items-center">
         <p-tag

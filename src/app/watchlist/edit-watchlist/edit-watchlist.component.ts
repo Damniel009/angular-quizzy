@@ -44,9 +44,17 @@ export class EditWatchlistComponent implements OnInit {
     });
   }
 
-  increaseProgress(id, value) {
-    this.userDataService.editWatchlistProgress(id, value).subscribe((res) => {
-      this.show.episodesWatched = value;
+  progressChange = null;
+  increaseProgress(id, value) { 
+    this.progressChange = value - this.show.episodesWatched;
+    // this.userDataService.editWatchlistProgress(id, helper).subscribe((res) => {
+    //   this.show.episodesWatched = value;
+    // });
+  }
+
+  saveProgress(id){
+    this.userDataService.editWatchlistProgress(id, this.progressChange).subscribe((res) => {
+      // this.show.episodesWatched = value;
     });
   }
 

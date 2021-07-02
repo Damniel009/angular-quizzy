@@ -160,55 +160,59 @@
         (click)="displayAddReview = true"
       ></button>
     </div>
-    <div *ngIf="showInfo.entryReview.length > 0" class="col">
-      <div class="mb-2" *ngFor="let review of this.showInfo.entryReview">
-        <div class="d-flex justify-content-between">
+    <div *ngIf="showInfo.entryReview.length > 0" class="row w-100">
+      <div  class="col">
+        <div class="mb-2" *ngFor="let review of this.showInfo.entryReview">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+              <h5 class="mb-0">
+                Review by
+                <span class="name" (click)="openUserPage(review.userid)">{{
+                  review.username
+                }}</span>
+              </h5>
+              <button
+                *ngIf="review.userid === userId || userRole === 'admin'"
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text"
+                (click)="removeReview(review.reviewid)"
+              ></button>
+            </div>
+            <p-rating
+              [(ngModel)]="review.rating"
+              [readonly]="true"
+              [cancel]="false"
+            ></p-rating>
+          </div>
+          <h6 class="timestamp text-muted">{{ review.timestamp }}</h6>
+          <p class="my-2">{{ review.review }}</p>
           <div class="d-flex align-items-center">
-            <h5 class="mb-0">
-              Review by
-              <span class="name" (click)="openUserPage(review.userid)">{{
-                review.username
-              }}</span>
-            </h5>
+            <p-tag
+              styleClass="p-mr-2 ml-2"
+              value="{{ review.likecounter }} user found this helpful."
+            ></p-tag>
+            <p *ngIf="userId" class="mb-0 mr-2">Was this review helpful?</p>
             <button
-              *ngIf="review.userid === userId || userRole === 'admin'"
+            *ngIf="userId"
               pButton
               pRipple
               type="button"
-              icon="pi pi-trash"
-              class="p-button-rounded p-button-danger p-button-text"
-              (click)="removeReview(review.reviewid)"
+              label="Yes"
+              class="p-button-outlined py-0"
+              (click)="likeRating(review.reviewid)"
             ></button>
           </div>
-          <p-rating
-            [(ngModel)]="review.rating"
-            [readonly]="true"
-            [cancel]="false"
-          ></p-rating>
+          <hr
+            style="border-top: 1px solid #e2e2e2; margin-left: 20px"
+            class="w-25"
+          />
         </div>
-        <h6 class="timestamp text-muted">{{ review.timestamp }}</h6>
-        <p class="my-2">{{ review.review }}</p>
-        <div class="d-flex align-items-center">
-          <p-tag
-            styleClass="p-mr-2 ml-2"
-            value="{{ review.likecounter }} user found this helpful."
-          ></p-tag>
-          <p class="mb-0 mr-2">Was this review helpful?</p>
-          <button
-            pButton
-            pRipple
-            type="button"
-            label="Yes"
-            class="p-button-outlined py-0"
-            (click)="likeRating(review.reviewid)"
-          ></button>
-        </div>
-        <hr
-          style="border-top: 1px solid #e2e2e2; margin-left: 20px"
-          class="w-25"
-        />
       </div>
     </div>
+
     <div class="row">
       <div *ngIf="showInfo.entryReview.length === 0" class="col">
         There are no review for this entry yet.

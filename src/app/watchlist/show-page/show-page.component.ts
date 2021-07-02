@@ -76,15 +76,24 @@ export class ShowPageComponent implements OnInit {
   }
 
   likeRating(reviewId) {
-    this.showService.likeReview(reviewId).subscribe((res) => {
-      let helper = this.showInfo.entryReview.find(
-        (review) => review.reviewid === reviewId
-      ).likecounter;
-      let helperNumber = parseInt(helper) + 1;
-      this.showInfo.entryReview.find(
-        (review) => review.reviewid === reviewId
-      ).likecounter = `${helperNumber}`;
-    });
+    this.showService.likeReview(reviewId).subscribe(
+      (res) => {
+        let helper = this.showInfo.entryReview.find(
+          (review) => review.reviewid === reviewId
+        ).likecounter;
+        let helperNumber = parseInt(helper) + 1;
+        this.showInfo.entryReview.find(
+          (review) => review.reviewid === reviewId
+        ).likecounter = `${helperNumber}`;
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'You already liked it',
+          detail: '',
+        });
+      }
+    );
   }
 
   addReview(id) {
@@ -139,7 +148,7 @@ export class ShowPageComponent implements OnInit {
       .subscribe((res) => {});
   }
 
-  openUserPage(userId){
+  openUserPage(userId) {
     this.router.navigate(['/user', userId]);
   }
 
